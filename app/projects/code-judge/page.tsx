@@ -12,7 +12,7 @@ export default function CodeJudgePage() {
                     ⚖️ Mini Online Judge (Flask Backend)
                 </h1>
                 <p className="text-lg text-gray-400 mt-4 break-all">
-                    A lightweight Online Code Judge built using Flask that executes user-submitted Python code, evaluates it against test cases, and returns verdicts — just like Codeforces, but pocket-sized 😎
+                    A lightweight Online Code Judge built using Flask, designed to replicate the core functionality of platforms like Codeforces or LeetCode. It executes user-submitted Python code, evaluates it against predefined test cases, and provides detailed verdicts. This project serves as a foundational implementation to understand the intricacies of automated code evaluation systems, offering a pocket-sized, yet powerful, solution for competitive programming practice or educational purposes.
                 </p>
             </header>
             <Image
@@ -29,19 +29,19 @@ export default function CodeJudgePage() {
                 <h2
                     className={`text-xl sm:text-3xl font-bold mb-6 ${classNames.spanText} ${classNames.textGlowEffect}`}
                 >
-                    ✨ Features
+                    ✨ Key Features
                 </h2>
                 <ul
                     className={`space-y-3 text-gray-300 ${classNames.cardparent_list}`}
                 >
-                    <li><span className={classNames.cardparent_list_span}>✅ Execute Python code submissions</span></li>
-                    <li><span className={classNames.cardparent_list_span}>✅ Accept custom input (stdin)</span></li>
-                    <li><span className={classNames.cardparent_list_span}>✅ Compare output with expected output</span></li>
-                    <li><span className={classNames.cardparent_list_span}>✅ Verdict system</span></li>
-                    <li><span className={classNames.cardparent_list_span}>✅ Execution time limits</span></li>
-                    <li><span className={classNames.cardparent_list_span}>✅ Clean REST API</span></li>
-                    <li><span className={classNames.cardparent_list_span}>✅ JSON-based request/response</span></li>
-                    <li><span className={classNames.cardparent_list_span}>✅ Beginner-friendly but system-level logic</span></li>
+                    <li><span className={classNames.cardparent_list_span}>✅ Execute Python code submissions:</span> Securely runs user-provided Python scripts in an isolated environment.</li>
+                    <li><span className={classNames.cardparent_list_span}>✅ Accept custom input (stdin):</span> Allows test cases to be dynamically supplied to the executing code via standard input.</li>
+                    <li><span className={classNames.cardparent_list_span}>✅ Compare output with expected output:</span> Automatically verifies the correctness of the submitted code's output against predefined correct solutions.</li>
+                    <li><span className={classNames.cardparent_list_span}>✅ Comprehensive Verdict System:</span> Provides clear feedback on submission results, including Accepted, Wrong Answer, Runtime Error, and Time Limit Exceeded.</li>
+                    <li><span className={classNames.cardparent_list_span}>✅ Execution time limits:</span> Enforces strict time constraints on code execution to prevent infinite loops and inefficient solutions.</li>
+                    <li><span className={classNames.cardparent_list_span}>✅ Clean REST API:</span> Offers a well-structured and easy-to-use API endpoint for submitting code and retrieving results programmatically.</li>
+                    <li><span className={classNames.cardparent_list_span}>✅ JSON-based request/response:</span> Utilizes industry-standard JSON format for seamless data exchange between clients and the judge server.</li>
+                    <li><span className={classNames.cardparent_list_span}>✅ Beginner-friendly but system-level logic:</span> Designed with an approachable architecture, while incorporating fundamental system-level concepts essential for robust code execution and evaluation.</li>
                 </ul>
             </div>
 
@@ -52,19 +52,19 @@ export default function CodeJudgePage() {
                     <h3
                         className={`text-lg sm:text-2xl font-semibold mb-4 ${classNames.spanText} ${classNames.textGlowEffect}`}
                     >
-                        🧠 How It Works (High Level)
+                        🧠 How It Works (High Level Overview)
                     </h3>
                     <ul
                         className={`space-y-3 text-gray-300 ${classNames.cardparent_list}`}
                     >
-                        <li>User sends Python code via API</li>
-                        <li>Code is written to a temporary file</li>
-                        <li>Code is executed using <code>subprocess</code></li>
-                        <li>Input is piped through stdin</li>
-                        <li>Output is captured from stdout</li>
-                        <li>Output is compared with expected output</li>
-                        <li>Judge returns a verdict</li>
-                        <li className="text-sm text-yellow-400">⚠️ Code execution is sandboxed only at a basic level (timeouts). Advanced isolation (Docker, seccomp) is planned.</li>
+                        <li>**User sends Python code via API:** Submissions are made through a dedicated REST API endpoint.</li>
+                        <li>**Code is written to a temporary file:** The received code is saved to a secure, temporary location on the server filesystem.</li>
+                        <li>**Code is executed using `subprocess`:** Python's `subprocess` module is leveraged to run the user's code as a separate process, allowing for controlled execution.</li>
+                        <li>**Input is piped through stdin:** Test case inputs are redirected to the executing code's standard input stream.</li>
+                        <li>**Output is captured from stdout:** The executed code's standard output is captured for later comparison.</li>
+                        <li>**Output is compared with expected output:** The captured output is then meticulously compared against the known correct output for the given test case.</li>
+                        <li>**Judge returns a detailed verdict:** Based on the comparison and execution metrics (like time taken), a final verdict is determined and returned to the user.</li>
+                        <li className="text-sm text-yellow-400">⚠️ **Note on Sandboxing:** Current implementation provides basic process isolation primarily through timeouts. Advanced security measures like Docker containerization or `seccomp` for system call filtering are considered for future enhancements to ensure more robust and secure execution environments.</li>
                     </ul>
                 </div>
 
@@ -79,11 +79,11 @@ export default function CodeJudgePage() {
                     <ul
                         className={`space-y-3 text-gray-300 ${classNames.cardparent_list}`}
                     >
-                        <li><span className={classNames.cardparent_list_span}>🐍 Python</span></li>
-                        <li><span className={classNames.cardparent_list_span}>🌶 Flask</span></li>
-                        <li><span className={classNames.cardparent_list_span}>⚙️ subprocess</span></li>
-                        <li><span className={classNames.cardparent_list_span}>📄 tempfile</span></li>
-                        <li><span className={classNames.cardparent_list_span}>🧪 Postman (for API testing)</span></li>
+                        <li><span className={classNames.cardparent_list_span}>🐍 Python:</span> The core programming language for the backend logic and code execution.</li>
+                        <li><span className={classNames.cardparent_list_span}>🌶 Flask:</span> A lightweight web framework used to build the RESTful API for handling submissions.</li>
+                        <li><span className={classNames.cardparent_list_span}>⚙️ `subprocess` module:</span> Essential for spawning and managing external processes to execute user code.</li>
+                        <li><span className={classNames.cardparent_list_span}>📄 `tempfile` module:</span> Utilized for securely creating and managing temporary files for code storage and execution.</li>
+                        <li><span className={classNames.cardparent_list_span}>🧪 Postman:</span> Used extensively for API development, testing, and debugging the backend endpoints.</li>
                     </ul>
                 </div>
             </div>
@@ -93,13 +93,13 @@ export default function CodeJudgePage() {
                 <h2
                     className={`text-xl sm:text-3xl font-bold mb-6 ${classNames.spanText} ${classNames.textGlowEffect}`}
                 >
-                    Verdict system
+                    Understanding the Verdict System
                 </h2>
                 <ul className={`space-y-3 text-gray-300 ${classNames.cardparent_list}`}>
-                    <li><span className={`${classNames.cardparent_list_span} text-green-500`}>🟢 AC — Accepted</span></li>
-                    <li><span className={`${classNames.cardparent_list_span} text-red-500`}>🔴 WA — Wrong Answer</span></li>
-                    <li><span className={`${classNames.cardparent_list_span} text-yellow-500`}>⚠️ RE — Runtime Error</span></li>
-                    <li><span className={`${classNames.cardparent_list_span} text-blue-500`}>⏱ TLE — Time Limit Exceeded</span></li>
+                    <li><span className={`${classNames.cardparent_list_span} text-green-500`}>🟢 AC — Accepted:</span> Your code produced the correct output for all test cases within the given time and memory limits.</li>
+                    <li><span className={`${classNames.cardparent_list_span} text-red-500`}>🔴 WA — Wrong Answer:</span> Your code's output did not match the expected output for one or more test cases.</li>
+                    <li><span className={`${classNames.cardparent_list_span} text-yellow-500`}>⚠️ RE — Runtime Error:</span> Your code terminated abnormally during execution (e.g., due to an uncaught exception, division by zero, or invalid memory access).</li>
+                    <li><span className={`${classNames.cardparent_list_span} text-blue-500`}>⏱ TLE — Time Limit Exceeded:</span> Your code took longer to execute than the maximum allowed time limit.</li>
                 </ul>
             </div>
 
