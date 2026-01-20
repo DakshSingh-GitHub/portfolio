@@ -9,10 +9,10 @@ export default function CodeJudgePage() {
                 <h1
                     className={`text-3xl sm:text-5xl font-extrabold ${classNames.textGlowEffect}`}
                 >
-                    ⚖️ Mini Online Judge (Flask Backend)
+                    ⚖️ Mini Online Judge (FastAPI Backend)
                 </h1>
                 <p className="text-lg text-gray-400 mt-4 break-all">
-                    A lightweight Online Code Judge built using Flask, designed to replicate the core functionality of platforms like Codeforces or LeetCode. It executes user-submitted Python code, evaluates it against predefined test cases, and provides detailed verdicts. This project serves as a foundational implementation to understand the intricacies of automated code evaluation systems, offering a pocket-sized, yet powerful, solution for competitive programming practice or educational purposes.
+                    A lightweight Online Code Judge built using FastAPI, designed to replicate the core functionality of platforms like Codeforces or LeetCode. It executes user-submitted Python code, evaluates it against predefined test cases, and provides detailed verdicts. This project serves as a foundational implementation to understand the intricacies of automated code evaluation systems, offering a pocket-sized, yet powerful, solution for competitive programming practice or educational purposes.
                 </p>
             </header>
             <Image
@@ -80,7 +80,8 @@ export default function CodeJudgePage() {
                         className={`space-y-3 text-gray-300 ${classNames.cardparent_list}`}
                     >
                         <li><span className={classNames.cardparent_list_span}>🐍 Python:</span> The core programming language for the backend logic and code execution.</li>
-                        <li><span className={classNames.cardparent_list_span}>🌶 Flask:</span> A lightweight web framework used to build the RESTful API for handling submissions.</li>
+                        <li><span className={classNames.cardparent_list_span}>⚡ FastAPI:</span> A modern, fast (high-performance) web framework for building APIs with Python 3.7+ based on standard Python type hints.</li>
+                        <li><span className={classNames.cardparent_list_span}>🌐 Next.js:</span> A React framework for building server-side rendered (SSR) and static web applications, used for the frontend interface.</li>
                         <li><span className={classNames.cardparent_list_span}>⚙️ `subprocess` module:</span> Essential for spawning and managing external processes to execute user code.</li>
                         <li><span className={classNames.cardparent_list_span}>📄 `tempfile` module:</span> Utilized for securely creating and managing temporary files for code storage and execution.</li>
                         <li><span className={classNames.cardparent_list_span}>🧪 Postman:</span> Used extensively for API development, testing, and debugging the backend endpoints.</li>
