@@ -84,7 +84,7 @@ export default function Projects() {
             variants={staggerContainer}
             initial="hidden"
             animate="visible"
-            className="flex flex-col items-center mt-10 w-full overflow-hidden"
+            className="flex flex-col items-center mt-0 md:mt-10 w-full overflow-hidden"
         >
             {ProjectDesc.map((project) => (
                 <motion.div key={project.key} variants={bounceIn} className="w-full" whileHover={{ scale: 1.02 }} transition={{ type: "spring", stiffness: 300 }}>
