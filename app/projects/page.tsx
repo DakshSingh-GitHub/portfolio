@@ -36,8 +36,8 @@ const projectDetails = {
 
 const ProjectDesc = [
     {
-        title: "Code Judge (In Development)",
-        desc: "A web-based code judge system built with Flask and React, designed to evaluate and score programming assignments efficiently. (IN DEVELOPMENT)",
+        title: "Code Judge",
+        desc: "A web-based code judge system built with FastAPI and NextJS, designed to evaluate and score programming assignments efficiently.",
         href: "projects/code-judge",
         img: "./projects/code_judge.png",
         key: 4,

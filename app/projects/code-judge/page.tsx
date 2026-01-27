@@ -10,7 +10,7 @@ export default function CodeJudgePage() {
                 <h1
                     className={`text-3xl sm:text-5xl font-extrabold ${classNames.textGlowEffect}`}
                 >
-                    Code Judge (Flask Backend)
+                    Code Judge (FastAPI Backend)
                 </h1>
                 <p className="text-lg text-gray-400 mt-4 break-all">
                     A lightweight Online Code Judge built using Flask, designed
@@ -81,7 +81,7 @@ export default function CodeJudgePage() {
                     </li>
                     <li>
                         <span className={classNames.cardparent_list_span}>
-                            ✅ Clean REST API:
+                            ✅ Clean API:
                         </span>{" "}
                         Offers a well-structured and easy-to-use API endpoint
                         for submitting code and retrieving results
@@ -186,10 +186,10 @@ export default function CodeJudgePage() {
                         </li>
                         <li>
                             <span className={classNames.cardparent_list_span}>
-                                🌶 Flask:
+                                🌶 FastAPI:
                             </span>{" "}
                             A lightweight web framework used to build the
-                            RESTful API for handling submissions.
+                            API for handling submissions.
                         </li>
                         <li>
                             <span className={classNames.cardparent_list_span}>

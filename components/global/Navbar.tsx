@@ -36,7 +36,7 @@ export default function Navbar() {
     const projectLinks = [
         {
             href: "/projects/code-judge",
-            name: "Code Judge (In Development)",
+            name: "Code Judge",
             className: "block px-4 py-2 hover:bg-purple-950 rounded-b-md",
         },
         {

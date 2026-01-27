@@ -43,8 +43,7 @@ export default function HomeCard() {
                                 Java:
                             </span>
                             <span className="md:w-3/4">
-                                I learnt Java programming language when I was in
-                                8th Standard
+                                Done it for consoles and DSA.
                             </span>
                         </li>
                         <li className="flex flex-col md:flex-row mb-2">
@@ -54,7 +53,7 @@ export default function HomeCard() {
                                 Python:
                             </span>
                             <span className="md:w-3/4">
-                                I learnt Python programming language afterwards.
+                                Problem Solving, and Database Tooling.
                             </span>
                         </li>
                         <li className="flex flex-col md:flex-row">
@@ -64,7 +63,7 @@ export default function HomeCard() {
                                 JavaScript:
                             </span>
                             <span className="md:w-3/4">
-                                Currently Learning
+                                Currently Learning NextJS
                             </span>
                         </li>
                     </ul>
