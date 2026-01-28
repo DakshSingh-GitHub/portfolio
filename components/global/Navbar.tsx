@@ -36,11 +36,12 @@ export default function Navbar() {
     const isActive = (path: string) =>
         pathname === path || (path !== "/" && pathname.startsWith(path));
 
-    const getLinkClass = (path: string, baseClass: string = "") => {
+    const getLinkClass = (path: string, baseClass: string = "", isDesktop: boolean = false) => {
         const activeClass = "bg-violet-600/80 text-white";
         const inactiveClass =
             "bg-transparent hover:bg-violet-600/50 text-gray-300 hover:text-white";
-        return `${baseClass} px-4 py-2 rounded-full transition-all duration-300 ${
+        const paddingClass = isDesktop ? "px-4 py-2" : "px-4 py-3";
+        return `${baseClass} ${paddingClass} rounded-full transition-all duration-300 text-base ${
             isActive(path) ? activeClass : inactiveClass
         }`;
     };
@@ -85,36 +86,36 @@ export default function Navbar() {
 
     return (
         <nav className="fixed top-0 left-0 right-0 z-10 bg-black/70 text-white backdrop-blur-xl border-b border-purple-700/30 transition-all duration-300 ease-in-out">
-            <div className="container mx-auto px-6 py-5">
+            <div className="container mx-auto px-4 sm:px-6 md:py-5 py-4">
                 <div className="flex justify-between items-center">
                     <Link
                         href="/"
-                        className={`text-2xl font-bold ${textGlowEffect} flex gap-4 items-center`}
+                        className={`text-xl sm:text-2xl font-bold ${textGlowEffect} flex gap-3 sm:gap-4 items-center`}
                     >
                         <Image
                             src="https://i.pinimg.com/736x/0d/00/60/0d00602699272d50087f09e99ae8a764.jpg"
                             width={45}
                             height={45}
                             alt="Lui Shirosagi Motif"
-                            className="rounded-full"
+                            className="rounded-full w-10 h-10 sm:w-12 sm:h-12"
                         />
                         Meet Daksh Singh
                     </Link>
 
                     {/* Desktop Menu */}
                     <div className="hidden md:flex gap-2 items-center">
-                        <Link href="/about" className={getLinkClass("/about")}>
+                        <Link href="/about" className={getLinkClass("/about", "", true)}>
                             About
                         </Link>
                         <div className="relative" ref={dropdownRef}>
                             <div
                                 className={`${getLinkClass(
-                                    "/projects"
+                                    "/projects", "", true
                                 )} flex items-center`}
                             >
                                 <Link href="/projects" className="pr-2">
                                     Projects
-                                </Link>
+                                 </Link>
                                 <div className="h-4 w-px bg-white/30"></div>
                                 <button
                                     onClick={() =>
@@ -158,13 +159,13 @@ export default function Navbar() {
                         </div>
                         <Link
                             href="/practice-codes"
-                            className={getLinkClass("/practice-codes")}
+                            className={getLinkClass("/practice-codes", "", true)}
                         >
                             Practice Codes
                         </Link>
                         <Link
                             href="/contact-me"
-                            className={getLinkClass("/contact-me")}
+                            className={getLinkClass("/contact-me", "", true)}
                         >
                             Contact
                         </Link>
@@ -176,7 +177,7 @@ export default function Navbar() {
                             onClick={() =>
                                 setIsMobileMenuOpen(!isMobileMenuOpen)
                             }
-                            className="text-white focus:outline-none"
+                            className="text-white focus:outline-none p-2"
                         >
                             {isMobileMenuOpen ? (
                                 <svg
@@ -213,7 +214,7 @@ export default function Navbar() {
 
                 {/* Mobile Menu */}
                 {isMobileMenuOpen && (
-                    <div className="md:hidden mt-6 space-y-2">
+                    <div className="md:hidden mt-6 space-y-3">
                         <Link
                             href="/about"
                             className={getLinkClass(
@@ -237,7 +238,7 @@ export default function Navbar() {
                                 >
                                     Projects
                                 </Link>
-                                <div className="h-4 w-px bg-white/30"></div>
+                                <div className="h-5 w-px bg-white/30"></div>
                                 <button
                                     onClick={() =>
                                         setIsMobileProjectsDropdownOpen(
@@ -273,10 +274,10 @@ export default function Navbar() {
                                                 );
                                             }}
                                         >
-                                            <p className="font-semibold">
+                                            <p className="font-semibold text-base">
                                                 {link.name}
                                             </p>
-                                            <p className="text-xs text-gray-300">
+                                            <p className="text-sm text-gray-300">
                                                 {link.description}
                                             </p>
                                         </Link>

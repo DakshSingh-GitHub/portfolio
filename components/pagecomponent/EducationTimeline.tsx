@@ -77,7 +77,7 @@ export default function EducationTimeline() {
         {
             title: "Secondary Education",
             subtitle: "10th Grade - CBSE Board",
-            year: "2021-2022",
+            year: "2023",
             details: [
                 { label: "School", value: "Shri Gulab Rai Montessori" },
                 { label: "Aggregate Score", value: "89.8%" },
@@ -91,7 +91,7 @@ export default function EducationTimeline() {
         {
             title: "Higher Secondary Education",
             subtitle: "12th Grade - CBSE Board",
-            year: "2023-2024",
+            year: "2025",
             details: [
                 { label: "School", value: "Shri Gulab Rai Montessori" },
                 { label: "Aggregate Score", value: "91.0%" },

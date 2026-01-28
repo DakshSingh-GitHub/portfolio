@@ -1,59 +1,53 @@
 
 import Image from "next/image";
 
-import { classNames } from "../styles";
+interface CardProps {
+  image: string;
+  text: string;
+  paragraph: string;
+  board: boolean;
+}
 
-interface CardProps { image: string; text: string; paragraph: string; board:boolean }
-
-export default function Card( { image, text, paragraph, board }: CardProps ) {
-    return (
-        <div
-            className={`${classNames.card} w-full md:w-97.5 h-auto md:h-140 cursor-default border-purple-500/30 bg-gray-900/50 hover:shadow-purple-500/50 hover:border-purple-500`}
-        >
-            <Image
-                src={image}
-                width={350}
-                height={350}
-                alt={text}
-                className="w-full h-auto"
-                loading="eager"
-            />
-            <div className="p-4">
-                <h1
-                    className={`text-center mb-4 text-xl ${classNames.textGlowEffect}`}
-                >
-                    {text}
-                </h1>
-                <hr className="" style={{ color: "white" }} />
-                <p className="mt-4 text-center">{paragraph}</p>
-            </div>
-            {board ? (
-                <ul className="text-center p-4">
-                    <h1
-                        className={`font-bold mb-3 text-xl ${classNames.textGlowEffect}`}
-                    >
-                        Results are as follows:
-                    </h1>
-                    <li>
-                        <span
-                            className={`${classNames.spanText} ${classNames.textGlowEffect}`}
-                        >
-                            10th CBSE Board
-                        </span>{" "}
-                        - 89.8% | B5: 95.2%
-                    </li>
-                    <li>
-                        <span
-                            className={`${classNames.spanText} ${classNames.textGlowEffect}`}
-                        >
-                            12th CBSE Board
-                        </span>{" "}
-                        - 91.0%
-                    </li>
-                </ul>
-            ) : (
-                <div className=""></div>
-            )}
+export default function Card({ image, text, paragraph, board }: CardProps) {
+  return (
+    <div className="w-full md:w-97.5 bg-black/20 backdrop-blur-lg rounded-2xl border border-purple-700/30 overflow-hidden shadow-[0_0_20px_rgba(124,58,237,0.15)] hover:shadow-[0_0_40px_rgba(124,58,237,0.3)] hover:border-purple-500 transition-all duration-300 flex flex-col">
+      <div className="relative w-full h-52">
+        <Image
+          src={image}
+          layout="fill"
+          objectFit="cover"
+          alt={text}
+          loading="eager"
+        />
+      </div>
+      <div className="px-5 pt-5 pb-2 flex flex-col">
+        <h1 className="text-center mb-3 text-xl font-bold text-white tracking-wide">
+          {text}
+        </h1>
+        <hr className="border-white/20" />
+        <p className="mt-3 text-center text-gray-300 text-sm">{paragraph}</p>
+      </div>
+      {board && (
+        <div className="px-5 pt-2 pb-5 bg-black/20">
+          <h2 className="font-bold mb-2 text-lg text-center text-white">
+            Results
+          </h2>
+          <ul className="text-center space-y-1 text-sm">
+            <li>
+              <span className="font-semibold text-purple-400">
+                10th CBSE Board
+              </span>
+              <span className="text-gray-300"> - 89.8% | B5: 95.2%</span>
+            </li>
+            <li>
+              <span className="font-semibold text-purple-400">
+                12th CBSE Board
+              </span>
+              <span className="text-gray-300"> - 91.0%</span>
+            </li>
+          </ul>
         </div>
-    );
-};
+      )}
+    </div>
+  );
+}
