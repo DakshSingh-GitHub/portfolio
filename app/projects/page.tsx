@@ -1,10 +1,8 @@
 "use client";
 
-import ProjectCards from "@/components/pagecomponent/ProjectCards";
 import Link from "next/link";
-
-import { motion } from "framer-motion";
-import { staggerContainer, bounceIn } from "@/components/animations";
+import Image from "next/image";
+import { motion, Variants } from "framer-motion";
 
 const projectDetails = {
     hotelManagement: [
@@ -77,27 +75,56 @@ const ProjectDesc = [
     },
 ];
 
+const cardVariants: Variants = {
+    hidden: { opacity: 0, y: 20, scale: 0.98 },
+    visible: (i: number) => ({
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        transition: {
+            delay: i * 0.1,
+            duration: 0.5,
+            ease: "easeOut",
+        },
+    }),
+};
 
 export default function Projects() {
     return (
-        <motion.div
-            variants={staggerContainer}
-            initial="hidden"
-            animate="visible"
-            className="flex flex-col items-center mt-0 md:mt-10 w-full overflow-hidden"
-        >
-            {ProjectDesc.map((project) => (
-                <motion.div key={project.key} variants={bounceIn} className="w-full" whileHover={{ scale: 1.02 }} transition={{ type: "spring", stiffness: 300 }}>
-                    <Link href={project.href} className="w-full">
-                        <ProjectCards
-                            image={project.img}
-                            text={project.title}
-                            paragraph={project.desc}
-                            details={project.details}
-                        />
-                    </Link>
-                </motion.div>
-            ))}
-        </motion.div>
-    )
+        <div className="w-full max-w-7xl mx-auto py-20 px-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+                {ProjectDesc.map((project, i) => (
+                    <motion.div
+                        key={project.key}
+                        variants={cardVariants}
+                        custom={i}
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true, amount: 0.2 }}
+                    >
+                        <Link href={project.href}>
+                            <div className="h-full bg-black/40 backdrop-blur-lg rounded-3xl border border-white/10 overflow-hidden transition-all duration-300 hover:shadow-[0_0_40px_rgba(167,139,250,0.25)] hover:border-violet-400/40 hover:scale-[1.02]">
+                                <div className="relative h-64">
+                                    <Image
+                                        src={project.img}
+                                        layout="fill"
+                                        objectFit="cover"
+                                        alt={project.title}
+                                    />
+                                </div>
+                                <div className="p-8">
+                                    <h3 className="text-3xl font-bold text-white mb-3">
+                                        {project.title}
+                                    </h3>
+                                    <p className="text-gray-300 text-lg leading-relaxed">
+                                        {project.desc}
+                                    </p>
+                                </div>
+                            </div>
+                        </Link>
+                    </motion.div>
+                ))}
+            </div>
+        </div>
+    );
 }

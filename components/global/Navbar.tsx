@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 
 export default function Navbar() {
     const [isDesktopProjectsDropdownOpen, setIsDesktopProjectsDropdownOpen] =
@@ -11,6 +12,7 @@ export default function Navbar() {
         useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
+    const pathname = usePathname();
 
     // Close dropdowns when clicking outside
     useEffect(() => {
@@ -22,10 +24,8 @@ export default function Navbar() {
                 setIsDesktopProjectsDropdownOpen(false);
             }
         }
-        // Bind the event listener
         document.addEventListener("mousedown", handleClickOutside);
         return () => {
-            // Unbind the event listener on clean up
             document.removeEventListener("mousedown", handleClickOutside);
         };
     }, [dropdownRef]);
@@ -33,46 +33,68 @@ export default function Navbar() {
     const textGlowEffect =
         "transition-all duration-300 ease-in-out hover:filter hover:drop-shadow-[0_0_8px_rgba(124,58,237,0.9)]";
 
+    const isActive = (path: string) =>
+        pathname === path || (path !== "/" && pathname.startsWith(path));
+
+    const getLinkClass = (path: string, baseClass: string = "") => {
+        const activeClass = "bg-violet-600/80 text-white";
+        const inactiveClass =
+            "bg-transparent hover:bg-violet-600/50 text-gray-300 hover:text-white";
+        return `${baseClass} px-4 py-2 rounded-full transition-all duration-300 ${
+            isActive(path) ? activeClass : inactiveClass
+        }`;
+    };
+
     const projectLinks = [
         {
             href: "/projects/code-judge",
             name: "Code Judge",
-            className: "block px-4 py-2 hover:bg-purple-950 rounded-b-md",
+            description: "An online platform for compiling and running code.",
         },
         {
             href: "/projects/library-management",
             name: "Library Management CLI",
-            className: "block px-4 py-2 hover:bg-purple-950 rounded-t-md",
+            description: "A CLI for managing library records.",
         },
         {
             href: "/projects/mathematics-helper",
             name: "Mathematics Helper Java",
-            className: "block px-4 py-2 hover:bg-purple-950",
+            description: "A Java app for solving mathematical problems.",
         },
         {
             href: "/projects/portfolio",
             name: "Portfolio (This Website)",
-            className: "block px-4 py-2 hover:bg-purple-950",
+            description: "The portfolio you are currently viewing.",
         },
         {
             href: "/projects/hotel-management",
             name: "Hotel management (School Project)",
-            className: "block px-4 py-2 hover:bg-purple-950 rounded-b-md",
+            description: "A school project for managing hotel operations.",
         },
     ];
 
+    const dropdownClasses = `absolute top-full mt-4 w-72 bg-black/80 backdrop-blur-lg rounded-xl shadow-2xl border border-purple-700/60 transition-all duration-300 ease-in-out transform ${
+        isDesktopProjectsDropdownOpen
+            ? "opacity-100 scale-100"
+            : "opacity-0 scale-95 pointer-events-none"
+    }`;
+
+    const mobileDropdownClasses = `pl-4 transition-all duration-300 ease-in-out overflow-hidden ${
+        isMobileProjectsDropdownOpen ? "max-h-96" : "max-h-0"
+    }`;
+
     return (
-        <nav className="fixed top-0 left-0 right-0 z-10 bg-black/50 text-white backdrop-blur-sm border-b border-purple-700/50 transition-shadow duration-300 ease-in-out hover:shadow-[0_10px_25px_-5px_rgba(76,5,119,0.8)] hover:border-purple-500">
-            <div className="container mx-auto px-6 py-6">
+        <nav className="fixed top-0 left-0 right-0 z-10 bg-black/70 text-white backdrop-blur-xl border-b border-purple-700/30 transition-all duration-300 ease-in-out">
+            <div className="container mx-auto px-6 py-5">
                 <div className="flex justify-between items-center">
                     <Link
                         href="/"
-                        className={`text-2xl font-bold ${textGlowEffect} flex gap-3 items-center`}
+                        className={`text-2xl font-bold ${textGlowEffect} flex gap-4 items-center`}
                     >
                         <Image
                             src="https://i.pinimg.com/736x/0d/00/60/0d00602699272d50087f09e99ae8a764.jpg"
-                            width={40}
-                            height={40}
+                            width={45}
+                            height={45}
                             alt="Lui Shirosagi Motif"
                             className="rounded-full"
                         />
@@ -80,28 +102,27 @@ export default function Navbar() {
                     </Link>
 
                     {/* Desktop Menu */}
-                    <div className="hidden md:flex gap-6 items-center">
-                        <Link
-                            href="/about"
-                            className={`hover:text-gray-300 ${textGlowEffect}`}
-                        >
+                    <div className="hidden md:flex gap-2 items-center">
+                        <Link href="/about" className={getLinkClass("/about")}>
                             About
                         </Link>
                         <div className="relative" ref={dropdownRef}>
-                            <div className="flex items-center">
-                                <Link
-                                    href="/projects"
-                                    className={`hover:text-gray-300 ${textGlowEffect}`}
-                                >
+                            <div
+                                className={`${getLinkClass(
+                                    "/projects"
+                                )} flex items-center`}
+                            >
+                                <Link href="/projects" className="pr-2">
                                     Projects
                                 </Link>
+                                <div className="h-4 w-px bg-white/30"></div>
                                 <button
                                     onClick={() =>
                                         setIsDesktopProjectsDropdownOpen(
                                             !isDesktopProjectsDropdownOpen
                                         )
                                     }
-                                    className={`ml-1 hover:text-gray-300 ${textGlowEffect}`}
+                                    className="pl-2"
                                 >
                                     <svg
                                         className="w-4 h-4"
@@ -116,32 +137,34 @@ export default function Navbar() {
                                     </svg>
                                 </button>
                             </div>
-                            {isDesktopProjectsDropdownOpen && (
-                                <div className="absolute top-full mt-2 w-64 bg-black/70 backdrop-blur-sm rounded-md shadow-lg">
-                                    <ul>
-                                        {projectLinks.map((link) => (
-                                            <li key={link.href}>
-                                                <Link
-                                                    href={link.href}
-                                                    className={link.className}
-                                                >
-                                                    {link.name}
-                                                </Link>
-                                            </li>
-                                        ))}
-                                    </ul>
+                            <div className={dropdownClasses}>
+                                <div className="rounded-xl overflow-hidden">
+                                    {projectLinks.map((link) => (
+                                        <Link
+                                            key={link.href}
+                                            href={link.href}
+                                            className={`block w-full text-left px-6 py-4 hover:bg-violet-700/60 transition-colors duration-200`}
+                                        >
+                                            <p className="font-semibold">
+                                                {link.name}
+                                            </p>
+                                            <p className="text-sm text-gray-300">
+                                                {link.description}
+                                            </p>
+                                        </Link>
+                                    ))}
                                 </div>
-                            )}
+                            </div>
                         </div>
                         <Link
                             href="/practice-codes"
-                            className={`hover:text-gray-300 ${textGlowEffect}`}
+                            className={getLinkClass("/practice-codes")}
                         >
                             Practice Codes
                         </Link>
                         <Link
                             href="/contact-me"
-                            className={`hover:text-gray-300 ${textGlowEffect}`}
+                            className={getLinkClass("/contact-me")}
                         >
                             Contact
                         </Link>
@@ -157,11 +180,10 @@ export default function Navbar() {
                         >
                             {isMobileMenuOpen ? (
                                 <svg
-                                    className="w-6 h-6"
+                                    className="w-7 h-7"
                                     fill="none"
                                     stroke="currentColor"
                                     viewBox="0 0 24 24"
-                                    xmlns="http://www.w3.org/2000/svg"
                                 >
                                     <path
                                         strokeLinecap="round"
@@ -172,7 +194,7 @@ export default function Navbar() {
                                 </svg>
                             ) : (
                                 <svg
-                                    className="w-6 h-6"
+                                    className="w-7 h-7"
                                     fill="none"
                                     stroke="currentColor"
                                     viewBox="0 0 24 24"
@@ -191,30 +213,38 @@ export default function Navbar() {
 
                 {/* Mobile Menu */}
                 {isMobileMenuOpen && (
-                    <div className="md:hidden mt-4">
+                    <div className="md:hidden mt-6 space-y-2">
                         <Link
                             href="/about"
-                            className={`block py-2 ${textGlowEffect}`}
+                            className={getLinkClass(
+                                "/about",
+                                "block text-center"
+                            )}
                             onClick={() => setIsMobileMenuOpen(false)}
                         >
                             About
                         </Link>
                         <div className="relative">
-                            <div className="flex items-center justify-between">
+                            <div
+                                className={`${getLinkClass(
+                                    "/projects"
+                                )} flex items-center justify-center`}
+                            >
                                 <Link
                                     href="/projects"
-                                    className={`block py-2 ${textGlowEffect}`}
+                                    className="pr-3"
                                     onClick={() => setIsMobileMenuOpen(false)}
                                 >
                                     Projects
                                 </Link>
+                                <div className="h-4 w-px bg-white/30"></div>
                                 <button
                                     onClick={() =>
                                         setIsMobileProjectsDropdownOpen(
                                             !isMobileProjectsDropdownOpen
                                         )
                                     }
-                                    className={`py-2 ${textGlowEffect}`}
+                                    className="pl-3"
                                 >
                                     <svg
                                         className="w-5 h-5"
@@ -229,41 +259,47 @@ export default function Navbar() {
                                     </svg>
                                 </button>
                             </div>
-                            {isMobileProjectsDropdownOpen && (
-                                <div className="pl-4">
-                                    <ul>
-                                        {projectLinks.map((link) => (
-                                            <li key={link.href}>
-                                                <Link
-                                                    href={link.href}
-                                                    className={link.className}
-                                                    onClick={() => {
-                                                        setIsMobileMenuOpen(
-                                                            false
-                                                        );
-                                                        setIsMobileProjectsDropdownOpen(
-                                                            false
-                                                        );
-                                                    }}
-                                                >
-                                                    {link.name}
-                                                </Link>
-                                            </li>
-                                        ))}
-                                    </ul>
+                            <div className={mobileDropdownClasses}>
+                                <div className="mt-2 space-y-2">
+                                    {projectLinks.map((link) => (
+                                        <Link
+                                            key={link.href}
+                                            href={link.href}
+                                            className="block text-center px-4 py-3 bg-black/50 rounded-full hover:bg-violet-700/60 transition-colors duration-200"
+                                            onClick={() => {
+                                                setIsMobileMenuOpen(false);
+                                                setIsMobileProjectsDropdownOpen(
+                                                    false
+                                                );
+                                            }}
+                                        >
+                                            <p className="font-semibold">
+                                                {link.name}
+                                            </p>
+                                            <p className="text-xs text-gray-300">
+                                                {link.description}
+                                            </p>
+                                        </Link>
+                                    ))}
                                 </div>
-                            )}
+                            </div>
                         </div>
                         <Link
                             href="/practice-codes"
-                            className={`block py-2 ${textGlowEffect}`}
+                            className={getLinkClass(
+                                "/practice-codes",
+                                "block text-center"
+                            )}
                             onClick={() => setIsMobileMenuOpen(false)}
                         >
                             Practice Codes
                         </Link>
                         <Link
                             href="/contact-me"
-                            className={`block py-2 ${textGlowEffect}`}
+                            className={getLinkClass(
+                                "/contact-me",
+                                "block text-center"
+                            )}
                             onClick={() => setIsMobileMenuOpen(false)}
                         >
                             Contact
