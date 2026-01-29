@@ -4,7 +4,6 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-import { classNames } from "../styles";
 import { motion } from "framer-motion";
 import { bounceIn } from "../animations";
 
@@ -22,32 +21,29 @@ const CertificateCard: React.FC<CertificateCardProps> = ({
     pdfUrl,
 }) => {
     return (
-        <div
-            className={`${classNames.card} bg-gray-900/50 border-purple-500/30 hover:border-purple-500 hover:shadow-purple-500/50 max-h-70 min-h-45`}
-        >
-            <Link href={pdfUrl} target="_blank" rel="noopener noreferrer">
-                <div className="p-4">
-                    <h3
-                        className={`text-lg font-bold ${classNames.textGlowEffect}`}
-                    >
+        <Link href={pdfUrl} target="_blank" rel="noopener noreferrer" className="block h-full">
+            <div className="bg-black/20 backdrop-blur-lg rounded-2xl border border-purple-700/30 p-6 shadow-lg h-full flex flex-col justify-between transition-all duration-300 hover:border-purple-500/80 hover:shadow-purple-500/20 hover:bg-black/30">
+                <div>
+                    <h3 className="text-xl font-bold text-white mb-2 leading-tight">
                         {title}
                     </h3>
-                    <p className="text-gray-400">{issuer}</p>
-                    <p className="text-sm text-gray-500">{date}</p>
-                    <div className="flex items-center mt-4">
-                        <Image
-                            src="./file.svg"
-                            alt="File Icon"
-                            width={20}
-                            height={20}
-                        />
-                        <span className={`ml-2 ${classNames.textGlowEffect}`}>
-                            View Certificate
-                        </span>
-                    </div>
+                    <p className="text-purple-300 font-medium mb-1">{issuer}</p>
+                    <p className="text-sm text-gray-400">{date}</p>
                 </div>
-            </Link>
-        </div>
+                <div className="flex items-center mt-4 text-gray-200 group">
+                    <Image
+                        src="./file.svg"
+                        alt="File Icon"
+                        width={20}
+                        height={20}
+                        className="transition-transform duration-300 group-hover:scale-110"
+                    />
+                    <span className="ml-2 font-semibold transition-colors duration-300 group-hover:text-purple-300">
+                        View Certificate
+                    </span>
+                </div>
+            </div>
+        </Link>
     );
 };
 
@@ -82,10 +78,10 @@ const certificates_g1 = [
 
 const Certificate: React.FC = () => {
     return (
-        <div className="">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="w-full">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {certificates_g1.map((cert, index) => (
-                    <motion.div key={index} variants={bounceIn} whileHover={{ scale: 1.02 }} transition={{ type: "spring", stiffness: 300 }}>
+                    <motion.div key={index} variants={bounceIn} whileHover={{ scale: 1.03 }} transition={{ type: "spring", stiffness: 300 }}>
                         <CertificateCard
                             title={cert.title}
                             issuer={cert.issuer}
