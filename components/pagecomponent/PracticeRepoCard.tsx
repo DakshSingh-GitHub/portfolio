@@ -11,29 +11,35 @@ interface PropsPracticeRepoCard {
 
 export default function PracticeRepoCard({repo_name, repo_desc, repo_lang, repo_url}: PropsPracticeRepoCard) {
     return (
-        <div className="w-full md:w-100 max-w-[95%] mx-auto my-4 cursor-default flex flex-col md:flex-row border shadow-lg rounded-lg overflow-hidden transition-shadow duration-300 ease-in-out hover:shadow-[0_0_20px_rgba(139,92,246,0.5)] border-purple-500/30 bg-gray-900/50 hover:shadow-purple-500/50 hover:border-purple-500">
-            <Link
-                href={repo_url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="h-full"
-            >
-                <div className="m-5">
-                    <h2 className="text-2xl font-semibold mb-3">{repo_name}</h2>
-                    <hr />
-                    <p className="mb-5 mt-5">{repo_desc}</p>
+        <Link
+            href={repo_url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block h-full"
+        >
+            <div className="bg-black/20 backdrop-blur-lg rounded-2xl border border-purple-700/30 p-6 shadow-lg h-full flex flex-col justify-between transition-all duration-300 hover:border-purple-500/80 hover:shadow-purple-500/20 hover:bg-black/30">
+                <div>
+                    <h2 className="text-xl font-bold text-white mb-3 leading-tight">
+                        {repo_name}
+                    </h2>
+                    <hr className="border-white/20 mb-4" />
+                    <p className="text-gray-300 text-sm mb-4">
+                        {repo_desc}
+                    </p>
+                </div>
+                <div className="flex flex-wrap gap-2">
                     {(Array.isArray(repo_lang) ? repo_lang : [repo_lang]).map(
                         (lang, index) => (
                             <span
                                 key={index}
-                                className="inline-block bg-purple-600 text-white text-sm px-2 py-1 rounded-full mr-2"
+                                className="inline-block bg-purple-600/30 text-purple-200 text-xs font-medium px-3 py-1 rounded-full border border-purple-500/50"
                             >
                                 {lang}
                             </span>
                         )
                     )}
                 </div>
-            </Link>
-        </div>
+            </div>
+        </Link>
     );
 }

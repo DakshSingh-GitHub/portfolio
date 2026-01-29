@@ -2,8 +2,7 @@
 
 import PracticeRepoCard from "@/components/pagecomponent/PracticeRepoCard";
 
-import { classNames } from "@/components/styles";
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import { staggerContainer, bounceIn } from "@/components/animations";
 
 const Repositories = [
@@ -39,6 +38,19 @@ const Repositories = [
 ];
 
 export default function PracticeCodes() {
+    const headerVariants: Variants = {
+        hidden: { scale: 0.9, opacity: 0 },
+        visible: {
+            scale: 1,
+            opacity: 1,
+            transition: {
+                type: "spring",
+                stiffness: 100,
+                damping: 15,
+            },
+        },
+    };
+
     return (
         <motion.div
             variants={staggerContainer}
@@ -47,17 +59,13 @@ export default function PracticeCodes() {
             className="practice-code p-4 md:p-10 cursor-default"
         >
             <motion.div
-                className="head-not flex flex-col items-center w-full md:w-3/4 mx-auto pb-10 px-2 md:px-0"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 1.2 }}
+                className="text-center mb-12 bg-black/20 backdrop-blur-xl rounded-3xl border border-purple-700/30 p-8 md:p-12 shadow-[0_0_30px_rgba(124,58,237,0.1)] hover:shadow-[0_0_50px_rgba(124,58,237,0.2)] transition-shadow duration-500"
+                variants={headerVariants}
             >
-                <h1
-                    className={`text-center ${classNames.textGlowEffect} text-5xl font-bold`}
-                >
+                <h1 className="text-4xl md:text-6xl font-bold mb-6 tracking-tight bg-clip-text text-transparent bg-linear-to-r from-white via-purple-200 to-purple-400">
                     Practice Codes
                 </h1>
-                <p className="text-sm md:text-lg text-center mt-5 md:text-justify">
+                <p className="text-lg md:text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
                     This section will contain practice codes and exercises.
                     Repositories with practice codes will be linked here. I
                     prefer coding and sharing my progress as I learn the
@@ -65,14 +73,16 @@ export default function PracticeCodes() {
                     practice.
                 </p>
             </motion.div>
-            <hr />
-            <div className="repo flex-col md:flex-row items-center justify-between h-full w-full mt-10 md:gap-0 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            
+            <div className="h-px bg-linear-to-r from-transparent via-purple-500/50 to-transparent my-12"></div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-10">
                 {Repositories.map((repo) => (
                     <motion.div
                         key={repo.repo_key}
                         variants={bounceIn}
-                        className="w-full"
-                        whileHover={{ scale: 1.02 }}
+                        className="h-full"
+                        whileHover={{ scale: 1.03 }}
                         transition={{ type: "spring", stiffness: 300 }}
                     >
                         <PracticeRepoCard
@@ -87,4 +97,3 @@ export default function PracticeCodes() {
         </motion.div>
     );
 };
-
