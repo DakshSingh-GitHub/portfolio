@@ -32,7 +32,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
     return (
         <html lang="en">
-            <body className={` ${oxanium.variable} ${geistSans.variable} ${geistMono.variable} antialiased text-sm sm:text-base pt-36 sm:pt-28`} >
+            <body className={` ${oxanium.variable} ${geistSans.variable} ${geistMono.variable} antialiased text-sm sm:text-base pt-36 sm:pt-28 select-none`} >
                 <ParticleBackground />
                 <Navbar />
                 {children}
