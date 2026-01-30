@@ -1,9 +1,9 @@
-/* eslint-disable react/no-unescaped-entities */
+
 "use client";
 
 import Image from "next/image";
 import { motion, Variants } from "framer-motion";
-import { staggerContainer, bounceIn } from "@/components/animations";
+import { staggerContainer } from "@/components/animations";
 
 export default function CodeJudgePage() {
     const headerVariants: Variants = {

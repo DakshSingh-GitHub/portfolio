@@ -1,438 +1,231 @@
-/* eslint-disable react/no-unescaped-entities */
 
 "use client";
 
-import { classNames } from "@/components/styles";
 import Image from "next/image";
+import { motion, Variants } from "framer-motion";
+import { staggerContainer } from "@/components/animations";
 
 export default function HotelManagementPage() {
+    const headerVariants: Variants = {
+        hidden: { scale: 0.9, opacity: 0 },
+        visible: {
+            scale: 1,
+            opacity: 1,
+            transition: {
+                type: "spring",
+                stiffness: 100,
+                damping: 15,
+            },
+        },
+    };
+
+    const itemVariants: Variants = {
+        hidden: { y: 20, opacity: 0 },
+        visible: {
+            y: 0,
+            opacity: 1,
+            transition: {
+                type: "spring",
+                stiffness: 100,
+            },
+        },
+    };
+
     return (
-        <div className="container mx-auto px-6 py-4 text-white">
-            <header className="text-center my-12">
-                <h1
-                    className={`text-3xl sm:text-5xl font-extrabold ${classNames.textGlowEffect}`}
-                >
+        <motion.div 
+            className="container mx-auto px-4 sm:px-6 py-10 text-white"
+            variants={staggerContainer}
+            initial="hidden"
+            animate="visible"
+        >
+            <motion.div 
+                className="text-center mb-12 bg-black/20 backdrop-blur-xl rounded-3xl border border-purple-700/30 p-8 md:p-12 shadow-[0_0_30px_rgba(124,58,237,0.1)] hover:shadow-[0_0_50px_rgba(124,58,237,0.2)] transition-shadow duration-500"
+                variants={headerVariants}
+            >
+                <h1 className="text-3xl sm:text-5xl font-extrabold mb-6 tracking-tight bg-clip-text text-transparent bg-linear-to-r from-white via-purple-200 to-purple-400">
                     Hotel Management System
                 </h1>
-                <p className="text-lg text-gray-400 mt-4 break-all">
-                    A CLI-based / Web based (both) hotel management system using
-                    Python, Colorama, and MySQL.
+                <p className="text-lg text-gray-300 max-w-4xl mx-auto leading-relaxed">
+                    A comprehensive CLI-based and Web-based hotel management system built using Python, Colorama, and MySQL. It streamlines hotel operations, from guest management to billing, with a user-friendly interface.
                 </p>
-            </header>
-            <Image
-                src="../projects/hotel_management.png"
-                alt="Hotel Management"
-                height={200}
-                width={600}
-                className={`rounded-4xl mx-auto mt-10 border-4 border-purple-500/50 shadow-lg shadow-purple-500/20 ${classNames.textGlowEffect} hover:border-purple-500`}
-            />
+            </motion.div>
 
-            <div
-                className={`bg-gray-900/50 p-8 rounded-lg shadow-lg border border-purple-500/30 my-10 ${classNames.boxHoverEffect}`}
+            <motion.div variants={itemVariants} className="flex justify-center mb-16">
+                <div className="relative rounded-3xl overflow-hidden border-4 border-purple-500/30 shadow-[0_0_40px_rgba(124,58,237,0.2)] hover:border-purple-500/60 transition-all duration-500 group">
+                    <Image
+                        src="../projects/hotel_management.png"
+                        alt="Hotel Management"
+                        height={400}
+                        width={800}
+                        className="object-cover transform transition-transform duration-700 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-linear-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                </div>
+            </motion.div>
+
+            <motion.div
+                className="bg-black/20 backdrop-blur-lg p-8 rounded-2xl border border-purple-700/30 shadow-lg mb-12 hover:border-purple-500/50 transition-colors duration-300"
+                variants={itemVariants}
             >
-                <h2
-                    className={`text-xl sm:text-3xl font-bold mb-6 ${classNames.spanText} ${classNames.textGlowEffect}`}
-                >
-                    Project Overview
+                <h2 className="text-2xl sm:text-3xl font-bold mb-6 text-white flex items-center gap-3">
+                    <span className="text-purple-400">✨</span> Project Overview
                 </h2>
-                <p className="text-lg text-gray-300 leading-relaxed break-all">
-                    The Hotel Management System is a command-line interface
-                    (CLI) application built with Python to streamline hotel
-                    operations. It leverages a MySQL database to manage guest
-                    information, room bookings, and staff details. The
-                    application features a user-friendly, color-coded interface
-                    powered by the Colorama library, making it intuitive and
-                    efficient for hotel staff to perform their daily tasks.
+                <p className="text-lg text-gray-300 leading-relaxed">
+                    The Hotel Management System is a dual-interface application (CLI & Web) designed to modernize hotel administration. It leverages a robust MySQL database to manage guest information, room bookings, and staff details efficiently. The CLI version features a color-coded interface powered by Colorama for enhanced usability, while the Web version utilizes Flask to provide accessible management tools.
                 </p>
+            </motion.div>
+
+            <div className="grid md:grid-cols-2 gap-8 mb-12">
+                <motion.div
+                    className="bg-black/20 backdrop-blur-lg p-8 rounded-2xl border border-purple-700/30 shadow-lg hover:border-purple-500/50 transition-colors duration-300 h-full"
+                    variants={itemVariants}
+                >
+                    <h3 className="text-xl sm:text-2xl font-bold mb-6 text-white flex items-center gap-3">
+                        <span className="text-purple-400">⚙️</span> Core Functionalities
+                    </h3>
+                    <ul className="space-y-4">
+                        {[
+                            { title: "Guest Management", desc: "Add, update, and view guest information, including personal details and stay history." },
+                            { title: "Room Booking", desc: "Check room availability, book rooms for guests, and manage check-in and check-out processes." },
+                            { title: "Staff Management", desc: "Maintain a database of hotel staff, including their roles and contact information." },
+                            { title: "Billing and Invoicing", desc: "Generate bills for guests based on their stay and services availed." }
+                        ].map((feature, index) => (
+                            <li key={index} className="bg-white/5 p-4 rounded-xl border border-white/5 hover:bg-white/10 transition-colors duration-300">
+                                <span className="block font-semibold text-purple-300 mb-1">{feature.title}</span>
+                                <span className="text-gray-400 text-sm">{feature.desc}</span>
+                            </li>
+                        ))}
+                    </ul>
+                </motion.div>
+
+                <motion.div
+                    className="bg-black/20 backdrop-blur-lg p-8 rounded-2xl border border-purple-700/30 shadow-lg hover:border-purple-500/50 transition-colors duration-300 h-full"
+                    variants={itemVariants}
+                >
+                    <h3 className="text-xl sm:text-2xl font-bold mb-6 text-white flex items-center gap-3">
+                        <span className="text-purple-400">🛠</span> Technical Deep Dive
+                    </h3>
+                    <ul className="space-y-4">
+                        {[
+                            { icon: "🐍", title: "Python", desc: "The core logic of the application is written in Python." },
+                            { icon: "🗄️", title: "MySQL", desc: "Used for data persistence, storing all guest, booking, and staff information." },
+                            { icon: "🎨", title: "Colorama", desc: "Adds color to the command-line interface for a better user experience." },
+                            { icon: "🌐", title: "Flask", desc: "Powers the web environment to manage core functionalities." },
+                            { icon: "💻", title: "CLI", desc: "Lightweight command-line interface for versatile deployment." }
+                        ].map((tech, index) => (
+                            <li key={index} className="flex items-start gap-4 p-3 rounded-xl hover:bg-white/5 transition-colors duration-300">
+                                <span className="text-2xl">{tech.icon}</span>
+                                <div>
+                                    <span className="block font-semibold text-purple-300">{tech.title}</span>
+                                    <span className="text-gray-400 text-sm">{tech.desc}</span>
+                                </div>
+                            </li>
+                        ))}
+                    </ul>
+                </motion.div>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-10 my-10">
-                <div
-                    className={`bg-gray-900/50 p-6 rounded-lg shadow-lg border border-purple-500/30 ${classNames.boxHoverEffect}`}
-                >
-                    <h3
-                        className={`text-lg sm:text-2xl font-semibold mb-4 ${classNames.spanText} ${classNames.textGlowEffect}`}
-                    >
-                        Core Functionalities
-                    </h3>
-                    <ul
-                        className={`space-y-3 text-gray-300 ${classNames.cardparent_list}`}
-                    >
-                        <li>
-                            <span className={classNames.cardparent_list_span}>
-                                Guest Management:
-                            </span>{" "}
-                            Add, update, and view guest information, including
-                            personal details and stay history.
-                        </li>
-                        <li>
-                            <span className={classNames.cardparent_list_span}>
-                                Room Booking:
-                            </span>{" "}
-                            Check room availability, book rooms for guests, and
-                            manage check-in and check-out processes.
-                        </li>
-                        <li>
-                            <span className={classNames.cardparent_list_span}>
-                                Staff Management:
-                            </span>{" "}
-                            Maintain a database of hotel staff, including their
-                            roles and contact information.
-                        </li>
-                        <li>
-                            <span className={classNames.cardparent_list_span}>
-                                Billing and Invoicing:
-                            </span>{" "}
-                            Generate bills for guests based on their stay and
-                            services availed.
-                        </li>
-                    </ul>
-                </div>
-
-                <div
-                    className={`bg-gray-900/50 p-6 rounded-lg shadow-lg border border-purple-500/30 ${classNames.boxHoverEffect}`}
-                >
-                    <h3
-                        className={`text-lg sm:text-2xl font-semibold mb-4 ${classNames.spanText} ${classNames.textGlowEffect}`}
-                    >
-                        Technical Deep Dive
-                    </h3>
-                    <p className="text-gray-300 mb-4 break-all">
-                        The application is built with Python and relies on a few
-                        key libraries for its functionality.
-                    </p>
-                    <ul
-                        className={`space-y-3 text-gray-300 ${classNames.cardparent_list}`}
-                    >
-                        <li>
-                            <span className={classNames.cardparent_list_span}>
-                                Python:
-                            </span>{" "}
-                            The core logic of the application is written in
-                            Python.
-                        </li>
-                        <li>
-                            <span className={classNames.cardparent_list_span}>
-                                MySQL:
-                            </span>{" "}
-                            A MySQL database is used for data persistence,
-                            storing all guest, booking, and staff information.
-                        </li>
-                        <li>
-                            <span className={classNames.cardparent_list_span}>
-                                Colorama:
-                            </span>{" "}
-                            The Colorama library is used to add color to the
-                            command-line interface, making it more visually
-                            appealing and user-friendly.
-                        </li>
-                        <li>
-                            <span className={classNames.cardparent_list_span}>
-                                Web App:
-                            </span>{" "}
-                           Designed with python Flask, a web environment to manage the cor functionalities of the hotel management system.
-                        </li>
-                        <li>
-                            <span className={classNames.cardparent_list_span}>
-                                CLI:
-                            </span>{" "}
-                            The application is entirely command-line based,
-                            ensuring it is lightweight and can run in various
-                            environments.
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div
-                className={`bg-gray-900/50 p-8 rounded-lg shadow-lg border border-purple-500/30 my-10 ${classNames.boxHoverEffect}`}
+            <motion.div
+                className="bg-black/20 backdrop-blur-lg p-8 rounded-2xl border border-purple-700/30 shadow-lg mb-12 hover:border-purple-500/50 transition-colors duration-300"
+                variants={itemVariants}
             >
-                <h2
-                    className={`text-xl sm:text-3xl font-bold mb-6 ${classNames.spanText} ${classNames.textGlowEffect}`}
-                >
-                    Detailed Information
+                <h2 className="text-2xl sm:text-3xl font-bold mb-8 text-white text-center">
+                    Detailed Features
                 </h2>
-                <p className="text-lg text-gray-300 leading-relaxed break-all">
-                    A comprehensive Command Line Interface (CLI) based Hotel
-                    Management System written in Python. This application
-                    facilitates the management of hotel bookings, customers,
-                    rooms, and billing with a connection to a MySQL database.
-                </p>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {[
+                        { title: "User Management", items: ["Secure login for Admin & Staff", "Role-based access control", "Local credential storage", "Session timer"] },
+                        { title: "Booking & Reservations", items: ["Streamlined booking process", "Automatic availability checks", "Cancellation with refund logic", "Date-range booking retrieval"] },
+                        { title: "Room & Tariff Management", items: ["Inventory management", "Dynamic tariff updates", "Multiple room categories"] },
+                        { title: "Billing & Finance", items: ["Automated bill generation", "Dynamic GST calculation", "Payment status tracking", "Daily financial summaries"] },
+                        { title: "Reporting", items: ["Occupancy analysis", "Booking volume trends", "Customer billing status"] }
+                    ].map((section, index) => (
+                        <div key={index} className="bg-white/5 p-6 rounded-xl border border-white/5 hover:bg-white/10 transition-colors duration-300">
+                            <h4 className="text-xl font-bold text-purple-300 mb-4">{section.title}</h4>
+                            <ul className="list-disc list-inside text-gray-300 space-y-2">
+                                {section.items.map((item, i) => (
+                                    <li key={i} className="text-sm">{item}</li>
+                                ))}
+                            </ul>
+                        </div>
+                    ))}
+                </div>
+            </motion.div>
 
-                <h3
-                    className={`text-lg sm:text-2xl font-semibold mt-8 mb-3 ${classNames.spanText} break-all`}
-                >
-                    Features
-                </h3>
-
-                <h4
-                    className={`text-md sm:text-xl font-semibold mt-6 mb-2 ${classNames.spanText} break-all`}
-                >
-                    User Management
-                </h4>
-                <ul className="list-disc list-inside text-gray-300 space-y-2 pl-4 max-w-full break-all">
-                    <li>
-                        <strong>Authentication:</strong> Secure login system for
-                        Admin and Staff users.
-                    </li>
-                    <li>
-                        <strong>User Roles:</strong>
-                        <ul className="list-disc list-inside text-gray-300 space-y-2 pl-8 max-w-full break-all">
-                            <li>
-                                <strong>Admin:</strong> Full access including
-                                user creation/deletion, room management, and
-                                fare adjustments.
-                            </li>
-                            <li>
-                                <strong>Staff (Front End):</strong> Access to
-                                booking, billing, and customer management
-                                features.
-                            </li>
+            <motion.div
+                className="bg-black/20 backdrop-blur-lg p-8 rounded-2xl border border-purple-700/30 shadow-lg mb-16 hover:border-purple-500/50 transition-colors duration-300"
+                variants={itemVariants}
+            >
+                <h2 className="text-2xl sm:text-3xl font-bold mb-8 text-white text-center">
+                    Getting Started
+                </h2>
+                
+                <div className="space-y-8">
+                    <div>
+                        <h3 className="text-xl font-bold text-purple-300 mb-3">Prerequisites</h3>
+                        <ul className="list-disc list-inside text-gray-300 ml-4">
+                            <li>Python 3.x</li>
+                            <li>MySQL Server</li>
                         </ul>
-                    </li>
-                    <li>
-                        <strong>Local Storage:</strong> User credentials
-                        (excluding the hardcoded Admin) are stored locally in
-                        users.been using Python's pickle module.
-                    </li>
-                    <li>
-                        <strong>Session Timer:</strong> Includes a login session
-                        countdown.
-                    </li>
-                </ul>
+                    </div>
 
-                <h4
-                    className={`text-md sm:text-xl font-semibold mt-6 mb-2 ${classNames.spanText} break-all`}
-                >
-                    Booking & Reservations
-                </h4>
-                <ul className="list-disc list-inside text-gray-300 space-y-2 pl-4 max-w-full break-all">
-                    <li>
-                        <strong>Create Booking:</strong> Streamlined process to
-                        book rooms, capturing guest details (Name, Address, Age,
-                        Gender).
-                    </li>
-                    <li>
-                        <strong>Availability Check:</strong> Automatically
-                        checks for room availability based on dates and room
-                        type (Normal 'np' / Super 's').
-                    </li>
-                    <li>
-                        <strong>Cancel Booking:</strong> Allows cancellation
-                        with logic for refund/charges based on check-in dates
-                        (e.g., 30% charge if cancelled after check-in).
-                    </li>
-                    <li>
-                        <strong>View Bookings:</strong> Retrieve bookings for a
-                        specific day or a date range.
-                    </li>
-                </ul>
+                    <div>
+                        <h3 className="text-xl font-bold text-purple-300 mb-3">Installation</h3>
+                        <div className="bg-black/50 p-4 rounded-xl border border-white/10 font-mono text-sm text-gray-300 overflow-x-auto">
+                            pip install mysql-connector-python colorama
+                        </div>
+                    </div>
 
-                <h4
-                    className={`text-md sm:text-xl font-semibold mt-6 mb-2 ${classNames.spanText} break-all`}
-                >
-                    Room & Tariff Management
-                </h4>
-                <ul className="list-disc list-inside text-gray-300 space-y-2 pl-4 max-w-full break-all">
-                    <li>
-                        <strong>Add Rooms:</strong> Admin can add new rooms to
-                        the inventory.
-                    </li>
-                    <li>
-                        <strong>Fare Management:</strong> Update tariffs for
-                        specific rooms or room types.
-                    </li>
-                    <li>
-                        <strong>Room Types:</strong> Supports different
-                        categories.
-                    </li>
-                </ul>
+                    <div>
+                        <h3 className="text-xl font-bold text-purple-300 mb-3">Database Setup</h3>
+                        <p className="text-gray-300 mb-3">Ensure a MySQL database named <strong>hotel</strong> exists with the following tables:</p>
+                        <div className="flex flex-wrap gap-2 mb-4">
+                            {["customer", "booking", "room", "bill", "av_room"].map((table, i) => (
+                                <span key={i} className="px-3 py-1 bg-purple-900/30 border border-purple-500/30 rounded-full text-xs text-purple-200 font-mono">
+                                    {table}
+                                </span>
+                            ))}
+                        </div>
+                        <p className="text-gray-300 mb-2 text-sm">Update connection parameters in <code>main.py</code>:</p>
+                        <div className="bg-black/50 p-4 rounded-xl border border-white/10 font-mono text-sm text-gray-300 overflow-x-auto">
+                            <pre>{`conn = sql.connect(
+  host="localhost",
+  user="YourUsername",
+  password="YourPassword",
+  database="hotel"
+)`}</pre>
+                        </div>
+                    </div>
 
-                <h4
-                    className={`text-md sm:text-xl font-semibold mt-6 mb-2 ${classNames.spanText} break-all`}
-                >
-                    Billing & Finance
-                </h4>
-                <ul className="list-disc list-inside text-gray-300 space-y-2 pl-4 max-w-full break-all">
-                    <li>
-                        <strong>Bill Calculation:</strong> Automated bill
-                        generation including room tariff, service charges, and
-                        discounts. Handles tariff changes during a stay.
-                    </li>
-                    <li>
-                        <strong>GST Calculation:</strong> Dynamic GST
-                        application based on the total bill amount (&gt;7500
-                        implies 18%, else 12%).
-                    </li>
-                    <li>
-                        <strong>Payment Tracking:</strong> Update paid amounts
-                        and check payment status (Fully Paid/Pending).
-                    </li>
-                    <li>
-                        <strong>Daily Summary:</strong> View daily statistics on
-                        check-ins, check-outs, total revenue, and collected
-                        revenue.
-                    </li>
-                </ul>
+                    <div>
+                        <h3 className="text-xl font-bold text-purple-300 mb-3">Usage</h3>
+                        <div className="bg-black/50 p-4 rounded-xl border border-white/10 font-mono text-sm text-gray-300 overflow-x-auto mb-4">
+                            python main.py
+                        </div>
+                        <div className="bg-white/5 p-4 rounded-xl border border-white/5">
+                            <p className="font-bold text-gray-200 mb-2">Default Admin Credentials:</p>
+                            <ul className="list-disc list-inside text-gray-400 text-sm">
+                                <li>User: DakshSingh</li>
+                                <li>Password: dakshsingh</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </motion.div>
 
-                <h4
-                    className={`text-md sm:text-xl font-semibold mt-6 mb-2 ${classNames.spanText} break-all`}
-                >
-                    Reporting
-                </h4>
-                <ul className="list-disc list-inside text-gray-300 space-y-2 pl-4 max-w-full break-all">
-                    <li>
-                        <strong>Occupancy:</strong> Check room occupancy for
-                        specific dates.
-                    </li>
-                    <li>
-                        <strong>Booking Counts:</strong> Analyze booking volume
-                        over a period.
-                    </li>
-                    <li>
-                        <strong>Customer List:</strong> View all customers and
-                        their billing status.
-                    </li>
-                </ul>
-
-                <h3
-                    className={`text-lg sm:text-2xl font-semibold mt-8 mb-3 ${classNames.spanText} break-all`}
-                >
-                    Prerequisites
-                </h3>
-                <ul className="list-disc list-inside text-gray-300 space-y-2 pl-4 max-w-full break-all">
-                    <li>Python 3.x</li>
-                    <li>MySQL Server</li>
-                </ul>
-
-                <h3
-                    className={`text-lg sm:text-2xl font-semibold mt-8 mb-3 ${classNames.spanText} break-all`}
-                >
-                    Python Libraries
-                </h3>
-                <p className="text-base text-gray-300 leading-relaxed mb-3 break-all">
-                    Install the required dependencies using pip:
-                </p>
-                <code className="block whitespace-pre-wrap bg-gray-800 p-4 rounded-lg">
-                    pip install mysql-connector-python colorama
-                </code>
-
-                <h3
-                    className={`text-lg sm:text-2xl font-semibold mt-8 mb-3 ${classNames.spanText} break-all`}
-                >
-                    Database Setup
-                </h3>
-                <p className="text-base text-gray-300 leading-relaxed mb-3 break-all">
-                    The application requires a MySQL database named{" "}
-                    <strong>hotel</strong>. Ensure the following tables/views
-                    exist (inferred from code):
-                </p>
-                <ul className="list-disc list-inside text-gray-300 space-y-2 pl-4 max-w-full break-all">
-                    <li>
-                        <strong>customer:</strong> Stores guest details.
-                    </li>
-                    <li>
-                        <strong>booking:</strong> Stores booking links between
-                        guests and rooms.
-                    </li>
-                    <li>
-                        <strong>room:</strong> Stores room inventory and
-                        tariffs.
-                    </li>
-                    <li>
-                        <strong>bill:</strong> Stores billing information.
-                    </li>
-                    <li>
-                        <strong>av_room:</strong> View or table used to check
-                        room availability.
-                    </li>
-                </ul>
-                <p className="text-base text-gray-300 leading-relaxed mt-4 mb-3 break-all">
-                    Note: You may need to adjust the database connection
-                    parameters in <code>main.py</code>:
-                </p>
-                <code className="block whitespace-pre-wrap bg-gray-800 p-4 rounded-lg">
-                    conn = sql.connect(
-                    <br />
-                    &nbsp;&nbsp;host="localhost",
-                    <br />
-                    &nbsp;&nbsp;user="DakshSingh", # Change to your MySQL
-                    username
-                    <br />
-                    &nbsp;&nbsp;password="dakshsingh", # Change to your MySQL
-                    password
-                    <br />
-                    &nbsp;&nbsp;database="hotel",
-                    <br />)
-                </code>
-
-                <h3
-                    className={`text-lg sm:text-2xl font-semibold mt-8 mb-3 ${classNames.spanText} break-all`}
-                >
-                    Usage
-                </h3>
-                <p className="text-base text-gray-300 leading-relaxed mb-3 break-all">
-                    Start the Application: Run the main script:
-                </p>
-                <code className="block whitespace-pre-wrap bg-gray-800 p-4 rounded-lg">
-                    python main.py
-                </code>
-                <p className="text-base text-gray-300 leading-relaxed mt-4 mb-3 break-all">
-                    <strong>Login:</strong>
-                </p>
-                <p className="text-base text-gray-300 leading-relaxed mb-3 break-all">
-                    Default Admin Credentials:
-                </p>
-                <ul className="list-disc list-inside text-gray-300 space-y-2 pl-4 max-w-full break-all">
-                    <li>User: DakshSingh</li>
-                    <li>Password: dakshsingh</li>
-                </ul>
-                <p className="text-base text-gray-300 leading-relaxed mt-4 mb-3 break-all">
-                    You can create new users via the Admin menu.
-                </p>
-                <p className="text-base text-gray-300 leading-relaxed mt-4 mb-3 break-all">
-                    <strong>Navigation:</strong>
-                </p>
-                <ul className="list-disc list-inside text-gray-300 space-y-2 pl-4 max-w-full break-all">
-                    <li>
-                        Follow the on-screen numbered menu to access different
-                        features.
-                    </li>
-                    <li>
-                        Use <code>!END</code> in input prompts to exit specific
-                        operations.
-                    </li>
-                </ul>
-
-                <h3
-                    className={`text-lg sm:text-2xl font-semibold mt-8 mb-3 ${classNames.spanText} break-all`}
-                >
-                    Important Notes
-                </h3>
-                <ul className="list-disc list-inside text-gray-300 space-y-2 pl-4 max-w-full break-all">
-                    <li>
-                        <strong>Hardcoded Paths:</strong> The script contains a
-                        hardcoded path for restarting the application in{" "}
-                        <code>main.py</code>. You should update this to match
-                        your Python installation path if the restart feature
-                        fails.
-                    </li>
-                    <li>
-                        <strong>Date Formats:</strong> The system generally
-                        expects dates in <code>YYYY-MM-DD</code> format
-                    </li>
-                </ul>
-            </div>
-
-            <div className="text-center my-12">
+            <motion.div className="text-center mb-12" variants={itemVariants}>
                 <a
                     href="https://github.com/DakshSingh-GitHub/HotelManagement"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={`inline-block bg-purple-600 text-white font-semibold px-8 py-3 rounded-lg shadow-lg transition-transform transform hover:scale-105 hover:bg-purple-700 ${classNames.textGlowEffect}`}
+                    className="inline-flex items-center gap-2 bg-purple-600 text-white font-semibold px-8 py-4 rounded-full shadow-[0_0_20px_rgba(124,58,237,0.4)] transition-all duration-300 hover:scale-105 hover:bg-purple-700 hover:shadow-[0_0_30px_rgba(124,58,237,0.6)]"
                 >
+                    <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path fillRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clipRule="evenodd" />
+                    </svg>
                     View on GitHub
                 </a>
-            </div>
-        </div>
+            </motion.div>
+        </motion.div>
     );
 }
