@@ -1,397 +1,198 @@
-/* eslint-disable react/no-unescaped-entities */
+
 "use client";
 
-import { classNames } from "@/components/styles";
 import Image from "next/image";
+import { motion, Variants } from "framer-motion";
+import { staggerContainer } from "@/components/animations";
 
 export default function MathematicsHelperPage() {
+    const headerVariants: Variants = {
+        hidden: { scale: 0.9, opacity: 0 },
+        visible: {
+            scale: 1,
+            opacity: 1,
+            transition: {
+                type: "spring",
+                stiffness: 100,
+                damping: 15,
+            },
+        },
+    };
+
+    const itemVariants: Variants = {
+        hidden: { y: 20, opacity: 0 },
+        visible: {
+            y: 0,
+            opacity: 1,
+            transition: {
+                type: "spring",
+                stiffness: 100,
+            },
+        },
+    };
+
     return (
-        <div className="container mx-auto px-6 py-4 text-white">
-            <header className="text-center my-12">
-                <h1
-                    className={`text-3xl sm:text-5xl font-extrabold ${classNames.textGlowEffect}`}
-                >
+        <motion.div 
+            className="container mx-auto px-4 sm:px-6 py-10 text-white"
+            variants={staggerContainer}
+            initial="hidden"
+            animate="visible"
+        >
+            <motion.div 
+                className="text-center mb-12 bg-black/20 backdrop-blur-xl rounded-3xl border border-purple-700/30 p-8 md:p-12 shadow-[0_0_30px_rgba(124,58,237,0.1)] hover:shadow-[0_0_50px_rgba(124,58,237,0.2)] transition-shadow duration-500"
+                variants={headerVariants}
+            >
+                <h1 className="text-3xl sm:text-5xl font-extrabold mb-6 tracking-tight bg-clip-text text-transparent bg-linear-to-r from-white via-purple-200 to-purple-400">
                     Mathematics Helper
                 </h1>
-                <p className="text-lg text-gray-400 mt-4 break-all">
-                    A Java-based application for solving mathematical problems.
+                <p className="text-lg text-gray-300 max-w-4xl mx-auto leading-relaxed">
+                    A comprehensive Java-based application designed to assist users in solving a wide range of mathematical problems, from arithmetic to advanced geometry and algebra.
                 </p>
-            </header>
-            <Image
-                src="../projects/mathshelpjava.png"
-                alt="Mathematics Helper"
-                height={200}
-                width={600}
-                className={`rounded-4xl mx-auto mt-10 border-4 border-purple-500/50 shadow-lg shadow-purple-500/20 ${classNames.textGlowEffect} hover:border-purple-500`}
-            />
+            </motion.div>
 
-            <div
-                className={`bg-gray-900/50 p-8 rounded-lg shadow-lg border border-purple-500/30 my-10 ${classNames.boxHoverEffect}`}
-            >
-                <h2
-                    className={`text-xl sm:text-3xl font-bold mb-6 ${classNames.spanText} ${classNames.textGlowEffect}`}
-                >
-                    Project Overview
-                </h2>
-                <p className="text-lg text-gray-300 leading-relaxed break-all">
-                    The Mathematics Helper is a comprehensive Java-based application designed to assist users in solving a wide range of mathematical problems. It provides a user-friendly interface to perform calculations and learn mathematical concepts.
-                </p>
-            </div>
-
-            <div className="grid md:grid-cols-2 gap-10 my-10">
-                <div
-                    className={`bg-gray-900/50 p-6 rounded-lg shadow-lg border border-purple-500/30 ${classNames.boxHoverEffect}`}
-                >
-                    <h3
-                        className={`text-lg sm:text-2xl font-semibold mb-4 ${classNames.spanText} ${classNames.textGlowEffect}`}
-                    >
-                        Core Functionalities
-                    </h3>
-                    <ul
-                        className={`space-y-3 text-gray-300 ${classNames.cardparent_list}`}
-                    >
-                        <li>
-                            <span className={classNames.cardparent_list_span}>
-                                Arithmetic Operations:
-                            </span>{" "}
-                            Perform basic and advanced arithmetic calculations.
-                        </li>
-                        <li>
-                            <span className={classNames.cardparent_list_span}>
-                                Algebra Solver:
-                            </span>{" "}
-                            Solve algebraic equations and expressions.
-                        </li>
-                        <li>
-                            <span className={classNames.cardparent_list_span}>
-                                Geometry Calculator:
-                            </span>{" "}
-                            Calculate properties of geometric shapes.
-                        </li>
-                        <li>
-                            <span className={classNames.cardparent_list_span}>
-                                Trigonometry Functions:
-                            </span>{" "}
-                            Evaluate trigonometric functions and identities.
-                        </li>
-                    </ul>
+            <motion.div variants={itemVariants} className="flex justify-center mb-16">
+                <div className="relative rounded-3xl overflow-hidden border-4 border-purple-500/30 shadow-[0_0_40px_rgba(124,58,237,0.2)] hover:border-purple-500/60 transition-all duration-500 group">
+                    <Image
+                        src="../projects/mathshelpjava.png"
+                        alt="Mathematics Helper"
+                        height={400}
+                        width={800}
+                        className="object-cover transform transition-transform duration-700 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-linear-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 </div>
+            </motion.div>
 
-                <div
-                    className={`bg-gray-900/50 p-6 rounded-lg shadow-lg border border-purple-500/30 ${classNames.boxHoverEffect}`}
-                >
-                    <h3
-                        className={`text-lg sm:text-2xl font-semibold mb-4 ${classNames.spanText} ${classNames.textGlowEffect}`}
-                    >
-                        Technical Deep Dive
-                    </h3>
-                    <p className="text-gray-300 mb-4 break-all">
-                        The application is built entirely in Java, leveraging object-oriented principles and mathematical libraries.
-                    </p>
-                    <ul
-                        className={`space-y-3 text-gray-300 ${classNames.cardparent_list}`}
-                    >
-                        <li>
-                            <span className={classNames.cardparent_list_span}>
-                                Core Java:
-                            </span>{" "}
-                            Utilizes fundamental Java concepts for logic and computations.
-                        </li>
-                        <li>
-                            <span className={classNames.cardparent_list_span}>
-                                Modular Design:
-                            </span>{" "}
-                            The code is organized into modules for different mathematical domains, making it easy to extend.
-                        </li>
-                        <li>
-                            <span className={classNames.cardparent_list_span}>
-                                Mathematical Libraries:
-                            </span>{" "}
-                             Integrates with libraries like Apache Commons Math for complex calculations.
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            {/* <div className="text-center my-12">
-                <a
-                    href="https://github.com/DakshSingh-GitHub/Mathematics-Helper"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`inline-block bg-purple-600 text-white font-semibold px-8 py-3 rounded-lg shadow-lg transition-transform transform hover:scale-105 hover:bg-purple-700 ${classNames.textGlowEffect}`}
-                >
-                    View on GitHub
-                </a>
-            </div> */}
-
-            <div
-                className={`bg-gray-900/50 p-8 rounded-lg shadow-lg border border-purple-500/30 my-10 ${classNames.boxHoverEffect}`}
+            <motion.div
+                className="bg-black/20 backdrop-blur-lg p-8 rounded-2xl border border-purple-700/30 shadow-lg mb-12 hover:border-purple-500/50 transition-colors duration-300"
+                variants={itemVariants}
             >
-                <h2
-                    className={`text-xl sm:text-3xl font-bold mb-6 ${classNames.spanText} ${classNames.textGlowEffect}`}
-                >
-                    Project Classes
+                <h2 className="text-2xl sm:text-3xl font-bold mb-6 text-white flex items-center gap-3">
+                    <span className="text-purple-400">✨</span> Project Overview
                 </h2>
+                <p className="text-lg text-gray-300 leading-relaxed">
+                    The Mathematics Helper is a robust tool built with Java that simplifies complex mathematical computations. It offers a user-friendly interface for students and professionals to perform calculations, verify results, and understand mathematical concepts through practical application.
+                </p>
+            </motion.div>
 
-                <h3
-                    className={`text-lg sm:text-2xl font-semibold mt-8 mb-3 ${classNames.spanText} break-all`}
+            <div className="grid md:grid-cols-2 gap-8 mb-12">
+                <motion.div
+                    className="bg-black/20 backdrop-blur-lg p-8 rounded-2xl border border-purple-700/30 shadow-lg hover:border-purple-500/50 transition-colors duration-300 h-full"
+                    variants={itemVariants}
                 >
-                    sequences.progression
-                </h3>
-                <p className="text-base text-gray-300 leading-relaxed mb-3 break-all">
-                    This project provides classes for handling mathematical progressions.
-                </p>
-                <h4 className={`text-md sm:text-xl font-semibold mt-6 mb-2 ${classNames.spanText} break-all`}>ArithematicProgression</h4>
-                <p className="text-base text-gray-300 leading-relaxed mb-3 break-all">
-                    Represents an arithmetic progression (AP) of double values. An arithmetic progression is a sequence of numbers where the difference between consecutive terms is constant.
-                </p>
-                <p className="text-base text-gray-300 leading-relaxed font-semibold mb-3 break-all">
-                    Instance States:
-                </p>
-                <ul className="list-disc list-inside text-gray-300 space-y-2 pl-4 max-w-full break-all">
-                    <li><strong>Empty:</strong> Created with ArithematicProgression(). Has no terms.</li>
-                    <li><strong>Uninitialized:</strong> Created with ArithematicProgression(firstTerm). The common difference is unknown until a second term is added.</li>
-                    <li><strong>Initialized:</strong> Created with ArithematicProgression(firstTerm, secondTerm). The common difference is known, and the sequence can be extended.</li>
-                </ul>
-                <p className="text-base text-gray-300 leading-relaxed font-semibold mb-3 break-all mt-4">
-                    Key Methods:
-                </p>
-                <ul className="list-disc list-inside text-gray-300 space-y-2 pl-4 max-w-full break-all">
-                    <li><strong>insertTerm(double number):</strong> Adds a new term, initializing or validating the sequence.</li>
-                    <li><strong>insertTillNthTerm(int n):</strong> Extends the sequence to a total of &apos;n' terms.</li>
-                    <li><strong>safeInsertNextTerm():</strong> Automatically calculates and adds the next correct term.</li>
-                    <li><strong>sumOfAP():</strong> Calculates the sum of the current terms.</li>
-                    <li><strong>projectedSumOfAP(int n):</strong> Calculates the sum of the first 'n' terms.</li>
-                    <li><strong>predictTerm():</strong> Predicts the next term without adding it to the sequence.</li>
-                    <li><strong>removeLastTerm():</strong> Removes the last term from the sequence.</li>
-                    <li><strong>clearAP() / resetAP():</strong> Manages the sequence's lifecycle.</li>
-                </ul>
+                    <h3 className="text-xl sm:text-2xl font-bold mb-6 text-white flex items-center gap-3">
+                        <span className="text-purple-400">⚙️</span> Core Functionalities
+                    </h3>
+                    <ul className="space-y-4">
+                        {[
+                            { title: "Arithmetic Operations", desc: "Perform basic and advanced arithmetic calculations with precision." },
+                            { title: "Algebra Solver", desc: "Solve algebraic equations, expressions, and find roots of polynomials." },
+                            { title: "Geometry Calculator", desc: "Calculate properties of 2D and 3D shapes, including area, volume, and intersections." },
+                            { title: "Trigonometry Functions", desc: "Evaluate trigonometric functions, identities, and solve triangles." }
+                        ].map((feature, index) => (
+                            <li key={index} className="bg-white/5 p-4 rounded-xl border border-white/5 hover:bg-white/10 transition-colors duration-300">
+                                <span className="block font-semibold text-purple-300 mb-1">{feature.title}</span>
+                                <span className="text-gray-400 text-sm">{feature.desc}</span>
+                            </li>
+                        ))}
+                    </ul>
+                </motion.div>
 
-                <h4 className={`text-md sm:text-xl font-semibold mt-6 mb-2 ${classNames.spanText} break-all`}>GeometricProgression</h4>
-                <p className="text-base text-gray-300 leading-relaxed mb-3 break-all">
-                    Represents a geometric progression (GP) of double values. A geometric progression is a sequence where each term after the first is found by multiplying the previous one by a fixed, non-zero number (the common ratio).
-                </p>
-                <p className="text-base text-gray-300 leading-relaxed font-semibold mb-3 break-all">
-                    Instance States:
-                </p>
-                <ul className="list-disc list-inside text-gray-300 space-y-2 pl-4 max-w-full break-all">
-                    <li><strong>Empty:</strong> Created with GeometricProgression(). Has no terms.</li>
-                    <li><strong>Uninitialized:</strong> Created with GeometricProgression(firstTerm). The common ratio is unknown.</li>
-                    <li><strong>Initialized:</strong> Created with GeometricProgression(firstTerm, secondTerm). The common ratio is known.</li>
-                </ul>
-                <p className="text-base text-gray-300 leading-relaxed font-semibold mb-3 break-all mt-4">
-                    Method Overview:
-                </p>
-                <p className="text-base text-gray-300 leading-relaxed font-semibold mb-3 break-all mt-2">
-                    Modification:
-                </p>
-                <ul className="list-disc list-inside text-gray-300 space-y-2 pl-4 max-w-full break-all">
-                    <li><strong>insertTerm(double n):</strong> Inserts a term, initializing or validating the GP.</li>
-                    <li><strong>insertTillNthTerm(int n):</strong> Extends the sequence to 'n' terms.</li>
-                    <li><strong>safeInsertNextTerm():</strong> Automatically calculates and adds the next term.</li>
-                    <li><strong>removeLastTerm():</strong> Removes the last term.</li>
-                    <li><strong>clearGP() / resetGP() / updateGP():</strong> Manages the sequence's lifecycle.</li>
-                </ul>
-                <p className="text-base text-gray-300 leading-relaxed font-semibold mb-3 break-all mt-2">
-                    Calculation & Prediction:
-                </p>
-                <ul className="list-disc list-inside text-gray-300 space-y-2 pl-4 max-w-full break-all">
-                    <li><strong>predictTerm():</strong> Returns the value of the next term without adding it.</li>
-                    <li><strong>predictTerm(int n):</strong> Calculates the value of the nth term.</li>
-                    <li><strong>sumOfGP():</strong> Returns the sum of all terms currently in the sequence.</li>
-                    <li><strong>projectedSumOfGP(int n):</strong> Calculates the sum of the first 'n' terms.</li>
-                </ul>
-                <p className="text-base text-gray-300 leading-relaxed font-semibold mb-3 break-all mt-2">
-                    State & Validation:
-                </p>
-                <ul className="list-disc list-inside text-gray-300 space-y-2 pl-4 max-w-full break-all">
-                    <li><strong>getCurrentSequence():</strong> Returns a copy of the current sequence.</li>
-                    <li><strong>getRemovedHeap():</strong> Returns a history of all cleared sequences.</li>
-                    <li><strong>isValidGP(ArrayList&lt;Double&gt; sequence):</strong> A static method to check if any list of doubles is a valid GP.</li>
-                </ul>
-                
-                <h3
-                    className={`text-lg sm:text-2xl font-semibold mt-8 mb-3 ${classNames.spanText} break-all`}
+                <motion.div
+                    className="bg-black/20 backdrop-blur-lg p-8 rounded-2xl border border-purple-700/30 shadow-lg hover:border-purple-500/50 transition-colors duration-300 h-full"
+                    variants={itemVariants}
                 >
-                    pnc.base
-                </h3>
-                
-                <h4 className={`text-md sm:text-xl font-semibold mt-6 mb-2 ${classNames.spanText} break-all`}>Factorial</h4>
-                <p className="text-base text-gray-300 leading-relaxed mb-3 break-all">
-                    A simple class to calculate the factorial of a non-negative integer.
-                </p>
-                <p className="text-base text-gray-300 leading-relaxed font-semibold mb-3 break-all mt-4">
-                    Methods:
-                </p>
-                <ul className="list-disc list-inside text-gray-300 space-y-2 pl-4 max-w-full break-all">
-                    <li><strong>Factorial(int num):</strong> Constructor that calculates the factorial of num.</li>
-                    <li><strong>int getFactorial():</strong> Returns the calculated factorial.</li>
-                </ul>
-
-                <h4 className={`text-md sm:text-xl font-semibold mt-6 mb-2 ${classNames.spanText} break-all`}>Combination</h4>
-                <p className="text-base text-gray-300 leading-relaxed mb-3 break-all">
-                This class calculates combinations (nCr), which represents the number of ways to choose 'r' items from a set of 'n' items where order does not matter.
-                </p>
-                <p className="text-base text-gray-300 leading-relaxed font-semibold mb-3 break-all mt-4">
-                    Methods:
-                </p>
-                <ul className="list-disc list-inside text-gray-300 space-y-2 pl-4 max-w-full break-all">
-                    <li><strong>Combination(int n, int c):</strong> Calculates nCr upon instantiation.</li>
-                    <li><strong>Combination(int n):</strong> Initializes with 'n' but defers calculation.</li>
-                    <li><strong>long combineWithVariableValue(int value):</strong> Calculates nCr with a variable 'r' value.</li>
-                    <li><strong>long getCombination():</strong> Returns the pre-calculated combination value.</li>
-                </ul>
-
-                <h4 className={`text-md sm:text-xl font-semibold mt-6 mb-2 ${classNames.spanText} break-all`}>Permutation</h4>
-                <p className="text-base text-gray-300 leading-relaxed mb-3 break-all">
-                This class calculates permutations (nPr), which represents the number of ways to arrange 'r' items from a set of 'n' items where order matters.
-                </p>
-                <p className="text-base text-gray-300 leading-relaxed font-semibold mb-3 break-all mt-4">
-                    Methods:
-                </p>
-                <ul className="list-disc list-inside text-gray-300 space-y-2 pl-4 max-w-full break-all">
-                    <li><strong>Permutation(int totalobjectsN, int waystorearrangeC):</strong> Calculates nPr upon instantiation.</li>
-                    <li><strong>Permutation(int totalobjectsN):</strong> Initializes with 'n' but defers calculation.</li>
-                    <li><strong>long permuteWithVariableValue(int value):</strong> Calculates nPr with a variable 'r' value.</li>
-                    <li><strong>long getPermutations():</strong> Returns the pre-calculated permutation value.</li>
-                </ul>
-
-                <h3
-                    className={`text-lg sm:text-2xl font-semibold mt-8 mb-3 ${classNames.spanText} break-all`}
-                >
-                    pnc.solver
-                </h3>
-                <p className="text-base text-gray-300 leading-relaxed mb-3 break-all">
-                    This package provides a solver for permutation and combination problems.
-                </p>
-                <h4 className={`text-md sm:text-xl font-semibold mt-6 mb-2 ${classNames.spanText} break-all`}>PncSolver</h4>
-                <p className="text-base text-gray-300 leading-relaxed mb-3 break-all">
-                    A class that simplifies solving permutation and combination problems based on user input.
-                </p>
-                <p className="text-base text-gray-300 leading-relaxed font-semibold mb-3 break-all mt-4">
-                    Methods:
-                </p>
-                <ul className="list-disc list-inside text-gray-300 space-y-2 pl-4 max-w-full break-all">
-                    <li><strong>PncSolver(int totalobjectsN, String method):</strong> Initializes the solver with the total number of objects and the method ("permutation" or "combination").</li>
-                    <li><strong>PncSolver(int totalobjectsN, String method, String title):</strong> An overloaded constructor that includes an optional title for the problem.</li>
-                    <li><strong>long calculatePermutation():</strong> Calculates the factorial of 'n' (n!).</li>
-                    <li><strong>long calculateCombination(int waystoselectC):</strong> Calculates nCr.</li>
-                    <li><strong>static void getHelp():</strong> Displays general help information.</li>
-                    <li><strong>static void getHelp(String method):</strong> Provides help for a specific method.</li>
-                    <li><strong>static void getExamplesOfMethods():</strong> Shows real-life examples of when to use permutation vs. combination.</li>
-                </ul>
-
-                <h3
-                    className={`text-lg sm:text-2xl font-semibold mt-8 mb-3 ${classNames.spanText} break-all`}
-                >
-                    geometry.base
-                </h3>
-                <p className="text-base text-gray-300 leading-relaxed mb-3 break-all">
-                    This package provides the basic building blocks for geometric calculations.
-                </p>
-                <h4 className={`text-md sm:text-xl font-semibold mt-6 mb-2 ${classNames.spanText} break-all`}>Point</h4>
-                <p className="text-base text-gray-300 leading-relaxed mb-3 break-all">
-                    Represents a point in 2D or 3D space.
-                </p>
-                <p className="text-base text-gray-300 leading-relaxed font-semibold mb-3 break-all mt-4">
-                    Methods:
-                </p>
-                <ul className="list-disc list-inside text-gray-300 space-y-2 pl-4 max-w-full break-all">
-                    <li><strong>Point(double x, double y):</strong> Creates a 2D point.</li>
-                    <li><strong>Point(double x, double y, double z):</strong> Creates a 3D point.</li>
-                    <li><strong>static double distance(Point p1, Point p2):</strong> Calculates the distance between two points.</li>
-                    <li><strong>ArrayList&lt;Double&gt; getCoordinates2D():</strong> Returns the 2D coordinates of the point.</li>
-                </ul>
-                
-                <h3
-                    className={`text-lg sm:text-2xl font-semibold mt-8 mb-3 ${classNames.spanText} break-all`}
-                >
-                    geometry.shapes
-                </h3>
-                <p className="text-base text-gray-300 leading-relaxed mb-3 break-all">
-                    This package provides classes for various geometric shapes.
-                </p>
-
-                <h4 className={`text-md sm:text-xl font-semibold mt-6 mb-2 ${classNames.spanText} break-all`}>Circle</h4>
-                <p className="text-base text-gray-300 leading-relaxed mb-3 break-all">
-                    Represents a circle in 2D space.
-                </p>
-                <p className="text-base text-gray-300 leading-relaxed font-semibold mb-3 break-all mt-4">
-                    Methods:
-                </p>
-                <ul className="list-disc list-inside text-gray-300 space-y-2 pl-4 max-w-full break-all">
-                    <li><strong>Circle(Point center):</strong> Creates a circle with a given center and no defined radius.</li>
-                    <li><strong>Circle(Point center, Point anyPoint):</strong> Creates a circle with a given center and a point on its circumference.</li>
-                    <li><strong>void updateRadiusWithNewPoint(Point secondPoint):</strong> Updates the circle's radius using a new point.</li>
-                    <li><strong>void addPointonCircle(Point p):</strong> Adds a point to the circle's definition if it lies on the circumference.</li>
-                    <li><strong>boolean checkPointOnCircle(Point p):</strong> Checks if a given point lies on the circle.</li>
-                    <li><strong>double circumference():</strong> Calculates the circumference of the circle.</li>
-                    <li><strong>double area():</strong> Calculates the area of the circle.</li>
-                    <li><strong>String getEquationOfCircle():</strong> Returns the equation of the circle.</li>
-                    <li><strong>int checkPositionOfPoint(Point p):</strong> Determines if a point is inside, outside, or on the circle.</li>
-                    <li><strong>int checkPositionOfLine(Line2D line):</strong> Determines if a line is a tangent, secant, or outside the circle.</li>
-                    <li><strong>ArrayList&lt;Point&gt; getIntersectionPointsWithLine(Line2D line):</strong> Calculates the intersection points of the circle and a line.</li>
-                    <li><strong>ArrayList&lt;String&gt; equationOfTangent(double slope):</strong> Returns the equations of tangents with a given slope.</li>
-                    <li><strong>ArrayList&lt;String&gt; equationOfTangent(Point p):</strong> Returns the equation of the tangent at a specific point on the circle.</li>
-                </ul>
-
-                <h4 className={`text-md sm:text-xl font-semibold mt-6 mb-2 ${classNames.spanText} break-all`}>Line2D</h4>
-                <p className="text-base text-gray-300 leading-relaxed mb-3 break-all">
-                    Represents a line in 2D space.
-                </p>
-                <p className="text-base text-gray-300 leading-relaxed font-semibold mb-3 break-all mt-4">
-                    Methods:
-                </p>
-                <ul className="list-disc list-inside text-gray-300 space-y-2 pl-4 max-w-full break-all">
-                    <li><strong>Line2D(Point p1, Point p2):</strong> Creates a line defined by two points.</li>
-                    <li><strong>Line2D(Point p1, double slope):</strong> Creates a line defined by a point and a slope.</li>
-                    <li><strong>void updateSlope(double slope):</strong> Updates the slope of the line.</li>
-                    <li><strong>void addPointOnLine(Point p):</strong> Adds a point to the line's definition if it lies on the line.</li>
-                    <li><strong>Map&lt;String, String&gt; LineEquations():</strong> Returns the general and slope-intercept equations of the line.</li>
-                    <li><strong>double distanceFromPoint(Point p):</strong> Calculates the perpendicular distance from a point to the line.</li>
-                </ul>
-
-                <h4 className={`text-md sm:text-xl font-semibold mt-6 mb-2 ${classNames.spanText} break-all`}>Triangle</h4>
-                <p className="text-base text-gray-300 leading-relaxed mb-3 break-all">
-                    Represents a triangle in 2D or 3D space.
-                </p>
-                <p className="text-base text-gray-300 leading-relaxed font-semibold mb-3 break-all mt-4">
-                    Methods:
-                </p>
-                <ul className="list-disc list-inside text-gray-300 space-y-2 pl-4 max-w-full break-all">
-                    <li><strong>Triangle(Point p1, Point p2, Point p3):</strong> Creates a triangle from three points, with validation.</li>
-                    <li><strong>double area():</strong> Calculates the area of the triangle.</li>
-                    <li><strong>Point centroid():</strong> Calculates the centroid of the triangle.</li>
-                    <li><strong>Point orthocenter3D():</strong> Calculates the orthocenter of the triangle in 3D space.</li>
-                </ul>
-
-                <h4 className={`text-md sm:text-xl font-semibold mt-6 mb-2 ${classNames.spanText} break-all`}>Parabola</h4>
-                <p className="text-base text-gray-300 leading-relaxed mb-3 break-all">
-                    Represents a parabola in 2D space.
-                </p>
-                <p className="text-base text-gray-300 leading-relaxed font-semibold mb-3 break-all mt-4">
-                    Methods:
-                </p>
-                <ul className="list-disc list-inside text-gray-300 space-y-2 pl-4 max-w-full break-all">
-                    <li><strong>Parabola(Point vertex, double a, String type):</strong> Creates a parabola with a given vertex, 'a' value, and type ("horizontal" or "vertical").</li>
-                    <li><strong>Parabola(Point vertex):</strong> Creates a parabola with a given vertex but no defined 'a' value or type.</li>
-                    <li><strong>String generateEquation():</strong> Generates and returns the equation of the parabola.</li>
-                    <li><strong>void updateLatusRectum(double a):</strong> Updates the latus rectum of the parabola.</li>
-                    <li><strong>void addPointOnParabola(Point point):</strong> Adds a point to the parabola's definition if it lies on the curve.</li>
-                    <li><strong>int checkPositionOfPoint(Point p):</strong> Determines if a point is inside, outside, or on the parabola. Returns 1 for inside, 0 for outside, 2 for on the parabola.</li>
-                    <li><strong>String equationOfTangent(double slope):</strong> Returns the equation of a tangent line with a given slope.</li>
-                    <li><strong>ArrayList&lt;Point&gt; getUsedPointsOnParabola():</strong> Returns the list of points that have been added to the parabola.</li>
-                </ul>
+                    <h3 className="text-xl sm:text-2xl font-bold mb-6 text-white flex items-center gap-3">
+                        <span className="text-purple-400">🛠</span> Technical Deep Dive
+                    </h3>
+                    <ul className="space-y-4">
+                        {[
+                            { icon: "☕", title: "Core Java", desc: "Built entirely in Java, utilizing object-oriented principles for modularity." },
+                            { icon: "🧩", title: "Modular Design", desc: "Codebase organized into distinct packages for Algebra, Geometry, and Sequences." },
+                            { icon: "📚", title: "Math Libraries", desc: "Integrates standard Java Math libraries and custom algorithms for complex computations." },
+                            { icon: "📐", title: "Object-Oriented", desc: "Uses classes like Point, Line, and Circle to model mathematical entities intuitively." }
+                        ].map((tech, index) => (
+                            <li key={index} className="flex items-start gap-4 p-3 rounded-xl hover:bg-white/5 transition-colors duration-300">
+                                <span className="text-2xl">{tech.icon}</span>
+                                <div>
+                                    <span className="block font-semibold text-purple-300">{tech.title}</span>
+                                    <span className="text-gray-400 text-sm">{tech.desc}</span>
+                                </div>
+                            </li>
+                        ))}
+                    </ul>
+                </motion.div>
             </div>
-            <div className="text-center my-12">
+
+            <motion.div
+                className="bg-black/20 backdrop-blur-lg p-8 rounded-2xl border border-purple-700/30 shadow-lg mb-16 hover:border-purple-500/50 transition-colors duration-300"
+                variants={itemVariants}
+            >
+                <h2 className="text-2xl sm:text-3xl font-bold mb-8 text-white text-center">
+                    Project Classes & Modules
+                </h2>
+                
+                <div className="space-y-8">
+                    {[
+                        {
+                            title: "Sequences & Progressions",
+                            package: "sequences.progression",
+                            classes: [
+                                { name: "ArithmeticProgression", desc: "Handles AP sequences, sum calculations, and term prediction." },
+                                { name: "GeometricProgression", desc: "Manages GP sequences, including infinite series and term prediction." }
+                            ]
+                        },
+                        {
+                            title: "Permutations & Combinations",
+                            package: "pnc.base & pnc.solver",
+                            classes: [
+                                { name: "Factorial", desc: "Efficient calculation of factorials." },
+                                { name: "Combination", desc: "Calculates nCr values." },
+                                { name: "Permutation", desc: "Calculates nPr values." },
+                                { name: "PncSolver", desc: "User-facing solver for PnC problems." }
+                            ]
+                        },
+                        {
+                            title: "Geometry: Base & Shapes",
+                            package: "geometry.base & geometry.shapes",
+                            classes: [
+                                { name: "Point", desc: "Represents 2D/3D points with distance calculations." },
+                                { name: "Line2D", desc: "Models lines, slopes, and intersections." },
+                                { name: "Circle", desc: "Handles circle properties, tangents, and point checks." },
+                                { name: "Triangle", desc: "Calculates area, centroid, and orthocenter." },
+                                { name: "Parabola", desc: "Manages parabolic equations and properties." }
+                            ]
+                        }
+                    ].map((module, index) => (
+                        <div key={index} className="bg-white/5 p-6 rounded-xl border border-white/5">
+                            <h3 className="text-xl font-bold text-purple-300 mb-1">{module.title}</h3>
+                            <p className="text-gray-400 text-sm font-mono mb-4">{module.package}</p>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                {module.classes.map((cls, i) => (
+                                    <div key={i} className="bg-black/30 p-3 rounded-lg border border-white/5">
+                                        <code className="text-purple-200 font-bold block mb-1">{cls.name}</code>
+                                        <span className="text-gray-400 text-sm">{cls.desc}</span>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </motion.div>
+
+            <motion.div className="text-center mb-12" variants={itemVariants}>
                 <a
                     href="https://github.com/DakshSingh-GitHub/MathematicsHelper"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={`inline-block bg-purple-600 text-white font-semibold px-8 py-3 rounded-lg shadow-lg transition-transform transform hover:scale-105 hover:bg-purple-700 ${classNames.textGlowEffect}`}
+                    className="inline-flex items-center gap-2 bg-purple-600 text-white font-semibold px-8 py-4 rounded-full shadow-[0_0_20px_rgba(124,58,237,0.4)] transition-all duration-300 hover:scale-105 hover:bg-purple-700 hover:shadow-[0_0_30px_rgba(124,58,237,0.6)]"
                 >
+                    <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path fillRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clipRule="evenodd" />
+                    </svg>
                     View on GitHub
                 </a>
-            </div>
-        </div>
+            </motion.div>
+        </motion.div>
     );
 }
