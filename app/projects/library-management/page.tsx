@@ -1,631 +1,233 @@
+
 "use client";
 
-import { classNames } from "@/components/styles";
 import Image from "next/image";
+import { motion, Variants } from "framer-motion";
+import { staggerContainer } from "@/components/animations";
 
 export default function LibraryManagementPage() {
+    const headerVariants: Variants = {
+        hidden: { scale: 0.9, opacity: 0 },
+        visible: {
+            scale: 1,
+            opacity: 1,
+            transition: {
+                type: "spring",
+                stiffness: 100,
+                damping: 15,
+            },
+        },
+    };
+
+    const itemVariants: Variants = {
+        hidden: { y: 20, opacity: 0 },
+        visible: {
+            y: 0,
+            opacity: 1,
+            transition: {
+                type: "spring",
+                stiffness: 100,
+            },
+        },
+    };
+
     return (
-        <div className="container mx-auto px-6 py-4 text-white">
-            <header className="text-center my-12">
-                <h1
-                    className={`text-3xl sm:text-5xl font-extrabold ${classNames.textGlowEffect}`}
-                >
+        <motion.div 
+            className="container mx-auto px-4 sm:px-6 py-10 text-white"
+            variants={staggerContainer}
+            initial="hidden"
+            animate="visible"
+        >
+            <motion.div 
+                className="text-center mb-12 bg-black/20 backdrop-blur-xl rounded-3xl border border-purple-700/30 p-8 md:p-12 shadow-[0_0_30px_rgba(124,58,237,0.1)] hover:shadow-[0_0_50px_rgba(124,58,237,0.2)] transition-shadow duration-500"
+                variants={headerVariants}
+            >
+                <h1 className="text-3xl sm:text-5xl font-extrabold mb-6 tracking-tight bg-clip-text text-transparent bg-linear-to-r from-white via-purple-200 to-purple-400">
                     Library Management System
                 </h1>
-                <p className="text-lg text-gray-400 mt-4 break-all">
-                    A comprehensive CLI-based / Web based (both) solution for
-                    efficient library operations.
+                <p className="text-lg text-gray-300 max-w-4xl mx-auto leading-relaxed">
+                    A comprehensive CLI-based and Web-based solution for efficient library operations, designed to streamline book inventory, member management, and lending processes.
                 </p>
-            </header>
-            <Image
-                src="../projects/library_management.png"
-                alt="Library Management"
-                height={200}
-                width={600}
-                className={`rounded-4xl mx-auto mt-10 border-4 border-purple-500/50 shadow-lg shadow-purple-500/20 ${classNames.textGlowEffect} hover:border-purple-500`}
-            />
+            </motion.div>
 
-            <div
-                className={`bg-gray-900/50 p-8 rounded-lg shadow-lg border border-purple-500/30 my-10 ${classNames.boxHoverEffect}`}
-            >
-                <h2
-                    className={`text-xl sm:text-3xl font-bold mb-6 ${classNames.spanText} ${classNames.textGlowEffect}`}
-                >
-                    Project Overview
-                </h2>
-                <p className="text-lg text-gray-300 leading-relaxed break-all">
-                    The Library Management System is a robust console-based
-                    application developed in Python, designed to streamline and
-                    automate the essential functions of a library. Born out of a
-                    passion for organization and efficiency, this project serves
-                    as a powerful tool for librarians to manage their book
-                    inventory and member activities without the need for a
-                    graphical user interface. Its lightweight and fast nature
-                    makes it ideal for environments where performance and
-                    simplicity are paramount.
-                </p>
-            </div>
-
-            <div className="grid md:grid-cols-2 gap-10 my-10">
-                <div
-                    className={`bg-gray-900/50 p-6 rounded-lg shadow-lg border border-purple-500/30 ${classNames.boxHoverEffect}`}
-                >
-                    <h3
-                        className={`text-lg sm:text-2xl font-semibold mb-4 ${classNames.spanText} ${classNames.textGlowEffect}`}
-                    >
-                        Core Functionalities
-                    </h3>
-                    <ul
-                        className={`space-y-3 text-gray-300 ${classNames.cardparent_list}`}
-                    >
-                        <li>
-                            <span className={classNames.cardparent_list_span}>
-                                Book Management:
-                            </span>{" "}
-                            Easily add, update, search, and delete books from
-                            the inventory. Each book is tracked with a unique
-                            ID, title, author, and quantity.
-                        </li>
-                        <li>
-                            <span className={classNames.cardparent_list_span}>
-                                Member Management:
-                            </span>{" "}
-                            Maintain a database of library members, including
-                            their contact information and borrowing history.
-                        </li>
-                        <li>
-                            <span className={classNames.cardparent_list_span}>
-                                Issue & Return Books:
-                            </span>{" "}
-                            Seamlessly handle the process of issuing books to
-                            members and processing returns, with automatic
-                            updates to inventory levels.
-                        </li>
-                        <li>
-                            <span className={classNames.cardparent_list_span}>
-                                Inventory Control:
-                            </span>{" "}
-                            Keep a real-time count of available books and get
-                            alerts for low stock, ensuring popular books are
-                            always available.
-                        </li>
-                        <li>
-                            <span className={classNames.cardparent_list_span}>
-                                Search & Discovery:
-                            </span>{" "}
-                            A powerful search feature allows librarians and
-                            members to find books quickly by title or author.
-                        </li>
-                    </ul>
+            <motion.div variants={itemVariants} className="flex justify-center mb-16">
+                <div className="relative rounded-3xl overflow-hidden border-4 border-purple-500/30 shadow-[0_0_40px_rgba(124,58,237,0.2)] hover:border-purple-500/60 transition-all duration-500 group">
+                    <Image
+                        src="../projects/library_management.png"
+                        alt="Library Management"
+                        height={400}
+                        width={800}
+                        className="object-cover transform transition-transform duration-700 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-linear-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 </div>
+            </motion.div>
 
-                <div
-                    className={`bg-gray-900/50 p-6 rounded-lg shadow-lg border border-purple-500/30 ${classNames.boxHoverEffect}`}
+            <motion.div
+                className="bg-black/20 backdrop-blur-lg p-8 rounded-2xl border border-purple-700/30 shadow-lg mb-12 hover:border-purple-500/50 transition-colors duration-300"
+                variants={itemVariants}
+            >
+                <h2 className="text-2xl sm:text-3xl font-bold mb-6 text-white flex items-center gap-3">
+                    <span className="text-purple-400">✨</span> Project Overview
+                </h2>
+                <p className="text-lg text-gray-300 leading-relaxed">
+                    The Library Management System is a robust application developed in Python, designed to automate essential library functions. It serves as a powerful tool for librarians to manage book inventories and member activities without the need for complex graphical interfaces. Its lightweight nature ensures high performance and simplicity, making it ideal for efficient library administration.
+                </p>
+            </motion.div>
+
+            <div className="grid md:grid-cols-2 gap-8 mb-12">
+                <motion.div
+                    className="bg-black/20 backdrop-blur-lg p-8 rounded-2xl border border-purple-700/30 shadow-lg hover:border-purple-500/50 transition-colors duration-300 h-full"
+                    variants={itemVariants}
                 >
-                    <h3
-                        className={`text-lg sm:text-2xl font-semibold mb-4 ${classNames.spanText} ${classNames.textGlowEffect}`}
-                    >
-                        Technical Deep Dive
+                    <h3 className="text-xl sm:text-2xl font-bold mb-6 text-white flex items-center gap-3">
+                        <span className="text-purple-400">⚙️</span> Core Functionalities
                     </h3>
-                    <p className="text-gray-300 mb-4 break-all">
-                        The application is built entirely in Python, leveraging
-                        fundamental data structures and programming concepts.
-                    </p>
-                    <ul
-                        className={`space-y-3 text-gray-300 ${classNames.cardparent_list}`}
-                    >
-                        <li>
-                            <span className={classNames.cardparent_list_span}>
-                                Web Application:
-                            </span>{" "}
-                            Web app with a modern design, used for management, with a good UI/UX. Built with Flask, Python Library.
-                        </li>
-                        <li>
-                            <span className={classNames.cardparent_list_span}>
-                                Data Structures:
-                            </span>{" "}
-                            Utilizes dictionaries and lists to efficiently store
-                            and manage data for books and members in memory,
-                            aallowing for rapid access and modification.
-                        </li>
-                        <li>
-                            <span className={classNames.cardparent_list_span}>
-                                Command-Line Interface (CLI):
-                            </span>{" "}
-                            The user interface is designed to be intuitive and
-                            easy to navigate, with clear prompts and a
-                            structured menu system built using simple print and
-                            input statements.
-                        </li>
-                        <li>
-                            <span className={classNames.cardparent_list_span}>
-                                Modular Design:
-                            </span>{" "}
-                            The code is organized into logical functions,
-                            separating concerns and making the application easy
-                            to maintain and extend with new features.
-                        </li>
-                        <li>
-                            <span className={classNames.cardparent_list_span}>
-                                Data Persistence:
-                            </span>{" "}
-                            While the base version uses in-memory data, the
-                            architecture is designed to be easily adaptable for
-                            future enhancements like file handling (CSV, JSON)
-                            or database integration (MySQL) for persistent data
-                            storage.
-                        </li>
+                    <ul className="space-y-4">
+                        {[
+                            { title: "Book Management", desc: "Add, update, search, and delete books with tracking for ID, title, author, and quantity." },
+                            { title: "Member Management", desc: "Maintain a database of members, including contact info and borrowing history." },
+                            { title: "Issue & Return", desc: "Seamlessly handle book lending and returns with automatic inventory updates." },
+                            { title: "Inventory Control", desc: "Real-time tracking of available books with low-stock alerts." },
+                            { title: "Search & Discovery", desc: "Powerful search by title or author for quick book retrieval." }
+                        ].map((feature, index) => (
+                            <li key={index} className="bg-white/5 p-4 rounded-xl border border-white/5 hover:bg-white/10 transition-colors duration-300">
+                                <span className="block font-semibold text-purple-300 mb-1">{feature.title}</span>
+                                <span className="text-gray-400 text-sm">{feature.desc}</span>
+                            </li>
+                        ))}
                     </ul>
+                </motion.div>
+
+                <motion.div
+                    className="bg-black/20 backdrop-blur-lg p-8 rounded-2xl border border-purple-700/30 shadow-lg hover:border-purple-500/50 transition-colors duration-300 h-full"
+                    variants={itemVariants}
+                >
+                    <h3 className="text-xl sm:text-2xl font-bold mb-6 text-white flex items-center gap-3">
+                        <span className="text-purple-400">🛠</span> Technical Deep Dive
+                    </h3>
+                    <ul className="space-y-4">
+                        {[
+                            { icon: "🌐", title: "Web Application", desc: "Modern UI/UX built with Flask for intuitive management." },
+                            { icon: "📊", title: "Data Structures", desc: "Efficient use of dictionaries and lists for rapid in-memory data access." },
+                            { icon: "💻", title: "CLI", desc: "Intuitive command-line interface with structured menus." },
+                            { icon: "🧩", title: "Modular Design", desc: "Code organized into logical functions for maintainability." },
+                            { icon: "💾", title: "Data Persistence", desc: "Adaptable architecture for future database integration (MySQL, JSON)." }
+                        ].map((tech, index) => (
+                            <li key={index} className="flex items-start gap-4 p-3 rounded-xl hover:bg-white/5 transition-colors duration-300">
+                                <span className="text-2xl">{tech.icon}</span>
+                                <div>
+                                    <span className="block font-semibold text-purple-300">{tech.title}</span>
+                                    <span className="text-gray-400 text-sm">{tech.desc}</span>
+                                </div>
+                            </li>
+                        ))}
+                    </ul>
+                </motion.div>
+            </div>
+
+            <motion.div
+                className="bg-black/20 backdrop-blur-lg p-8 rounded-2xl border border-purple-700/30 shadow-lg mb-12 hover:border-purple-500/50 transition-colors duration-300"
+                variants={itemVariants}
+            >
+                <h2 className="text-2xl sm:text-3xl font-bold mb-8 text-white text-center">
+                    Detailed Features
+                </h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {[
+                        { title: "Book Management", items: ["Add/Edit book details", "Search by title/author/genre", "Real-time availability updates", "Inventory auditing"] },
+                        { title: "Visitor Management", items: ["Register new members", "Edit visitor details", "Search functionality", "Safe removal logic"] },
+                        { title: "Book Issuance", items: ["Streamlined issuing process", "Automatic return date calculation", "Price calculation", "History tracking"] },
+                        { title: "User Management (Admin)", items: ["Add/Remove system users", "Role-based access", "Secure credential storage", "User auditing"] }
+                    ].map((section, index) => (
+                        <div key={index} className="bg-white/5 p-6 rounded-xl border border-white/5 hover:bg-white/10 transition-colors duration-300">
+                            <h4 className="text-xl font-bold text-purple-300 mb-4">{section.title}</h4>
+                            <ul className="list-disc list-inside text-gray-300 space-y-2">
+                                {section.items.map((item, i) => (
+                                    <li key={i} className="text-sm">{item}</li>
+                                ))}
+                            </ul>
+                        </div>
+                    ))}
                 </div>
-            </div>
+            </motion.div>
 
-            <div
-                className={`bg-gray-900/50 p-8 rounded-lg shadow-lg border border-purple-500/30 my-10 ${classNames.boxHoverEffect}`}
+            <motion.div
+                className="bg-black/20 backdrop-blur-lg p-8 rounded-2xl border border-purple-700/30 shadow-lg mb-16 hover:border-purple-500/50 transition-colors duration-300"
+                variants={itemVariants}
             >
-                <h2
-                    className={`text-xl sm:text-3xl font-bold mb-6 ${classNames.spanText} ${classNames.textGlowEffect}`}
-                >
-                    Detailed Project Description: Unleashing the Power of CLI
-                    Library Management
+                <h2 className="text-2xl sm:text-3xl font-bold mb-8 text-white text-center">
+                    API & Method Reference
                 </h2>
-                <p className="text-lg text-gray-300 leading-relaxed mb-4 break-all">
-                    The Library Management System is a meticulously crafted
-                    command-line interface (CLI) application developed in
-                    Python, designed from the ground up to revolutionize the way
-                    libraries manage their vast collections and engage with
-                    their patrons. This robust system offers an unparalleled
-                    blend of efficiency, simplicity, and comprehensive
-                    functionality, making it an indispensable tool for
-                    librarians seeking to streamline their daily operations
-                    without the overhead of a graphical user interface. Its core
-                    strength lies in its ability to manage books, visitors, and
-                    book issuance with precision and speed, all underpinned by a
-                    reliable MySQL database for persistent data storage.
-                </p>
-                <h3
-                    className={`text-lg sm:text-2xl font-semibold mb-3 ${classNames.spanText}`}
-                >
-                    Book Management: The Heart of the Library
-                </h3>
-                <p className="text-base text-gray-300 leading-relaxed mb-3 break-all">
-                    At the core of any library is its collection, and this
-                    system provides a sophisticated suite of tools for managing
-                    every aspect of the book inventory. Librarians can
-                    effortlessly <strong>add new books</strong>, capturing
-                    essential details such as title, author, genre, publication
-                    year, and the per-day issue rate, along with the total
-                    quantity available. Should any book details require
-                    adjustment, the system facilitates{" "}
-                    <strong>editing existing book records</strong> with ease,
-                    ensuring accuracy across the entire catalog. A powerful{" "}
-                    <strong>search functionality</strong> allows for rapid
-                    retrieval of books based on various criteria, including
-                    name, author, or genre, dramatically reducing search times.
-                    Furthermore, the system offers a clear and concise{" "}
-                    <strong>view of all books</strong> currently in the library,
-                    complete with their availability status. Crucially, it
-                    supports dynamic{" "}
-                    <strong>updates to book availability</strong>, automatically
-                    adjusting quantities when books are issued or returned. For
-                    outdated or damaged items, the system enables the{" "}
-                    <strong>removal of books from inventory</strong>, ensuring
-                    the catalog remains current and relevant.
-                </p>
+                <div className="space-y-8">
+                    {[
+                        {
+                            title: "Admin Controller",
+                            file: "controllers/admin_controller/admin_controller.py",
+                            methods: [
+                                { name: "add_users(username)", desc: "Onboard new admin/staff users." },
+                                { name: "view_users()", desc: "Review all registered users." },
+                                { name: "delete_user(username)", desc: "Remove a user from the system." },
+                                { name: "edit_user(username)", desc: "Modify existing user details." }
+                            ]
+                        },
+                        {
+                            title: "Book Controller",
+                            file: "controllers/reception_controller/book_controller.py",
+                            methods: [
+                                { name: "add_book(...)", desc: "Add new books to inventory." },
+                                { name: "edit_book(id)", desc: "Modify book details." },
+                                { name: "find_book_information()", desc: "Search for books." },
+                                { name: "update_book_availability(id)", desc: "Adjust stock levels." }
+                            ]
+                        },
+                        {
+                            title: "Issue Controller",
+                            file: "controllers/reception_controller/issue_controller.py",
+                            methods: [
+                                { name: "create_issue(...)", desc: "Initiate a book loan." },
+                                { name: "return_book()", desc: "Process book returns." }
+                            ]
+                        },
+                        {
+                            title: "Visitor Controller",
+                            file: "controllers/visitor_controller/visitor_controller.py",
+                            methods: [
+                                { name: "add_visitor(...)", desc: "Register new library members." },
+                                { name: "edit_visitor(id)", desc: "Update member details." },
+                                { name: "find_visitor_information()", desc: "Locate member records." }
+                            ]
+                        }
+                    ].map((controller, index) => (
+                        <div key={index} className="bg-white/5 p-6 rounded-xl border border-white/5">
+                            <h3 className="text-xl font-bold text-purple-300 mb-1">{controller.title}</h3>
+                            <p className="text-gray-400 text-sm font-mono mb-4">{controller.file}</p>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                {controller.methods.map((method, i) => (
+                                    <div key={i} className="bg-black/30 p-3 rounded-lg border border-white/5">
+                                        <code className="text-purple-200 font-bold block mb-1">{method.name}</code>
+                                        <span className="text-gray-400 text-sm">{method.desc}</span>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </motion.div>
 
-                <h3
-                    className={`text-lg sm:text-2xl font-semibold mb-3 ${classNames.spanText}`}
-                >
-                    Visitor Management: Nurturing the Patron Relationship
-                </h3>
-                <p className="text-base text-gray-300 leading-relaxed mb-3 break-all">
-                    Effective management of library patrons is paramount, and
-                    the system offers robust features to facilitate this. New
-                    library members can be swiftly <strong>registered</strong>,
-                    with their name, phone number, email, and address securely
-                    recorded. The system intelligently parses full names into
-                    first, middle, and last names for enhanced data
-                    organization. Just as with books,{" "}
-                    <strong>visitor information can be edited</strong>, ensuring
-                    that contact details and other relevant data remain
-                    up-to-date. A dedicated{" "}
-                    <strong>search function for visitors</strong> allows
-                    librarians to locate specific patrons quickly. For
-                    administrative oversight, a comprehensive{" "}
-                    <strong>list of all registered visitors</strong> is readily
-                    available, providing a complete overview of the
-                    library&apos;s membership. In cases where a visitor no
-                    longer uses the library&apos;s services, the system supports
-                    the <strong>removal of visitors</strong>, with a built-in
-                    safeguard to prevent deletion if they currently have books
-                    on loan.
-                </p>
-
-                <h3
-                    className={`text-lg sm:text-2xl font-semibold mb-3 ${classNames.spanText}`}
-                >
-                    Book Issuance: A Seamless Borrowing Experience
-                </h3>
-                <p className="text-base text-gray-300 leading-relaxed mb-3 break-all">
-                    The core interaction between books and visitors is handled
-                    through a streamlined book issuance process. Librarians can
-                    easily <strong>issue books to visitors</strong>, linking a
-                    specific book to a patron. During issuance, the system
-                    automatically <strong>records the issue date</strong>,
-                    calculates an estimated <strong>return date</strong>, and
-                    determines the <strong>price</strong> for the loan period
-                    based on the book&apos;s daily rate. This process also
-                    intelligently updates the `books_issued` count for the
-                    visitor and decrements the `book_current_quantity` for the
-                    book, maintaining real-time inventory accuracy. When a book
-                    is returned, the system facilitates its{" "}
-                    <strong>return</strong>, marking the issue as cleared and
-                    updating the book&apos;s availability. All past and current
-                    lending activities are captured, allowing for a detailed{" "}
-                    <strong>view of the history of book issues</strong>,
-                    providing valuable insights into borrowing patterns.
-                </p>
-
-                <h3
-                    className={`text-lg sm:text-2xl font-semibold mb-3 ${classNames.spanText}`}
-                >
-                    User Management (Admin): Securing and Controlling Access
-                </h3>
-                <p className="text-base text-gray-300 leading-relaxed mb-3 break-all">
-                    For system administrators, the Library Management System
-                    provides powerful tools to manage user accounts and roles,
-                    ensuring secure and controlled access. Administrators can{" "}
-                    <strong>add new system users</strong> (e.g., other admins,
-                    staff members), defining their usernames, names, passwords,
-                    roles, and any pertinent notes. The system includes a check
-                    to prevent duplicate usernames. All system users can be{" "}
-                    <strong>viewed</strong>, providing an oversight of who has
-                    access and their designated roles. In cases of staff
-                    changes, the system supports the{" "}
-                    <strong>deletion of system users</strong>. The ability to{" "}
-                    <strong>check user roles</strong> ensures that permissions
-                    are correctly assigned and enforced. Furthermore,
-                    administrators can{" "}
-                    <strong>edit existing user details</strong>, including their
-                    name, password, role, and notes, with the flexibility to
-                    leave fields blank to retain current values. Internal helper
-                    functions, `_load_users()` and `_save_users()`, manage the
-                    persistence of user data to a `users.bin` file using
-                    Python&apos;s `pickle` module, providing a simple yet
-                    effective mechanism for storing user credentials.
-                </p>
-            </div>
-
-            <div
-                className={`bg-gray-900/50 p-8 rounded-lg shadow-lg border border-purple-500/30 my-10 ${classNames.boxHoverEffect}`}
-            >
-                <h2
-                    className={`text-xl sm:text-3xl font-bold mb-6 ${classNames.spanText} ${classNames.textGlowEffect}`}
-                >
-                    API & Method Reference: Unpacking the System&apos;s Core
-                    Logic
-                </h2>
-                <p className="text-lg text-gray-300 leading-relaxed mb-4 break-all">
-                    This section provides an in-depth breakdown of the Library
-                    Management System&apos;s programmatic interface, detailing
-                    each critical function available through its controllers.
-                    Organized by their respective functional areas, these
-                    methods expose the granular control and operational
-                    capabilities that underpin the entire application.
-                </p>
-
-                {/* Admin Controller */}
-                <h3
-                    className={`text-lg sm:text-2xl font-semibold mt-8 mb-3 ${classNames.spanText} break-all`}
-                >
-                    Admin Controller
-                    (`controllers/admin_controller/admin_controller.py`)
-                </h3>
-                <p className="text-base text-gray-300 leading-relaxed mb-3 break-all">
-                    The `admin_controller.py` module houses functions
-                    responsible for the secure management of system users. These
-                    methods provide administrators with the tools necessary to
-                    control access, define roles, and maintain user credentials
-                    within the system.
-                </p>
-                <ul className="list-disc list-inside text-gray-300 space-y-2 pl-4 max-w-full break-all">
-                    <li>
-                        <strong>`add_users(username)`:</strong> This function is
-                        invoked to onboard new administrative or staff users
-                        into the system. It first performs a crucial check to
-                        determine if the provided `username` already exists. If
-                        the username is unique, the system then interactively
-                        prompts the administrator to input the new user&apos;s
-                        full name, a secure password, their designated role
-                        (e.g., &apos;admin&apos;, &apos;staff&apos;), and any
-                        additional descriptive notes. Upon successful collection
-                        of this data, the new user&apos;s details are securely
-                        appended to the `users.bin` file, ensuring persistent
-                        storage.
-                    </li>
-                    <li>
-                        <strong>`view_users()`:</strong> Designed for oversight,
-                        this method allows administrators to comprehensively
-                        review all registered users. It retrieves the list of
-                        users from the `users.bin` file and then systematically
-                        iterates through each user record, neatly printing their
-                        `username`, `name`, `role`, and any associated `note`.
-                        This provides a clear snapshot of current system access.
-                    </li>
-                    <li>
-                        <strong>`delete_user(username)`:</strong> This function
-                        facilitates the removal of a user from the system. When
-                        a `username` is supplied, the method searches for the
-                        corresponding user record. If found, the user&apos;s
-                        entry is permanently removed, and a success message is
-                        displayed. If the `username` does not match an existing
-                        record, a &quot;not found&quot; message is returned,
-                        preventing erroneous deletions.
-                    </li>
-                    <li>
-                        <strong>`check_if_user(username)`:</strong> A utility
-                        function that serves as a predicate for user existence.
-                        It takes a `username` as input and efficiently queries
-                        the stored user data. It returns `True` if a user with
-                        that `username` is found, indicating their presence in
-                        the system, and `False` otherwise.
-                    </li>
-                    <li>
-                        <strong>`check_role(username)`:</strong> This method is
-                        used to ascertain the authorization level of a specific
-                        user. Given a `username`, it retrieves the assigned
-                        `role` (e.g., &apos;admin&apos;, &apos;staff&apos;) for
-                        that user. If the user exists, their role string is
-                        returned; otherwise, `None` is returned, signifying that
-                        the user was not found.
-                    </li>
-                    <li>
-                        <strong>`edit_user(username_to_edit)`:</strong> This
-                        powerful function enables administrators to modify the
-                        details of an existing user. Upon providing a
-                        `username_to_edit`, the system prompts for new values
-                        for the user&apos;s name, password, role, and a
-                        descriptive note. A key feature is its flexibility:
-                        leaving any prompt blank ensures that the current value
-                        for that specific field remains unchanged, allowing for
-                        partial updates.
-                    </li>
-                    <li>
-                        <strong>`_load_users()` (Internal):</strong> This is a
-                        crucial internal helper function, prefixed with an
-                        underscore to indicate its intended private use within
-                        the module. Its primary responsibility is to safely load
-                        the serialized list of user data from the `users.bin`
-                        file using Python&apos;s `pickle` module. In scenarios
-                        where the file does not exist or has become corrupted,
-                        it gracefully returns an empty list, preventing
-                        application crashes.
-                    </li>
-                    <li>
-                        <strong>`_save_users(users_data)` (Internal):</strong>{" "}
-                        Another internal helper function, `_save_users` is
-                        dedicated to persisting the current state of user data.
-                        It accepts `users_data` (typically a list of user
-                        objects) and serializes this data into the `users.bin`
-                        file using the `pickle` module, thereby ensuring that
-                        all user modifications are securely saved across
-                        application sessions.
-                    </li>
-                </ul>
-
-                {/* Reception Controller - Book Management */}
-                <h3
-                    className={`text-lg sm:text-2xl font-semibold mt-8 mb-3 ${classNames.spanText} break-all`}
-                >
-                    Reception Controller: Book Management
-                    (`controllers/reception_controller/book_controller.py`)
-                </h3>
-                <p className="text-base text-gray-300 leading-relaxed mb-3 break-all">
-                    The `book_controller.py` module provides a comprehensive set
-                    of functions for managing the library&apos;s physical
-                    collection. These methods allow staff to maintain an
-                    accurate and up-to-date catalog of all books, from
-                    acquisition to eventual removal.
-                </p>
-                <ul className="list-disc list-inside text-gray-300 space-y-2 pl-4 max-w-full break-all">
-                    <li>
-                        <strong>
-                            `add_book(connection, book_name, book_author,
-                            book_genre, book_publication_year, book_issue_rate,
-                            book_quantity)`:
-                        </strong>{" "}
-                        This function is fundamental for expanding the
-                        library&apos;s collection. It requires a database
-                        `connection` object and accepts detailed parameters for
-                        a new book: `book_name`, `book_author`, `book_genre`,
-                        `book_publication_year`, the `book_issue_rate` (cost per
-                        day for borrowing), and `book_quantity` (the total
-                        number of copies acquired). These details are then
-                        meticulously inserted into the `books` table in the
-                        MySQL database.
-                    </li>
-                    <li>
-                        <strong>`edit_book(connection, book_id)`:</strong>{" "}
-                        Designed for accuracy and maintenance, this function
-                        allows for granular modification of an existing
-                        book&apos;s details. Given a database `connection` and a
-                        unique `book_id`, it first retrieves the book&apos;s
-                        current information. The user is then presented with
-                        options to select which specific field (e.g., name,
-                        author, genre) they wish to alter. Upon selection, the
-                        method prompts for the new value and updates the
-                        corresponding record in the `books` table.
-                    </li>
-                    <li>
-                        <strong>`find_book_information(connection)`:</strong>{" "}
-                        This is a powerful discovery tool that enables users to
-                        locate books efficiently. It takes a database
-                        `connection` and allows searching based on various
-                        user-defined criteria, such as partial `book_name` or
-                        `book_author`. The function queries the database to
-                        retrieve and display all matching book records,
-                        facilitating quick access to desired titles.
-                    </li>
-                    <li>
-                        <strong>`view_book_details(connection)`:</strong>{" "}
-                        Providing a holistic overview of the library&apos;s
-                        holdings, this method, given a database `connection`,
-                        fetches and displays a neatly formatted list of all
-                        books present in the `books` table. This output
-                        typically includes all relevant details for each book,
-                        offering an easy way to audit the entire collection.
-                    </li>
-                    <li>
-                        <strong>
-                            `update_book_availability(connection, book_id)`:
-                        </strong>{" "}
-                        Crucial for real-time inventory management, this
-                        function updates the `book_current_quantity` for a
-                        specific book. This is particularly vital when a book is
-                        either returned by a visitor (increasing availability)
-                        or declared lost/damaged (decreasing availability),
-                        ensuring that the system&apos;s inventory reflects the
-                        true count of accessible copies.
-                    </li>
-                    <li>
-                        <strong>
-                            `remove_book_from_library_inventory(connection,
-                            book_id)`:
-                        </strong>{" "}
-                        This method handles the permanent deletion of a book
-                        record from the `books` table. Requiring a database
-                        `connection` and the `book_id` of the item to be
-                        removed, it includes a critical safeguard: the system
-                        checks to ensure that all copies of the book are
-                        currently within the library (i.e., not issued out)
-                        before allowing the deletion, preventing inconsistencies
-                        in inventory and lending records.
-                    </li>
-                </ul>
-
-                {/* Reception Controller - Issue Management */}
-                <h3
-                    className={`text-lg sm:text-2xl font-semibold mt-8 mb-3 ${classNames.spanText} break-all`}
-                >
-                    Reception Controller: Issue Management
-                    (`controllers/reception_controller/issue_controller.py`)
-                </h3>
-                <p className="text-base text-gray-300 leading-relaxed mb-3 break-all">
-                    The `issue_controller.py` module is dedicated to managing
-                    the circulation of books, encompassing both the issuance and
-                    return processes. These functions ensure accurate tracking
-                    of borrowed items, financial calculations, and inventory
-                    adjustments.
-                </p>
-                <ul className="list-disc list-inside text-gray-300 space-y-2 pl-4 max-w-full break-all">
-                    <li>
-                        <strong>
-                            `create_issue(connection, visitor, book_id,
-                            return_date)`:
-                        </strong>{" "}
-                        This is the primary function for initiating a book loan.
-                        It requires a database `connection`, the `visitor`
-                        object (representing the borrowing patron), the
-                        `book_id` of the item being borrowed, and the
-                        agreed-upon `return_date`. The function meticulously
-                        calculates the total `price` for the loan duration based
-                        on the book&apos;s daily issue rate. Furthermore, it
-                        intelligently updates the `books_issued` count for the
-                        specified `visitor` and decrements the
-                        `book_current_quantity` for the `book_id`, maintaining a
-                        precise, real-time inventory count.
-                    </li>
-                    <li>
-                        <strong>`return_book(connection)`:</strong> This method
-                        gracefully handles the process of a book being returned
-                        to the library. Given a database `connection`, it
-                        identifies the corresponding issue record. It then marks
-                        the issue as `cleared`, sets the `return_date` to the
-                        current date, and performs necessary updates to both the
-                        `visitor` record (decreasing their `books_issued` count)
-                        and the `book` record (incrementing its
-                        `book_current_quantity`), fully reconciling the loan
-                        transaction.
-                    </li>
-                </ul>
-
-                {/* Visitor Controller */}
-                <h3
-                    className={`text-lg sm:text-2xl font-semibold mt-8 mb-3 ${classNames.spanText} break-all`}
-                >
-                    Visitor Controller
-                    (`controllers/visitor_controller/visitor_controller.py`)
-                </h3>
-                <p className="text-base text-gray-300 leading-relaxed mb-3 break-all">
-                    The `visitor_controller.py` module is singularly focused on
-                    the management of library patrons. Its functions provide
-                    tools for registering, modifying, locating, and auditing all
-                    individuals who interact with the library.
-                </p>
-                <ul className="list-disc list-inside text-gray-300 space-y-2 pl-4 max-w-full break-all">
-                    <li>
-                        <strong>
-                            `add_visitor(connection, visitor_name,
-                            visitor_phone, visitor_email, visitor_address)`:
-                        </strong>{" "}
-                        This function is used to enroll new patrons into the
-                        library system. It requires a database `connection` and
-                        accepts the `visitor_name` (full name), `visitor_phone`,
-                        `visitor_email`, and `visitor_address`. A notable
-                        feature is its ability to parse the `visitor_name` into
-                        distinct first, middle, and last names, enhancing data
-                        granularity and search capabilities.
-                    </li>
-                    <li>
-                        <strong>`edit_visitor(connection, visitor_id)`:</strong>{" "}
-                        To ensure patron records remain accurate, this method
-                        allows for the modification of an existing
-                        visitor&apos;s details. Provided with a database
-                        `connection` and the unique `visitor_id`, it enables
-                        updates to any aspect of the patron&apos;s information,
-                        from contact details to address.
-                    </li>
-                    <li>
-                        <strong>`find_visitor_information(connection)`:</strong>{" "}
-                        An essential utility for staff, this function, given a
-                        database `connection`, facilitates the rapid location of
-                        visitor records. It supports searching based on various
-                        user-inputted terms and fields (e.g., name, phone
-                        number), quickly retrieving and displaying relevant
-                        patron data.
-                    </li>
-                    <li>
-                        <strong>`view_visitor_details(connection)`:</strong> For
-                        administrative review and auditing, this method, with a
-                        database `connection`, presents a clearly formatted list
-                        of all registered visitors. This allows for a
-                        comprehensive overview of the library&apos;s patron
-                        base.
-                    </li>
-                    <li>
-                        <strong>
-                            `remove_visitor(connection, visitor_uid)`:
-                        </strong>{" "}
-                        This function enables the permanent removal of a
-                        patron&apos;s record from the `visitors` table. It
-                        requires a database `connection` and the `visitor_uid`
-                        of the patron to be deleted. A critical safety measure
-                        is integrated: a visitor can only be removed if they
-                        currently have no books issued to them, preventing
-                        orphaned lending records and maintaining data integrity.
-                    </li>
-                </ul>
-            </div>
-
-            <div className="text-center my-12">
+            <motion.div className="text-center mb-12" variants={itemVariants}>
                 <a
-                    href="https://github.com/DakshSingh-GitHub/LibraryManagement" // Replace with actual link
+                    href="https://github.com/DakshSingh-GitHub/LibraryManagement"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={`inline-block bg-purple-600 text-white font-semibold px-8 py-3 rounded-lg shadow-lg transition-transform transform hover:scale-105 hover:bg-purple-700 ${classNames.textGlowEffect}`}
+                    className="inline-flex items-center gap-2 bg-purple-600 text-white font-semibold px-8 py-4 rounded-full shadow-[0_0_20px_rgba(124,58,237,0.4)] transition-all duration-300 hover:scale-105 hover:bg-purple-700 hover:shadow-[0_0_30px_rgba(124,58,237,0.6)]"
                 >
+                    <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path fillRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clipRule="evenodd" />
+                    </svg>
                     View on GitHub
                 </a>
-            </div>
-        </div>
+            </motion.div>
+        </motion.div>
     );
 }
