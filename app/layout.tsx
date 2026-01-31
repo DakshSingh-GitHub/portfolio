@@ -4,6 +4,7 @@ import "@/app/globals.css";
 import Navbar from "@/components/global/Navbar";
 import Footer from "@/components/global/Footer";
 import ParticleBackground from "@/components/ui/ParticleBackground";
+import React from "react";
 
 const geistSans = Geist({
     variable: "--font-geist-sans",

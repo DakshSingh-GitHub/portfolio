@@ -107,9 +107,9 @@ export default function Projects() {
                                 <div className="relative h-64">
                                     <Image
                                         src={project.img}
-                                        layout="fill"
-                                        objectFit="cover"
+                                        fill
                                         alt={project.title}
+                                        className="object-cover"
                                     />
                                 </div>
                                 <div className="p-8">

@@ -4,7 +4,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion, Variants } from "framer-motion";
-import { staggerContainer, bounceIn } from "@/components/animations";
+import { staggerContainer } from "@/components/animations";
 
 export default function PortfolioPage() {
     const headerVariants: Variants = {
@@ -44,7 +44,7 @@ export default function PortfolioPage() {
                 variants={headerVariants}
             >
                 <Link href="/">
-                    <h1 className="text-3xl sm:text-5xl font-extrabold mb-6 tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white via-purple-200 to-purple-400 hover:opacity-80 transition-opacity duration-300">
+                    <h1 className="text-3xl sm:text-5xl font-extrabold mb-6 tracking-tight bg-clip-text text-transparent bg-linear-to-r from-white via-purple-200 to-purple-400 hover:opacity-80 transition-opacity duration-300">
                         My Portfolio Website
                     </h1>
                 </Link>
@@ -62,7 +62,7 @@ export default function PortfolioPage() {
                         width={800}
                         className="object-cover transform transition-transform duration-700 group-hover:scale-105"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <div className="absolute inset-0 bg-linear-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 </div>
             </motion.div>
 

@@ -14,9 +14,9 @@ export default function Card({ image, text, paragraph, board }: CardProps) {
       <div className="relative w-full h-52">
         <Image
           src={image}
-          layout="fill"
-          objectFit="cover"
+          fill
           alt={text}
+          className="object-cover"
           loading="eager"
         />
       </div>

@@ -136,11 +136,10 @@ export default function HomeCard() {
                         transition={{ type: "spring", stiffness: 300 }}
                     >
                         <Image
-                            src="./daksh/daksh.jpg"
-                            layout="fill"
-                            objectFit="cover"
+                            src="../daksh/daksh.png"
+                            fill
                             alt="Daksh Singh"
-                            className={`rounded-2xl shadow-2xl ${textGlowEffect}`}
+                            className={`rounded-2xl shadow-2xl object-cover ${textGlowEffect}`}
                         />
                     </motion.div>
                 </motion.div>
