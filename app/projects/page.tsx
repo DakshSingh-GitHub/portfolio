@@ -103,8 +103,22 @@ export default function Projects() {
                         viewport={{ once: true, amount: 0.2 }}
                     >
                         <Link href={project.href}>
-                            <div className="h-full bg-black/40 backdrop-blur-lg rounded-3xl border border-white/10 overflow-hidden transition-all duration-300 hover:shadow-[0_0_40px_rgba(167,139,250,0.25)] hover:border-violet-400/40 hover:scale-[1.02]">
-                                <div className="relative h-64">
+                            <motion.div 
+                                className="h-full bg-black/40 backdrop-blur-lg rounded-3xl border border-white/10 overflow-hidden relative"
+                                whileHover="hover"
+                                initial="rest"
+                                animate="rest"
+                                variants={{
+                                    rest: { y: 0, scale: 1, boxShadow: "0 0 0 rgba(0,0,0,0)" },
+                                    hover: { 
+                                        y: -8, 
+                                        scale: 1.01,
+                                        boxShadow: "0 20px 50px rgba(124, 58, 237, 0.3)", // Purple shadow
+                                        transition: { type: "spring", stiffness: 300, damping: 20 }
+                                    }
+                                }}
+                            >
+                                <div className="relative h-64 overflow-hidden">
                                     <Image
                                         src={project.img}
                                         fill
@@ -112,15 +126,30 @@ export default function Projects() {
                                         className="object-cover"
                                     />
                                 </div>
-                                <div className="p-8">
-                                    <h3 className="text-3xl font-bold text-white mb-3">
+                                <div className="p-8 relative z-10">
+                                    <motion.h3 
+                                        className="text-3xl font-bold text-white mb-3"
+                                        variants={{
+                                            rest: { color: "#ffffff" },
+                                            hover: { color: "#c4b5fd" } // violet-300
+                                        }}
+                                        transition={{ duration: 0.3 }}
+                                    >
                                         {project.title}
-                                    </h3>
+                                    </motion.h3>
                                     <p className="text-gray-300 text-lg leading-relaxed">
                                         {project.desc}
                                     </p>
                                 </div>
-                            </div>
+                                <motion.div
+                                    className="absolute inset-0 border-2 border-transparent rounded-3xl pointer-events-none"
+                                    variants={{
+                                        rest: { borderColor: "rgba(255, 255, 255, 0.1)" },
+                                        hover: { borderColor: "rgba(124, 58, 237, 0.5)" } // Purple border
+                                    }}
+                                    transition={{ duration: 0.3 }}
+                                />
+                            </motion.div>
                         </Link>
                     </motion.div>
                 ))}

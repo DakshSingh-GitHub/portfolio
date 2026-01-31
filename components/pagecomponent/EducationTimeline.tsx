@@ -31,10 +31,10 @@ const EducationCard = ({
     color: "cyan" | "violet";
     index: number;
 }) => {
-    const glowColor =
+    const shadowColor =
         color === "cyan"
-            ? "hover:shadow-[0_0_30px_rgba(56,189,248,0.3)]"
-            : "hover:shadow-[0_0_30px_rgba(167,139,250,0.3)]";
+            ? "0 0 30px rgba(56,189,248,0.3)"
+            : "0 0 30px rgba(167,139,250,0.3)";
     const bulletColor = color === "cyan" ? "bg-cyan-400" : "bg-violet-400";
 
     return (
@@ -43,8 +43,12 @@ const EducationCard = ({
             custom={index}
             initial="hidden"
             whileInView="visible"
+            whileHover={{
+                boxShadow: shadowColor,
+                transition: { duration: 0.3, ease: "easeInOut" },
+            }}
             viewport={{ once: true, amount: 0.2 }}
-            className={`relative w-full md:w-1/2 bg-black/40 backdrop-blur-lg rounded-2xl border border-white/10 p-8 transition-shadow duration-300 ${glowColor}`}
+            className="relative w-full md:w-1/2 bg-black/40 backdrop-blur-lg rounded-2xl border border-white/10 p-8"
         >
             <div className="absolute top-6 right-6 bg-white/10 px-3 py-1 rounded-full text-sm font-medium text-white">
                 {year}

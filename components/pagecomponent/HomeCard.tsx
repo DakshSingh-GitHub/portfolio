@@ -126,7 +126,7 @@ export default function HomeCard() {
                     }}
                     transition={{
                         duration: 8,
-                        repeat: Infinity,
+                        // repeat: None,
                         ease: "easeInOut",
                     }}
                 >
