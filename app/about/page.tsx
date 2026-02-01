@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 
-import { staggerContainer, bounceIn } from "@/components/animations";
+import { staggerContainer, bounceIn, fadeInUp } from "@/components/animations";
 import { motion, Variants } from "framer-motion";
 
 import Card from "@/components/global/Card";
@@ -21,14 +21,14 @@ const schoolList = [
 
 export default function AboutPage() {
     const headerVariants: Variants = {
-        hidden: { scale: 0.9, opacity: 0 },
+        hidden: { scale: 0.95, opacity: 0, y: 20 },
         visible: {
             scale: 1,
             opacity: 1,
+            y: 0,
             transition: {
-                type: "spring",
-                stiffness: 100,
-                damping: 15,
+                duration: 0.8,
+                ease: "easeOut",
             },
         },
     };
@@ -58,7 +58,12 @@ export default function AboutPage() {
             className="p-4 md:p-10 cursor-default"
         >
             <motion.div 
-                className="text-center mb-12 bg-black/20 backdrop-blur-xl rounded-3xl border border-purple-700/30 p-8 md:p-12 shadow-[0_0_30px_rgba(124,58,237,0.1)] hover:shadow-[0_0_50px_rgba(124,58,237,0.2)] transition-shadow duration-500"
+                className="text-center mb-12 bg-black/20 backdrop-blur-xl rounded-3xl border border-purple-700/30 p-8 md:p-12"
+                style={{ boxShadow: "0 0 30px rgba(124,58,237,0.1)" }}
+                whileHover={{ 
+                    boxShadow: "0 0 50px rgba(124,58,237,0.2)",
+                    transition: { duration: 0.5, ease: "easeInOut" }
+                }}
                 variants={headerVariants}
             >
                 <h1 className="text-4xl md:text-6xl font-bold mb-6 tracking-tight bg-clip-text text-transparent bg-linear-to-r from-white via-purple-200 to-purple-400">
@@ -93,9 +98,9 @@ export default function AboutPage() {
                 </p>
             </motion.div>
             
-            <div className="h-px bg-linear-to-r from-transparent via-purple-500/50 to-transparent my-12"></div>
+            <motion.div variants={fadeInUp} className="h-px bg-linear-to-r from-transparent via-purple-500/50 to-transparent my-12"></motion.div>
 
-            <div className="schoolList mt-10 px-2 md:px-0 mb-10">
+            <motion.div variants={fadeInUp} className="schoolList mt-10 px-2 md:px-0 mb-10">
                 <h1
                     className="text-4xl md:text-5xl font-bold mb-8 text-center"
                 >
@@ -104,11 +109,11 @@ export default function AboutPage() {
                 <div className="flex flex-col md:flex-row items-center justify-evenly h-full w-full mt-10 gap-4 md:gap-0">
                     {schoolMap}
                 </div>
-            </div>
+            </motion.div>
 
-            <div className="h-px bg-linear-to-r from-transparent via-purple-500/50 to-transparent my-12"></div>
+            <motion.div variants={fadeInUp} className="h-px bg-linear-to-r from-transparent via-purple-500/50 to-transparent my-12"></motion.div>
 
-            <div className="mt-10 px-2 md:px-0">
+            <motion.div variants={fadeInUp} className="mt-10 px-2 md:px-0">
                 <h1
                     className="text-4xl md:text-5xl font-bold mb-8 text-center"
                 >
@@ -117,7 +122,7 @@ export default function AboutPage() {
                 <div className="flex flex-col md:flex-row items-center justify-evenly h-full w-full mt-10 gap-4 md:gap-0">
                     <Certificate />
                 </div>
-            </div>
+            </motion.div>
         </motion.div>
     );
 }
