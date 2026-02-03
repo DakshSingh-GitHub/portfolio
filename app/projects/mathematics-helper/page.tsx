@@ -1,4 +1,3 @@
-
 "use client";
 
 import Image from "next/image";
@@ -7,14 +6,14 @@ import { staggerContainer } from "@/components/animations";
 
 export default function MathematicsHelperPage() {
     const headerVariants: Variants = {
-        hidden: { scale: 0.9, opacity: 0 },
+        hidden: { scale: 0.95, opacity: 0, y: 20 },
         visible: {
             scale: 1,
             opacity: 1,
+            y: 0,
             transition: {
-                type: "spring",
-                stiffness: 100,
-                damping: 15,
+                duration: 0.8,
+                ease: "easeOut",
             },
         },
     };
@@ -39,7 +38,12 @@ export default function MathematicsHelperPage() {
             animate="visible"
         >
             <motion.div 
-                className="text-center mb-12 bg-black/20 backdrop-blur-xl rounded-3xl border border-purple-700/30 p-8 md:p-12 shadow-[0_0_30px_rgba(124,58,237,0.1)] hover:shadow-[0_0_50px_rgba(124,58,237,0.2)] transition-shadow duration-500"
+                className="text-center mb-12 bg-black/20 backdrop-blur-xl rounded-3xl border border-purple-700/30 p-8 md:p-12"
+                style={{ boxShadow: "0 0 30px rgba(124,58,237,0.1)" }}
+                whileHover={{ 
+                    boxShadow: "0 0 50px rgba(124,58,237,0.2)",
+                    transition: { duration: 0.5, ease: "easeInOut" }
+                }}
                 variants={headerVariants}
             >
                 <h1 className="text-3xl sm:text-5xl font-extrabold mb-6 tracking-tight bg-clip-text text-transparent bg-linear-to-r from-white via-purple-200 to-purple-400">
@@ -51,16 +55,44 @@ export default function MathematicsHelperPage() {
             </motion.div>
 
             <motion.div variants={itemVariants} className="flex justify-center mb-16">
-                <div className="relative rounded-3xl overflow-hidden border-4 border-purple-500/30 shadow-[0_0_40px_rgba(124,58,237,0.2)] hover:border-purple-500/60 transition-all duration-500 group">
-                    <Image
-                        src="../projects/mathshelpjava.png"
-                        alt="Mathematics Helper"
-                        height={400}
-                        width={800}
-                        className="object-cover transform transition-transform duration-700 group-hover:scale-105"
+                <motion.div 
+                    className="relative rounded-3xl overflow-hidden border-4 border-purple-500/30 shadow-[0_0_40px_rgba(124,58,237,0.2)]"
+                    initial="rest"
+                    whileHover="hover"
+                    animate="rest"
+                    variants={{
+                        rest: { borderColor: "rgba(168, 85, 247, 0.3)" },
+                        hover: { 
+                            borderColor: "rgba(168, 85, 247, 0.6)",
+                            transition: { duration: 0.5 }
+                        }
+                    }}
+                >
+                    <motion.div
+                        variants={{
+                            rest: { scale: 1 },
+                            hover: { 
+                                scale: 1.05,
+                                transition: { duration: 0.7, ease: "easeInOut" }
+                            }
+                        }}
+                    >
+                        <Image
+                            src="../projects/mathshelpjava.png"
+                            alt="Mathematics Helper"
+                            height={400}
+                            width={800}
+                            className="object-cover"
+                        />
+                    </motion.div>
+                    <motion.div 
+                        className="absolute inset-0 bg-linear-to-t from-black/60 to-transparent"
+                        variants={{
+                            rest: { opacity: 0 },
+                            hover: { opacity: 1, transition: { duration: 0.3 } }
+                        }}
                     />
-                    <div className="absolute inset-0 bg-linear-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                </div>
+                </motion.div>
             </motion.div>
 
             <motion.div
