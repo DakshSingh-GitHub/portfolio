@@ -53,6 +53,11 @@ export default function Navbar() {
             description: "An online platform for compiling and running code.",
         },
         {
+            href: "/projects/ai-assist",
+            name: "AI Assist",
+            description: "A smart, console-based personal assistant.",
+        },
+        {
             href: "/projects/library-management",
             name: "Library Management CLI",
             description: "A CLI for managing library records.",
