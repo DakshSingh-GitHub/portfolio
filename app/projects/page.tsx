@@ -30,6 +30,11 @@ const projectDetails = {
         "Implemented Basic API fetching, and code execution environment.",
         "Integration of a scoring system to streamline the evaluation process will be added soon",
     ],
+    aiAssist: [
+        "Building an AI-powered desktop assistant to automate tasks and enhance productivity.",
+        "Implemented voice command processing, system-level controls, and modular skill execution.",
+        "Advanced contextual understanding, learning-based responses, and deeper system integration are planned next.",
+    ],
 };
 
 const ProjectDesc = [
@@ -48,6 +53,14 @@ const ProjectDesc = [
         img: "./projects/library_management.png",
         key: 1,
         details: projectDetails.libraryManagement,
+    },
+    {
+        title: "AI Assist",
+        desc: "A simple AI based assistant which has the capability to control basic controls, such as opening browser and websites",
+        href: "projects/ai-assist",
+        img: "./projects/ai_assist.png",
+        key: 5,
+        details: projectDetails.aiAssist,
     },
     {
         title: "Hotel Management",
