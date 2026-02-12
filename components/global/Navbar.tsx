@@ -258,7 +258,7 @@ export default function Navbar() {
                                 onClick={() => setIsMobileMenuOpen(false)}
                             />
                             <motion.div
-                                className="absolute left-0 top-0 h-screen w-full overflow-y-auto border-r border-purple-700/40 bg-linear-to-b from-black via-[#090312] to-black px-6 pb-8 pt-24"
+                                className="absolute left-0 top-0 h-dvh w-full border-r border-purple-700/40 bg-linear-to-b from-black via-[#090312] to-black px-6 pt-24"
                                 initial={{ x: "-100%" }}
                                 animate={{ x: 0 }}
                                 exit={{ x: "-100%" }}
@@ -272,8 +272,9 @@ export default function Navbar() {
                                 >
                                     Close
                                 </button>
-                                <div className="flex min-h-full flex-col">
-                                    <div className="space-y-3">
+                                <div className="flex h-full min-h-0 flex-col">
+                                    <div className="min-h-0 flex-1 overflow-y-auto pb-6 pr-2 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+                                        <div className="space-y-3">
                                         <Link
                                             href="/about"
                                             className={getLinkClass(
@@ -368,17 +369,16 @@ export default function Navbar() {
                                             Contact
                                         </Link>
                                     </div>
-                                    <div className="mt-auto border-t border-purple-700/40 pt-6 text-center">
-                                        <h3 className="text-xl font-bold tracking-tight text-white">
-                                            Daksh Singh
-                                        </h3>
-                                        <p className="mt-3 text-sm italic text-gray-300/90">
-                                            &quot;Crafting digital experiences, one line of code at a time.&quot;
-                                        </p>
-                                        <p className="mt-4 text-xs uppercase tracking-[0.18em] text-violet-300/90">
-                                            Daksh Singh (c) 2026
-                                        </p>
-                                    </div>
+                                </div>
+                                <div className="shrink-0 border-t border-purple-700/40 bg-black/95 px-6 pb-[calc(1rem+env(safe-area-inset-bottom))] pt-5 text-center backdrop-blur-sm">
+                                    <h3 className="text-xl font-bold tracking-tight text-white">Daksh Singh</h3>
+                                    <p className="mt-3 text-sm italic text-gray-300/90">
+                                        &quot;Crafting digital experiences, one line of code at a time.&quot;
+                                    </p>
+                                    <p className="mt-4 text-xs uppercase tracking-[0.18em] text-violet-300/90">
+                                        Daksh Singh (c) 2026
+                                    </p>
+                                </div>
                                 </div>
                             </motion.div>
                         </motion.div>
