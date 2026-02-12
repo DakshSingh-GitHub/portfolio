@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
+import { AnimatePresence, motion } from "framer-motion";
 
 export default function Navbar() {
     const [isDesktopProjectsDropdownOpen, setIsDesktopProjectsDropdownOpen] =
@@ -29,6 +30,18 @@ export default function Navbar() {
             document.removeEventListener("mousedown", handleClickOutside);
         };
     }, [dropdownRef]);
+
+    useEffect(() => {
+        if (isMobileMenuOpen) {
+            document.body.style.overflow = "hidden";
+        } else {
+            document.body.style.overflow = "";
+        }
+
+        return () => {
+            document.body.style.overflow = "";
+        };
+    }, [isMobileMenuOpen]);
 
     const textGlowEffect =
         "transition-all duration-300 ease-in-out hover:filter hover:drop-shadow-[0_0_8px_rgba(124,58,237,0.9)]";
@@ -182,136 +195,195 @@ export default function Navbar() {
                             onClick={() =>
                                 setIsMobileMenuOpen(!isMobileMenuOpen)
                             }
-                            className="text-white focus:outline-none p-2"
+                            className="p-2 text-white focus:outline-none transition-transform duration-150 ease-out active:scale-90"
+                            type="button"
+                            aria-label="Toggle mobile menu"
                         >
-                            {isMobileMenuOpen ? (
-                                <svg
-                                    className="w-7 h-7"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    viewBox="0 0 24 24"
-                                >
-                                    <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        strokeWidth="2"
-                                        d="M6 18L18 6M6 6l12 12"
-                                    ></path>
-                                </svg>
-                            ) : (
-                                <svg
-                                    className="w-7 h-7"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    viewBox="0 0 24 24"
-                                >
-                                    <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        strokeWidth="2"
-                                        d="M4 6h16M4 12h16m-7 6h7"
-                                    ></path>
-                                </svg>
-                            )}
+                            <span
+                                className={`block transition-transform duration-300 ease-out ${
+                                    isMobileMenuOpen
+                                        ? "rotate-90 scale-105"
+                                        : "rotate-0 scale-100"
+                                }`}
+                            >
+                                {isMobileMenuOpen ? (
+                                    <svg
+                                        className="w-7 h-7"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            strokeWidth="2"
+                                            d="M6 18L18 6M6 6l12 12"
+                                        ></path>
+                                    </svg>
+                                ) : (
+                                    <svg
+                                        className="w-7 h-7"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            strokeWidth="2"
+                                            d="M4 6h16M4 12h16m-7 6h7"
+                                        ></path>
+                                    </svg>
+                                )}
+                            </span>
                         </button>
                     </div>
                 </div>
 
-                {/* Mobile Menu */}
-                {isMobileMenuOpen && (
-                    <div className="md:hidden mt-6 space-y-3">
-                        <Link
-                            href="/about"
-                            className={getLinkClass(
-                                "/about",
-                                "block text-center"
-                            )}
-                            onClick={() => setIsMobileMenuOpen(false)}
+                {/* Mobile Sidebar Menu */}
+                <AnimatePresence>
+                    {isMobileMenuOpen && (
+                        <motion.div
+                            aria-hidden={!isMobileMenuOpen}
+                            className="md:hidden fixed inset-0 z-40"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            transition={{ duration: 0.28, ease: "easeOut" }}
                         >
-                            About
-                        </Link>
-                        <div className="relative">
-                            <div
-                                className={`${getLinkClass(
-                                    "/projects"
-                                )} flex items-center justify-center`}
+                            <button
+                                type="button"
+                                aria-label="Close mobile menu overlay"
+                                className="absolute inset-0 bg-black/85 backdrop-blur-sm"
+                                onClick={() => setIsMobileMenuOpen(false)}
+                            />
+                            <motion.div
+                                className="absolute left-0 top-0 h-screen w-full overflow-y-auto border-r border-purple-700/40 bg-linear-to-b from-black via-[#090312] to-black px-6 pb-8 pt-24"
+                                initial={{ x: "-100%" }}
+                                animate={{ x: 0 }}
+                                exit={{ x: "-100%" }}
+                                transition={{ duration: 0.38, ease: [0.22, 1, 0.36, 1] }}
                             >
-                                <Link
-                                    href="/projects"
-                                    className="pr-3"
+                                <button
+                                    type="button"
+                                    aria-label="Close mobile menu"
+                                    className="absolute right-5 top-6 rounded-full border border-white/25 bg-black/40 px-3 py-2 text-sm font-semibold text-white hover:bg-black/70 transition-colors duration-200"
                                     onClick={() => setIsMobileMenuOpen(false)}
                                 >
-                                    Projects
-                                </Link>
-                                <div className="h-5 w-px bg-white/30"></div>
-                                <button
-                                    onClick={() =>
-                                        setIsMobileProjectsDropdownOpen(
-                                            !isMobileProjectsDropdownOpen
-                                        )
-                                    }
-                                    className="pl-3"
-                                >
-                                    <svg
-                                        className="w-5 h-5"
-                                        fill="currentColor"
-                                        viewBox="0 0 20 20"
-                                    >
-                                        <path
-                                            fillRule="evenodd"
-                                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                            clipRule="evenodd"
-                                        />
-                                    </svg>
+                                    Close
                                 </button>
-                            </div>
-                            <div className={mobileDropdownClasses}>
-                                <div className="mt-2 space-y-2">
-                                    {projectLinks.map((link) => (
+                                <div className="flex min-h-full flex-col">
+                                    <div className="space-y-3">
                                         <Link
-                                            key={link.href}
-                                            href={link.href}
-                                            className="block text-center px-4 py-3 bg-black/50 rounded-full hover:bg-violet-700/60 transition-colors duration-200"
-                                            onClick={() => {
-                                                setIsMobileMenuOpen(false);
-                                                setIsMobileProjectsDropdownOpen(
-                                                    false
-                                                );
-                                            }}
+                                            href="/about"
+                                            className={getLinkClass(
+                                                "/about",
+                                                "block text-center text-lg"
+                                            )}
+                                            onClick={() => setIsMobileMenuOpen(false)}
                                         >
-                                            <p className="font-semibold text-base">
-                                                {link.name}
-                                            </p>
-                                            <p className="text-sm text-gray-300">
-                                                {link.description}
-                                            </p>
+                                            About
                                         </Link>
-                                    ))}
+                                        <div className="relative">
+                                            <div
+                                                className={`${getLinkClass(
+                                                    "/projects",
+                                                    "text-lg"
+                                                )} flex items-center justify-center`}
+                                            >
+                                                <Link
+                                                    href="/projects"
+                                                    className="pr-3"
+                                                    onClick={() => setIsMobileMenuOpen(false)}
+                                                >
+                                                    Projects
+                                                </Link>
+                                                <div className="h-5 w-px bg-white/30"></div>
+                                                <button
+                                                    onClick={() =>
+                                                        setIsMobileProjectsDropdownOpen(
+                                                            !isMobileProjectsDropdownOpen
+                                                        )
+                                                    }
+                                                    className="pl-3"
+                                                    type="button"
+                                                    aria-label="Toggle mobile projects menu"
+                                                >
+                                                    <svg
+                                                        className="w-5 h-5"
+                                                        fill="currentColor"
+                                                        viewBox="0 0 20 20"
+                                                    >
+                                                        <path
+                                                            fillRule="evenodd"
+                                                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                                            clipRule="evenodd"
+                                                        />
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                            <div className={mobileDropdownClasses}>
+                                                <div className="mt-2 space-y-2">
+                                                    {projectLinks.map((link) => (
+                                                        <Link
+                                                            key={link.href}
+                                                            href={link.href}
+                                                            className="block text-center px-4 py-3 bg-black/50 rounded-full hover:bg-violet-700/60 transition-colors duration-200"
+                                                            onClick={() => {
+                                                                setIsMobileMenuOpen(false);
+                                                                setIsMobileProjectsDropdownOpen(
+                                                                    false
+                                                                );
+                                                            }}
+                                                        >
+                                                            <p className="font-semibold text-base">
+                                                                {link.name}
+                                                            </p>
+                                                            <p className="text-sm text-gray-300">
+                                                                {link.description}
+                                                            </p>
+                                                        </Link>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <Link
+                                            href="/practice-codes"
+                                            className={getLinkClass(
+                                                "/practice-codes",
+                                                "block text-center text-lg"
+                                            )}
+                                            onClick={() => setIsMobileMenuOpen(false)}
+                                        >
+                                            Practice Codes
+                                        </Link>
+                                        <Link
+                                            href="/contact-me"
+                                            className={getLinkClass(
+                                                "/contact-me",
+                                                "block text-center text-lg"
+                                            )}
+                                            onClick={() => setIsMobileMenuOpen(false)}
+                                        >
+                                            Contact
+                                        </Link>
+                                    </div>
+                                    <div className="mt-auto border-t border-purple-700/40 pt-6 text-center">
+                                        <h3 className="text-xl font-bold tracking-tight text-white">
+                                            Daksh Singh
+                                        </h3>
+                                        <p className="mt-3 text-sm italic text-gray-300/90">
+                                            &quot;Crafting digital experiences, one line of code at a time.&quot;
+                                        </p>
+                                        <p className="mt-4 text-xs uppercase tracking-[0.18em] text-violet-300/90">
+                                            Daksh Singh (c) 2026
+                                        </p>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                        <Link
-                            href="/practice-codes"
-                            className={getLinkClass(
-                                "/practice-codes",
-                                "block text-center"
-                            )}
-                            onClick={() => setIsMobileMenuOpen(false)}
-                        >
-                            Practice Codes
-                        </Link>
-                        <Link
-                            href="/contact-me"
-                            className={getLinkClass(
-                                "/contact-me",
-                                "block text-center"
-                            )}
-                            onClick={() => setIsMobileMenuOpen(false)}
-                        >
-                            Contact
-                        </Link>
-                    </div>
-                )}
+                            </motion.div>
+                        </motion.div>
+                    )}
+                </AnimatePresence>
             </div>
         </nav>
     );
