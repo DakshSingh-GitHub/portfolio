@@ -104,8 +104,8 @@ const cardVariants: Variants = {
 
 export default function Projects() {
     return (
-        <div className="w-full max-w-7xl mx-auto py-20 px-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+        <div className="w-full max-w-6xl mx-auto py-12 px-4 md:px-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10">
                 {ProjectDesc.map((project, i) => (
                     <motion.div
                         key={project.key}
@@ -113,52 +113,57 @@ export default function Projects() {
                         custom={i}
                         initial="hidden"
                         whileInView="visible"
-                        viewport={{ once: true, amount: 0.2 }}
+                        viewport={{ once: true, amount: 0.1 }}
                     >
-                        <Link href={project.href}>
+                        <Link href={project.href} className="block h-full">
                             <motion.div 
-                                className="h-full bg-black/40 backdrop-blur-lg rounded-3xl border border-white/10 overflow-hidden relative"
+                                className="h-full bg-black/40 backdrop-blur-2xl rounded-3xl border border-white/10 overflow-hidden relative flex flex-col justify-between"
                                 whileHover="hover"
                                 initial="rest"
                                 animate="rest"
                                 variants={{
                                     rest: { y: 0, scale: 1, boxShadow: "0 0 0 rgba(0,0,0,0)" },
                                     hover: { 
-                                        y: -8, 
+                                        y: -6, 
                                         scale: 1.01,
-                                        boxShadow: "0 20px 50px rgba(124, 58, 237, 0.3)", // Purple shadow
+                                        boxShadow: "0 20px 40px rgba(168, 85, 247, 0.25)", // Purple shadow
                                         transition: { type: "spring", stiffness: 300, damping: 20 }
                                     }
                                 }}
                             >
-                                <div className="relative h-64 overflow-hidden">
+                                <div className="relative h-56 sm:h-64 overflow-hidden bg-black/50 border-b border-white/5">
                                     <Image
                                         src={project.img}
                                         fill
                                         alt={project.title}
-                                        className="object-cover"
+                                        className="object-cover transition-transform duration-750 ease-out group-hover:scale-105"
                                     />
                                 </div>
-                                <div className="p-8 relative z-10">
-                                    <motion.h3 
-                                        className="text-3xl font-bold text-white mb-3"
-                                        variants={{
-                                            rest: { color: "#ffffff" },
-                                            hover: { color: "#c4b5fd" } // violet-300
-                                        }}
-                                        transition={{ duration: 0.3 }}
-                                    >
-                                        {project.title}
-                                    </motion.h3>
-                                    <p className="text-gray-300 text-lg leading-relaxed">
-                                        {project.desc}
-                                    </p>
+                                <div className="p-6 sm:p-8 relative z-10 flex-1 flex flex-col justify-between space-y-4">
+                                    <div className="space-y-2">
+                                        <motion.h3 
+                                            className="text-2xl sm:text-3xl font-bold text-white tracking-tight"
+                                            variants={{
+                                                rest: { color: "#ffffff" },
+                                                hover: { color: "#d8b4fe" } // purple-300
+                                            }}
+                                            transition={{ duration: 0.3 }}
+                                        >
+                                            {project.title}
+                                        </motion.h3>
+                                        <p className="text-gray-300 text-sm sm:text-base leading-relaxed">
+                                            {project.desc}
+                                        </p>
+                                    </div>
+                                    <div className="pt-2 flex items-center text-sm font-semibold text-purple-300 gap-1.5 hover:text-purple-200 transition-colors">
+                                        Learn More <span className="text-xs">→</span>
+                                    </div>
                                 </div>
                                 <motion.div
-                                    className="absolute inset-0 border-2 border-transparent rounded-3xl pointer-events-none"
+                                    className="absolute inset-0 border border-transparent rounded-3xl pointer-events-none"
                                     variants={{
                                         rest: { borderColor: "rgba(255, 255, 255, 0.1)" },
-                                        hover: { borderColor: "rgba(124, 58, 237, 0.5)" } // Purple border
+                                        hover: { borderColor: "rgba(168, 85, 247, 0.4)" } // Purple border
                                     }}
                                     transition={{ duration: 0.3 }}
                                 />

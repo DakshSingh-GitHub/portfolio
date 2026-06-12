@@ -55,21 +55,16 @@ export default function AboutPage() {
             variants={staggerContainer}
             initial="hidden"
             animate="visible"
-            className="p-4 md:p-10 cursor-default"
+            className="max-w-6xl mx-auto px-4 py-8 md:py-16 cursor-default space-y-12 md:space-y-16"
         >
             <motion.div 
-                className="text-center mb-12 bg-black/20 backdrop-blur-xl rounded-3xl border border-purple-700/30 p-8 md:p-12"
-                style={{ boxShadow: "0 0 30px rgba(124,58,237,0.1)" }}
-                whileHover={{ 
-                    boxShadow: "0 0 50px rgba(124,58,237,0.2)",
-                    transition: { duration: 0.5, ease: "easeInOut" }
-                }}
+                className="text-left bg-black/40 backdrop-blur-2xl rounded-3xl border border-white/10 p-8 md:p-12 shadow-[0_20px_50px_rgba(0,0,0,0.5)] transition-all duration-500 hover:border-purple-500/20"
                 variants={headerVariants}
             >
-                <h1 className="text-4xl md:text-6xl font-bold mb-6 tracking-tight bg-clip-text text-transparent bg-linear-to-r from-white via-purple-200 to-purple-400">
+                <h1 className="text-3xl md:text-5xl font-bold mb-6 tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white via-purple-200 to-purple-400">
                     Get to know me better :)
                 </h1>
-                <p className="text-lg md:text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed text-left md:text-justify">
+                <p className="text-base md:text-lg text-gray-300 leading-relaxed font-sans space-y-4">
                     Since you&apos;ve made it here, I&apos;d like to take this
                     opportunity to share a bit about my educational background.
                     I completed both my Secondary (10th Grade) and Senior
@@ -84,41 +79,38 @@ export default function AboutPage() {
                     journey and personal growth. I am proud to have achieved
                     commendable scores in both examinations, reflecting my
                     dedication and hard work throughout these formative years.
+                    <br /><br />
                     As I continue to pursue my interests and career goals, I
                     carry forward the values and knowledge imparted to me during
                     my schooling. Since childhood, I have been deeply
                     passionate about technology and I&apos;ve started to learn
                     about them at a young age. This passion has driven me to
                     explore various facets of the tech world, from software
-                    development to understanding the latest advancements in
-
-                    technology. I am excited to continue this journey,
+                    development to understanding the latest advancements. I am excited to continue this journey,
                     leveraging my educational foundation to further my skills
                     and contribute meaningfully to the tech community.
                 </p>
             </motion.div>
             
-            <motion.div variants={fadeInUp} className="h-px bg-linear-to-r from-transparent via-purple-500/50 to-transparent my-12"></motion.div>
+            <motion.div variants={fadeInUp} className="h-px bg-gradient-to-r from-transparent via-white/10 to-transparent"></motion.div>
 
-            <motion.div variants={fadeInUp} className="schoolList mt-10 px-2 md:px-0 mb-10">
-                <h1
-                    className="text-4xl md:text-5xl font-bold mb-8 text-center"
-                >
-                    Education...
-                </h1>
-                <div className="flex flex-col md:flex-row items-center justify-evenly h-full w-full mt-10 gap-4 md:gap-0">
+            <motion.div variants={fadeInUp} className="schoolList space-y-8">
+                <div className="text-center space-y-2">
+                    <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white">Education</h2>
+                    <p className="text-gray-400 text-sm max-w-md mx-auto">Where my formal studies and foundational learnings took shape.</p>
+                </div>
+                <div className="flex flex-col md:flex-row items-center justify-center gap-6">
                     {schoolMap}
                 </div>
             </motion.div>
 
-            <motion.div variants={fadeInUp} className="h-px bg-linear-to-r from-transparent via-purple-500/50 to-transparent my-12"></motion.div>
+            <motion.div variants={fadeInUp} className="h-px bg-gradient-to-r from-transparent via-white/10 to-transparent"></motion.div>
 
-            <motion.div variants={fadeInUp} className="mt-10 px-2 md:px-0">
-                <h1
-                    className="text-4xl md:text-5xl font-bold mb-8 text-center"
-                >
-                    Certifications of Mine...
-                </h1>
+            <motion.div variants={fadeInUp} className="space-y-8">
+                <div className="text-center space-y-2">
+                    <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white">Certifications</h2>
+                    <p className="text-gray-400 text-sm max-w-md mx-auto">Specialized programs and skill verifications completed online.</p>
+                </div>
                 <div className="flex flex-col md:flex-row items-center justify-evenly h-full w-full mt-10 gap-4 md:gap-0">
                     <Certificate />
                 </div>

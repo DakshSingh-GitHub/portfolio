@@ -50,11 +50,11 @@ export default function Navbar() {
         pathname === path || (path !== "/" && pathname.startsWith(path));
 
     const getLinkClass = (path: string, baseClass: string = "", isDesktop: boolean = false) => {
-        const activeClass = "bg-violet-600/80 text-white";
+        const activeClass = "bg-purple-600/90 text-white shadow-[0_0_15px_rgba(147,51,234,0.4)]";
         const inactiveClass =
-            "bg-transparent hover:bg-violet-600/50 text-gray-300 hover:text-white";
+            "bg-transparent hover:bg-white/5 text-gray-300 hover:text-white";
         const paddingClass = isDesktop ? "px-4 py-2" : "px-4 py-3";
-        return `${baseClass} ${paddingClass} rounded-full transition-all duration-300 text-base ${
+        return `${baseClass} ${paddingClass} rounded-full transition-all duration-300 text-sm font-semibold tracking-wide ${
             isActive(path) ? activeClass : inactiveClass
         }`;
     };
@@ -92,10 +92,10 @@ export default function Navbar() {
         },
     ];
 
-    const dropdownClasses = `absolute top-full mt-4 w-72 bg-black/80 backdrop-blur-lg rounded-xl shadow-2xl border border-purple-700/60 transition-all duration-300 ease-in-out transform ${
+    const dropdownClasses = `absolute top-full right-0 mt-4 w-80 bg-black/90 backdrop-blur-2xl rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] border border-purple-500/25 p-2 transition-all duration-300 ease-in-out transform ${
         isDesktopProjectsDropdownOpen
-            ? "opacity-100 scale-100"
-            : "opacity-0 scale-95 pointer-events-none"
+            ? "opacity-100 scale-100 translate-y-0"
+            : "opacity-0 scale-95 -translate-y-2 pointer-events-none"
     }`;
 
     const mobileDropdownClasses = `pl-4 transition-all duration-300 ease-in-out overflow-hidden ${
@@ -103,22 +103,23 @@ export default function Navbar() {
     }`;
 
     return (
-        <nav className="fixed top-0 left-0 right-0 z-10 bg-black/70 text-white backdrop-blur-xl border-b border-purple-700/30 transition-all duration-300 ease-in-out">
-            <div className="container mx-auto px-4 sm:px-6 md:py-5 py-4">
-                <div className="flex justify-between items-center">
-                    <Link
-                        href="/"
-                        className={`text-xl sm:text-2xl font-bold ${textGlowEffect} flex gap-3 sm:gap-4 items-center`}
-                    >
-                        <Image
-                            src="https://i.pinimg.com/736x/0d/00/60/0d00602699272d50087f09e99ae8a764.jpg"
-                            width={45}
-                            height={45}
-                            alt="Lui Shirosagi Motif"
-                            className="rounded-full w-10 h-10 sm:w-12 sm:h-12"
-                        />
-                        Meet Daksh Singh
-                    </Link>
+        <div className="fixed top-4 left-0 right-0 z-50 flex justify-center px-4 w-full">
+            <nav className="w-full max-w-6xl bg-black/40 text-white backdrop-blur-2xl border border-white/10 rounded-full shadow-[0_10px_40px_rgba(0,0,0,0.3)] transition-all duration-300 ease-in-out">
+                <div className="px-6 py-3">
+                    <div className="flex justify-between items-center">
+                        <Link
+                            href="/"
+                            className={`text-lg sm:text-xl font-bold font-sans tracking-wide ${textGlowEffect} flex gap-3 items-center`}
+                        >
+                            <Image
+                                src="https://i.pinimg.com/736x/0d/00/60/0d00602699272d50087f09e99ae8a764.jpg"
+                                width={38}
+                                height={38}
+                                alt="Lui Shirosagi Motif"
+                                className="rounded-full w-9 h-9 border border-purple-500/30"
+                            />
+                            Meet Daksh Singh
+                        </Link>
 
                     {/* Desktop Menu */}
                     <div className="hidden md:flex gap-2 items-center">
@@ -386,5 +387,6 @@ export default function Navbar() {
                 </AnimatePresence>
             </div>
         </nav>
+    </div>
     );
 }
