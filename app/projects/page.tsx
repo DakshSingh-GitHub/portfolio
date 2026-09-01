@@ -25,10 +25,10 @@ const projectDetails = {
         "Showcases my skills and projects in an organized manner.",
         "Features a responsive design for optimal viewing on all devices.",
     ],
-    projectJudge: [
-        "Developing a Code Judge using flask and react for analysis of codes",
-        "Implemented Basic API fetching, and code execution environment.",
-        "Integration of a scoring system to streamline the evaluation process will be added soon",
+    vlyxir: [
+        "Industrial-grade coding platform with sub-millisecond Python judging pool across 295+ challenges.",
+        "Dual-experience paradigm featuring LeetCode-familiar Classic view and immersive Modern Design Experience (MDE).",
+        "Built-in Pyodide WebAssembly in-browser sandbox, real-time 1v1 code duels, mock interviews, and multi-model AI code intelligence (Groq & Gemini).",
     ],
     aiAssist: [
         "Building an AI-powered desktop assistant to automate tasks and enhance productivity.",
@@ -39,12 +39,12 @@ const projectDetails = {
 
 const ProjectDesc = [
     {
-        title: "Code Judge",
-        desc: "A web-based code judge system built with FastAPI and NextJS, designed to evaluate and score programming assignments efficiently.",
-        href: "projects/code-judge",
+        title: "Vlyxir",
+        desc: "An industrial-grade full-lifecycle coding ecosystem and cloud development environment featuring a sub-millisecond Python judge, Cloud IDE, real-time duels, and AI code intelligence.",
+        href: "projects/vlyxir",
         img: "./projects/code_judge.png",
         key: 4,
-        details: projectDetails.projectJudge,
+        details: projectDetails.vlyxir,
     },
     {
         title: "Library Management",

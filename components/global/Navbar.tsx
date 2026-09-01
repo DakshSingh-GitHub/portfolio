@@ -61,9 +61,9 @@ export default function Navbar() {
 
     const projectLinks = [
         {
-            href: "/projects/code-judge",
-            name: "Code Judge",
-            description: "An online platform for compiling and running code.",
+            href: "/projects/vlyxir",
+            name: "Vlyxir",
+            description: "Industrial-grade online judge, Cloud IDE & competitive programming ecosystem.",
         },
         {
             href: "/projects/ai-assist",
