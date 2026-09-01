@@ -16,6 +16,15 @@ const schoolList = [
         desc: "Secondary and Senior Secondary Education from Shri Gulab Rai Montessori school",
         href: "https://grmschool.com/Default.aspx",
         key: 0,
+        board: true,
+    },
+    {
+        name: "Newton School of Technology, Rishihood University",
+        image: "./education/clg.jpg",
+        desc: "Bachelor of Technology in Computer Science and Engineering with AI",
+        href: "https://rishihood.edu.in/",
+        key: 1,
+        board: false,
     },
 ];
 
@@ -34,17 +43,24 @@ export default function AboutPage() {
     };
 
     const schoolMap = schoolList.map((school) => (
-        <motion.div key={school.key} variants={bounceIn} whileHover={{ scale: 1.02 }} transition={{ type: "spring", stiffness: 300 }}>
+        <motion.div
+            key={school.key}
+            variants={bounceIn}
+            whileHover={{ scale: 1.02 }}
+            transition={{ type: "spring", stiffness: 300 }}
+            className="flex flex-col w-full md:w-97.5"
+        >
             <Link
                 href={school.href}
                 target="_blank"
-                className="flex justify-center"
+                className="flex flex-col flex-1 w-full h-full"
             >
                 <Card
                     image={school.image}
                     text={school.name}
                     paragraph={school.desc}
-                    board={true}
+                    board={school.board}
+                    className="min-h-[460px]"
                 />
             </Link>
         </motion.div>
@@ -99,7 +115,7 @@ export default function AboutPage() {
                     <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white">Education</h2>
                     <p className="text-gray-400 text-sm max-w-md mx-auto">Where my formal studies and foundational learnings took shape.</p>
                 </div>
-                <div className="flex flex-col md:flex-row items-center justify-center gap-6">
+                <div className="flex flex-col md:flex-row items-center md:items-stretch justify-center gap-6">
                     {schoolMap}
                 </div>
             </motion.div>
