@@ -35,9 +35,22 @@ const projectDetails = {
         "Implemented voice command processing, system-level controls, and modular skill execution.",
         "Advanced contextual understanding, learning-based responses, and deeper system integration are planned next.",
     ],
+    coalMeLater: [
+        "Autonomous governance & statutory compliance monitoring infrastructure engineered for India's coal mining ecosystem.",
+        "Zero-data-loss subterranean edge persistence via IndexedDB (MineSafetyDB) with automated multipart surface sync.",
+        "Predictive geotechnical slope stability (FOS < 1.20) & methane risk AI with live 12-subsidiary DGMS command radar.",
+    ],
 };
 
 const ProjectDesc = [
+    {
+        title: "Coal-Me-Later (DataMiners)",
+        desc: "Mission-critical autonomous compliance monitoring & predictive geotechnical AI platform for India's coal mining ecosystem, featuring offline edge sync and DGMS CMR 2017 governance.",
+        href: "projects/coal-me-later",
+        img: "./projects/coal_me_later.png",
+        key: 6,
+        details: projectDetails.coalMeLater,
+    },
     {
         title: "Vlyxir",
         desc: "An industrial-grade full-lifecycle coding ecosystem and cloud development environment featuring a sub-millisecond Python judge, Cloud IDE, real-time duels, and AI code intelligence.",

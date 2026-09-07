@@ -61,6 +61,11 @@ export default function Navbar() {
 
     const projectLinks = [
         {
+            href: "/projects/coal-me-later",
+            name: "Coal-Me-Later (DataMiners)",
+            description: "Autonomous compliance monitoring & predictive AI for Indian coal mines.",
+        },
+        {
             href: "/projects/vlyxir",
             name: "Vlyxir",
             description: "Industrial-grade online judge, Cloud IDE & competitive programming ecosystem.",
