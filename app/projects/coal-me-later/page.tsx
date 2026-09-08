@@ -39,9 +39,11 @@ import {
 export default function CoalMeLaterPage() {
     const [activeTab, setActiveTab] = useState<"architecture" | "documentation">("architecture");
     const [readmeContent, setReadmeContent] = useState<string>("");
-    const [loadingReadme, setLoadingReadme] = useState<boolean>(false);
     const [readmeError, setReadmeError] = useState<string | null>(null);
     const [searchQuery, setSearchQuery] = useState<string>("");
+
+    // Derived loading state to prevent cascading renders in effects
+    const loadingReadme = activeTab === "documentation" && !readmeContent && !readmeError;
 
     const headerVariants: Variants = {
         hidden: { scale: 0.95, opacity: 0, y: 20 },
@@ -50,7 +52,7 @@ export default function CoalMeLaterPage() {
             opacity: 1,
             y: 0,
             transition: {
-                duration: 0.8,
+                duration: 0.5,
                 ease: "easeOut",
             },
         },
@@ -70,23 +72,28 @@ export default function CoalMeLaterPage() {
 
     // Load README_CML.md when user switches to documentation tab or on demand
     useEffect(() => {
-        if (activeTab === "documentation" && !readmeContent && !loadingReadme) {
-            setLoadingReadme(true);
+        let ignore = false;
+        if (activeTab === "documentation" && !readmeContent && !readmeError) {
             fetch("/README_CML.md")
                 .then((res) => {
                     if (!res.ok) throw new Error(`HTTP ${res.status}: Failed to load README_CML.md`);
                     return res.text();
                 })
                 .then((data) => {
-                    setReadmeContent(data);
-                    setLoadingReadme(false);
+                    if (!ignore) {
+                        setReadmeContent(data);
+                    }
                 })
                 .catch((err) => {
-                    setReadmeError(err.message || "Failed to load README document");
-                    setLoadingReadme(false);
+                    if (!ignore) {
+                        setReadmeError(err.message || "Failed to load README document");
+                    }
                 });
         }
-    }, [activeTab, readmeContent, loadingReadme]);
+        return () => {
+            ignore = true;
+        };
+    }, [activeTab, readmeContent, readmeError]);
 
     const metrics = [
         { label: "Mines Monitored", value: "321+", detail: "Across 6 Indian Mining States" },

@@ -61,6 +61,11 @@ export default function Navbar() {
 
     const projectLinks = [
         {
+            href: "/projects/code-cartofy",
+            name: "CodeCartofy",
+            description: "Interactive AST codebase cartography, force physics & AI copilot.",
+        },
+        {
             href: "/projects/coal-me-later",
             name: "Coal-Me-Later (DataMiners)",
             description: "Autonomous compliance monitoring & predictive AI for Indian coal mines.",
@@ -103,8 +108,10 @@ export default function Navbar() {
             : "opacity-0 scale-95 -translate-y-2 pointer-events-none"
     }`;
 
-    const mobileDropdownClasses = `pl-4 transition-all duration-300 ease-in-out overflow-hidden ${
-        isMobileProjectsDropdownOpen ? "max-h-96" : "max-h-0"
+    const mobileDropdownClasses = `pl-4 transition-all duration-300 ease-in-out ${
+        isMobileProjectsDropdownOpen
+            ? "max-h-80 overflow-y-auto overscroll-contain pr-1"
+            : "max-h-0 overflow-hidden pointer-events-none"
     }`;
 
     return (
@@ -163,11 +170,14 @@ export default function Navbar() {
                                 </button>
                             </div>
                             <div className={dropdownClasses}>
-                                <div className="rounded-xl overflow-hidden">
+                                <div className="rounded-xl max-h-80 overflow-y-auto overscroll-contain">
                                     {projectLinks.map((link) => (
                                         <Link
                                             key={link.href}
                                             href={link.href}
+                                            onClick={() =>
+                                                setIsDesktopProjectsDropdownOpen(false)
+                                            }
                                             className={`block w-full text-left px-6 py-4 hover:bg-violet-700/60 transition-colors duration-200`}
                                         >
                                             <p className="font-semibold">
