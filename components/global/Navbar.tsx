@@ -61,6 +61,11 @@ export default function Navbar() {
 
     const projectLinks = [
         {
+            href: "/projects/docs-drive",
+            name: "DocsDrive (Hack Day Sonipat)",
+            description: "Automated documentation drift detection CI/CD check & Python core engine.",
+        },
+        {
             href: "/projects/code-cartofy",
             name: "CodeCartofy",
             description: "Interactive AST codebase cartography, force physics & AI copilot.",

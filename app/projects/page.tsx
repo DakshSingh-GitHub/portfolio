@@ -45,24 +45,21 @@ const projectDetails = {
         "Zero-data-loss subterranean edge persistence via IndexedDB (MineSafetyDB) with automated multipart surface sync.",
         "Predictive geotechnical slope stability (FOS < 1.20) & methane risk AI with live 12-subsidiary DGMS command radar.",
     ],
+    docsDrive: [
+        "Automated CI/CD documentation drift detection system developed for Hacktoberfest 2026 (Hack Day Sonipat - Team HisenBugs).",
+        "AST semantic change extraction (Python/TS) coupled with hybrid retrieval (BM25 + nomic-embed-text dense embeddings via RRF) and local LLM verification (gemma4:e4b).",
+        "Dockerized GitHub Action with inline PR suggestions, bi-directional code-to-doc sentence mapping, and Next.js + retro 3D CRT workstation dashboard.",
+    ]
 };
 
 const ProjectDesc = [
     {
-        title: "CodeCartofy",
-        desc: "Interactive codebase cartography, AST dependency graphing & AI architectural copilot. Features in-browser Babel parsing, real-time 2D force physics, O(V+E) DFS circular loop detection, and dual-tier persistence.",
-        href: "/projects/code-cartofy",
-        img: "/projects/code_cartofy.png",
-        key: 7,
-        details: projectDetails.codeCartofy,
-    },
-    {
-        title: "Coal-Me-Later (DataMiners)",
-        desc: "Mission-critical autonomous compliance monitoring & predictive geotechnical AI platform for India's coal mining ecosystem, featuring offline edge sync and DGMS CMR 2017 governance. My SIH internal hackathon application",
-        href: "/projects/coal-me-later",
-        img: "/projects/coal_me_later.png",
-        key: 6,
-        details: projectDetails.coalMeLater,
+        title: "DocsDrive",
+        desc: "Automated CI/CD documentation drift detection engine & Python core. Pinpoints exact stale doc sentences caused by PR code changes using AST extraction, hybrid BM25 + dense vector embeddings, and local Ollama LLM verification.",
+        href: "/projects/docs-drive",
+        img: "/projects/docs_drive.png",
+        key: 8,
+        details: projectDetails.docsDrive,
     },
     {
         title: "Vlyxir",
@@ -112,6 +109,22 @@ const ProjectDesc = [
         key: 3,
         details: projectDetails.portfolio,
     },
+        {
+        title: "CodeCartofy",
+        desc: "Interactive codebase cartography, AST dependency graphing & AI architectural copilot. Features in-browser Babel parsing, real-time 2D force physics, O(V+E) DFS circular loop detection, and dual-tier persistence.",
+        href: "/projects/code-cartofy",
+        img: "/projects/code_cartofy.png",
+        key: 7,
+        details: projectDetails.codeCartofy,
+    },
+    {
+        title: "Coal-Me-Later (DataMiners)",
+        desc: "Mission-critical autonomous compliance monitoring & predictive geotechnical AI platform for India's coal mining ecosystem, featuring offline edge sync and DGMS CMR 2017 governance. My SIH internal hackathon application",
+        href: "/projects/coal-me-later",
+        img: "/projects/coal_me_later.png",
+        key: 6,
+        details: projectDetails.coalMeLater,
+    }
 ];
 
 const cardVariants: Variants = {

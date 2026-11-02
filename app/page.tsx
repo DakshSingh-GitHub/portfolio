@@ -21,9 +21,9 @@ export default function Home() {
             </section>
 
             {/* Education Timeline Section */}
-            <section className="w-full">
+            {/* <section className="w-full">
                 <EducationTimeline />
-            </section>
+            </section> */}
 
             {/* Projects Section */}
             <motion.section variants={fadeInUp} className="w-full space-y-8">
