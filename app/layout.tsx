@@ -4,7 +4,6 @@ import "@/app/globals.css";
 import Navbar from "@/components/global/Navbar";
 import Footer from "@/components/global/Footer";
 import ParticleBackground from "@/components/ui/ParticleBackground";
-import RouteContainer from "@/components/global/RouteContainer";
 import React from "react";
 
 const geistSans = Geist({
@@ -15,7 +14,7 @@ const geistSans = Geist({
 const oxanium = Oxanium({
     subsets: ["latin"],
     variable: "--font-oxanium",
-});
+})
 
 const geistMono = Geist_Mono({
     variable: "--font-geist-mono",
@@ -23,8 +22,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-    title: "Daksh Singh | Software Engineer & Systems Builder",
-    description: "Personal portfolio of Daksh Singh. Computer Science & AI, full-stack systems engineering, interactive platforms, and algorithms.",
+    title: "Meet Daksh Singh | Student",
+    description: "Portfolio Website that has been made by me, Daksh Singh, to showcase my profile",
     icons: {
         icon: "/daksh/daksh-logo.png",
         shortcut: "/daksh/daksh-logo.png",
@@ -33,13 +32,11 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
     return (
-        <html lang="en" className="dark">
-            <body className={`${oxanium.variable} ${geistSans.variable} ${geistMono.variable} antialiased text-neutral-200 bg-[#080808] min-h-screen selection:bg-neutral-800 selection:text-white`}>
+        <html lang="en">
+            <body className={` ${oxanium.variable} ${geistSans.variable} ${geistMono.variable} antialiased text-sm sm:text-base pt-36 sm:pt-28 select-none`} >
                 <ParticleBackground />
                 <Navbar />
-                <RouteContainer>
-                    {children}
-                </RouteContainer>
+                {children}
                 <Footer />
             </body>
         </html>

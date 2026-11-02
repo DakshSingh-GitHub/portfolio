@@ -7,8 +7,10 @@ import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 
 export default function Navbar() {
-    const [isDesktopProjectsDropdownOpen, setIsDesktopProjectsDropdownOpen] = useState(false);
-    const [isMobileProjectsDropdownOpen, setIsMobileProjectsDropdownOpen] = useState(false);
+    const [isDesktopProjectsDropdownOpen, setIsDesktopProjectsDropdownOpen] =
+        useState(false);
+    const [isMobileProjectsDropdownOpen, setIsMobileProjectsDropdownOpen] =
+        useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
     const pathname = usePathname();
@@ -27,7 +29,7 @@ export default function Navbar() {
         return () => {
             document.removeEventListener("mousedown", handleClickOutside);
         };
-    }, []);
+    }, [dropdownRef]);
 
     useEffect(() => {
         if (isMobileMenuOpen) {
@@ -41,19 +43,18 @@ export default function Navbar() {
         };
     }, [isMobileMenuOpen]);
 
-    // Condition 1: No navbar on the landing page!
-    if (pathname === "/") {
-        return null;
-    }
+    const textGlowEffect =
+        "transition-all duration-300 ease-in-out hover:filter hover:drop-shadow-[0_0_8px_rgba(124,58,237,0.9)]";
 
     const isActive = (path: string) =>
         pathname === path || (path !== "/" && pathname.startsWith(path));
 
     const getLinkClass = (path: string, baseClass: string = "", isDesktop: boolean = false) => {
-        const activeClass = "bg-neutral-800 text-white border border-neutral-700 shadow-sm font-medium";
-        const inactiveClass = "text-neutral-400 hover:text-white hover:bg-neutral-900 border border-transparent";
-        const paddingClass = isDesktop ? "px-3.5 py-1.5" : "px-4 py-3";
-        return `${baseClass} ${paddingClass} rounded-full transition-all duration-200 text-xs sm:text-sm tracking-wide ${
+        const activeClass = "bg-purple-600/90 text-white shadow-[0_0_15px_rgba(147,51,234,0.4)]";
+        const inactiveClass =
+            "bg-transparent hover:bg-white/5 text-gray-300 hover:text-white";
+        const paddingClass = isDesktop ? "px-4 py-2" : "px-4 py-3";
+        return `${baseClass} ${paddingClass} rounded-full transition-all duration-300 text-sm font-semibold tracking-wide ${
             isActive(path) ? activeClass : inactiveClass
         }`;
     };
@@ -62,299 +63,345 @@ export default function Navbar() {
         {
             href: "/projects/code-cartofy",
             name: "CodeCartofy",
-            tag: "AST & Cartography",
             description: "Interactive AST codebase cartography, force physics & AI copilot.",
         },
         {
             href: "/projects/coal-me-later",
-            name: "Coal-Me-Later",
-            tag: "SIH · Edge AI",
-            description: "Autonomous statutory compliance & geotechnical AI for Indian coal mines.",
+            name: "Coal-Me-Later (DataMiners)",
+            description: "Autonomous compliance monitoring & predictive AI for Indian coal mines.",
         },
         {
             href: "/projects/vlyxir",
             name: "Vlyxir",
-            tag: "Cloud IDE & Judge",
-            description: "Industrial-grade online judge, Cloud IDE & competitive ecosystem.",
+            description: "Industrial-grade online judge, Cloud IDE & competitive programming ecosystem.",
         },
         {
             href: "/projects/ai-assist",
             name: "AI Assist",
-            tag: "Automation",
-            description: "Voice-driven desktop assistant with modular system automation.",
+            description: "A smart, console-based personal assistant.",
         },
         {
             href: "/projects/library-management",
-            name: "Library Management",
-            tag: "CLI Tool",
-            description: "CLI and data-structure driven library records management software.",
+            name: "Library Management CLI",
+            description: "A CLI for managing library records.",
         },
         {
             href: "/projects/mathematics-helper",
-            name: "Mathematics Helper",
-            tag: "Java Engine",
-            description: "Java computational library for calculus, matrices, and algebra.",
+            name: "Mathematics Helper Java",
+            description: "A Java app for solving mathematical problems.",
+        },
+        {
+            href: "/projects/portfolio",
+            name: "Portfolio (This Website)",
+            description: "The portfolio you are currently viewing.",
+        },
+        {
+            href: "/projects/hotel-management",
+            name: "Hotel management (School Project)",
+            description: "A school project for managing hotel operations.",
         },
     ];
 
-    const dropdownClasses = `absolute top-full right-0 mt-3 w-84 bg-neutral-950/95 backdrop-blur-2xl rounded-2xl border border-neutral-800 p-2 shadow-[0_20px_50px_rgba(0,0,0,0.8)] transition-all duration-200 ease-out transform ${
+    const dropdownClasses = `absolute top-full right-0 mt-4 w-80 bg-black/90 backdrop-blur-2xl rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] border border-purple-500/25 p-2 transition-all duration-300 ease-in-out transform ${
         isDesktopProjectsDropdownOpen
-            ? "opacity-100 scale-100 translate-y-0 pointer-events-auto"
+            ? "opacity-100 scale-100 translate-y-0"
             : "opacity-0 scale-95 -translate-y-2 pointer-events-none"
     }`;
 
+    const mobileDropdownClasses = `pl-4 transition-all duration-300 ease-in-out ${
+        isMobileProjectsDropdownOpen
+            ? "max-h-80 overflow-y-auto overscroll-contain pr-1"
+            : "max-h-0 overflow-hidden pointer-events-none"
+    }`;
+
     return (
-        <header className="fixed top-5 left-0 right-0 z-50 flex justify-center px-4 w-full pointer-events-none">
-            {/* Pill shaped navbar with 80% screen width */}
-            <nav className="pointer-events-auto w-[80%] max-w-5xl bg-neutral-950/85 text-neutral-200 backdrop-blur-xl border border-neutral-800/90 rounded-full shadow-[0_12px_40px_rgba(0,0,0,0.7)] transition-all duration-300">
-                <div className="px-5 py-2.5 sm:px-6 sm:py-3">
+        <div className="fixed top-4 left-0 right-0 z-50 flex justify-center px-4 w-full">
+            <nav className="w-full max-w-6xl bg-black/40 text-white backdrop-blur-2xl border border-white/10 rounded-full shadow-[0_10px_40px_rgba(0,0,0,0.3)] transition-all duration-300 ease-in-out">
+                <div className="px-6 py-3">
                     <div className="flex justify-between items-center">
-                        {/* Brand Link */}
                         <Link
                             href="/"
-                            className="flex items-center gap-2.5 text-neutral-100 hover:text-white transition-colors group"
+                            className={`text-lg sm:text-xl font-bold font-sans tracking-wide ${textGlowEffect} flex gap-3 items-center`}
                         >
-                            <div className="relative w-8 h-8 rounded-full overflow-hidden border border-neutral-800 bg-neutral-900 group-hover:border-neutral-700 transition-colors">
-                                <Image
-                                    src="https://i.pinimg.com/736x/0d/00/60/0d00602699272d50087f09e99ae8a764.jpg"
-                                    width={32}
-                                    height={32}
-                                    alt="Daksh Singh"
-                                    className="object-cover w-full h-full"
-                                />
-                            </div>
-                            <span className="font-semibold text-sm tracking-tight text-white">
-                                Daksh Singh
-                            </span>
+                            <Image
+                                src="https://i.pinimg.com/736x/0d/00/60/0d00602699272d50087f09e99ae8a764.jpg"
+                                width={38}
+                                height={38}
+                                alt="Lui Shirosagi Motif"
+                                className="rounded-full w-9 h-9 border border-purple-500/30"
+                            />
+                            Meet Daksh Singh
                         </Link>
 
-                        {/* Desktop Menu - Grouped Buttons */}
-                        <div className="hidden md:flex items-center gap-1 bg-neutral-900/60 p-1 rounded-full border border-neutral-800/80">
-                            <Link href="/about" className={getLinkClass("/about", "", true)}>
-                                About
-                            </Link>
-
-                            {/* Projects Dropdown Group */}
-                            <div className="relative" ref={dropdownRef}>
-                                <div className="flex items-center">
-                                    <Link
-                                        href="/projects"
-                                        className={getLinkClass("/projects", "pr-2", true)}
+                    {/* Desktop Menu */}
+                    <div className="hidden md:flex gap-2 items-center">
+                        <Link href="/about" className={getLinkClass("/about", "", true)}>
+                            About
+                        </Link>
+                        <div className="relative" ref={dropdownRef}>
+                            <div
+                                className={`${getLinkClass(
+                                    "/projects", "", true
+                                )} flex items-center`}
+                            >
+                                <Link href="/projects" className="pr-2">
+                                    Projects
+                                 </Link>
+                                <div className="h-4 w-px bg-white/30"></div>
+                                <button
+                                    onClick={() =>
+                                        setIsDesktopProjectsDropdownOpen(
+                                            !isDesktopProjectsDropdownOpen
+                                        )
+                                    }
+                                    className="pl-2"
+                                >
+                                    <svg
+                                        className="w-4 h-4"
+                                        fill="currentColor"
+                                        viewBox="0 0 20 20"
                                     >
-                                        Projects
-                                    </Link>
-                                    <button
-                                        onClick={() =>
-                                            setIsDesktopProjectsDropdownOpen(!isDesktopProjectsDropdownOpen)
-                                        }
-                                        className="text-neutral-400 hover:text-white px-2 py-1.5 rounded-full hover:bg-neutral-800 transition-colors"
-                                        aria-label="Toggle Projects Dropdown"
-                                    >
-                                        <svg
-                                            className={`w-3.5 h-3.5 transition-transform duration-200 ${
-                                                isDesktopProjectsDropdownOpen ? "rotate-180" : ""
-                                            }`}
-                                            fill="none"
-                                            stroke="currentColor"
-                                            strokeWidth="2"
-                                            viewBox="0 0 24 24"
-                                        >
-                                            <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-                                        </svg>
-                                    </button>
-                                </div>
-
-                                <div className={dropdownClasses}>
-                                    <div className="px-3 py-2 border-b border-neutral-800/80 mb-1 flex justify-between items-center">
-                                        <span className="text-[11px] uppercase tracking-wider font-semibold text-neutral-400">
-                                            Projects Directory
-                                        </span>
+                                        <path
+                                            fillRule="evenodd"
+                                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                            clipRule="evenodd"
+                                        />
+                                    </svg>
+                                </button>
+                            </div>
+                            <div className={dropdownClasses}>
+                                <div className="rounded-xl max-h-80 overflow-y-auto overscroll-contain">
+                                    {projectLinks.map((link) => (
                                         <Link
-                                            href="/projects"
-                                            onClick={() => setIsDesktopProjectsDropdownOpen(false)}
-                                            className="text-[11px] text-neutral-300 hover:text-white underline underline-offset-2"
+                                            key={link.href}
+                                            href={link.href}
+                                            onClick={() =>
+                                                setIsDesktopProjectsDropdownOpen(false)
+                                            }
+                                            className={`block w-full text-left px-6 py-4 hover:bg-violet-700/60 transition-colors duration-200`}
                                         >
-                                            View all
+                                            <p className="font-semibold">
+                                                {link.name}
+                                            </p>
+                                            <p className="text-sm text-gray-300">
+                                                {link.description}
+                                            </p>
                                         </Link>
-                                    </div>
-                                    <div className="rounded-xl max-h-72 overflow-y-auto space-y-1 pr-1 [scrollbar-width:none]">
-                                        {projectLinks.map((link) => (
-                                            <Link
-                                                key={link.href}
-                                                href={link.href}
-                                                onClick={() => setIsDesktopProjectsDropdownOpen(false)}
-                                                className="block p-2.5 rounded-xl hover:bg-neutral-900 border border-transparent hover:border-neutral-800 transition-all text-left group"
-                                            >
-                                                <div className="flex items-center justify-between">
-                                                    <span className="font-medium text-sm text-neutral-200 group-hover:text-white">
-                                                        {link.name}
-                                                    </span>
-                                                    <span className="text-[10px] text-neutral-400 bg-neutral-900 border border-neutral-800 px-1.5 py-0.5 rounded-md">
-                                                        {link.tag}
-                                                    </span>
-                                                </div>
-                                                <p className="text-xs text-neutral-400 mt-1 line-clamp-1">
-                                                    {link.description}
-                                                </p>
-                                            </Link>
-                                        ))}
-                                    </div>
+                                    ))}
                                 </div>
                             </div>
-
-                            <Link
-                                href="/practice-codes"
-                                className={getLinkClass("/practice-codes", "", true)}
-                            >
-                                Practice Codes
-                            </Link>
-                            <Link
-                                href="/contact-me"
-                                className={getLinkClass("/contact-me", "", true)}
-                            >
-                                Contact
-                            </Link>
                         </div>
+                        <Link
+                            href="/practice-codes"
+                            className={getLinkClass("/practice-codes", "", true)}
+                        >
+                            Practice Codes
+                        </Link>
+                        <Link
+                            href="/contact-me"
+                            className={getLinkClass("/contact-me", "", true)}
+                        >
+                            Contact
+                        </Link>
+                    </div>
 
-                        {/* Hamburger Button for Mobile */}
-                        <div className="md:hidden">
-                            <button
-                                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                                className="p-1.5 text-neutral-300 hover:text-white focus:outline-none rounded-lg hover:bg-neutral-900 transition-colors"
-                                type="button"
-                                aria-label="Toggle navigation menu"
+                    {/* Hamburger Button */}
+                    <div className="md:hidden">
+                        <button
+                            onClick={() =>
+                                setIsMobileMenuOpen(!isMobileMenuOpen)
+                            }
+                            className="p-2 text-white focus:outline-none transition-transform duration-150 ease-out active:scale-90"
+                            type="button"
+                            aria-label="Toggle mobile menu"
+                        >
+                            <span
+                                className={`block transition-transform duration-300 ease-out ${
+                                    isMobileMenuOpen
+                                        ? "rotate-90 scale-105"
+                                        : "rotate-0 scale-100"
+                                }`}
                             >
-                                <svg
-                                    className="w-5 h-5"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    strokeWidth="2"
-                                    viewBox="0 0 24 24"
-                                >
-                                    {isMobileMenuOpen ? (
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-                                    ) : (
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16m-7 6h7" />
-                                    )}
-                                </svg>
-                            </button>
-                        </div>
+                                {isMobileMenuOpen ? (
+                                    <svg
+                                        className="w-7 h-7"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            strokeWidth="2"
+                                            d="M6 18L18 6M6 6l12 12"
+                                        ></path>
+                                    </svg>
+                                ) : (
+                                    <svg
+                                        className="w-7 h-7"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            strokeWidth="2"
+                                            d="M4 6h16M4 12h16m-7 6h7"
+                                        ></path>
+                                    </svg>
+                                )}
+                            </span>
+                        </button>
                     </div>
                 </div>
 
-                {/* Mobile Drawer */}
+                {/* Mobile Sidebar Menu */}
                 <AnimatePresence>
                     {isMobileMenuOpen && (
                         <motion.div
-                            className="md:hidden fixed inset-0 z-50 flex justify-end"
+                            aria-hidden={!isMobileMenuOpen}
+                            className="md:hidden fixed inset-0 z-40"
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
+                            transition={{ duration: 0.28, ease: "easeOut" }}
                         >
-                            <div
-                                className="fixed inset-0 bg-black/80 backdrop-blur-sm"
+                            <button
+                                type="button"
+                                aria-label="Close mobile menu overlay"
+                                className="absolute inset-0 bg-black/85 backdrop-blur-sm"
                                 onClick={() => setIsMobileMenuOpen(false)}
                             />
                             <motion.div
-                                className="relative w-72 h-full bg-neutral-950 border-l border-neutral-800 p-6 flex flex-col justify-between z-10"
-                                initial={{ x: "100%" }}
+                                className="absolute left-0 top-0 h-dvh w-full border-r border-purple-700/40 bg-linear-to-b from-black via-[#090312] to-black px-6 pt-24"
+                                initial={{ x: "-100%" }}
                                 animate={{ x: 0 }}
-                                exit={{ x: "100%" }}
-                                transition={{ duration: 0.25, ease: "easeOut" }}
+                                exit={{ x: "-100%" }}
+                                transition={{ duration: 0.38, ease: [0.22, 1, 0.36, 1] }}
                             >
-                                <div>
-                                    <div className="flex justify-between items-center pb-4 border-b border-neutral-800 mb-6">
-                                        <span className="font-semibold text-white text-sm">Navigation</span>
-                                        <button
-                                            onClick={() => setIsMobileMenuOpen(false)}
-                                            className="text-neutral-400 hover:text-white p-1"
-                                            aria-label="Close menu"
-                                        >
-                                            <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                                                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-                                            </svg>
-                                        </button>
-                                    </div>
-
-                                    <div className="space-y-2">
-                                        <Link
-                                            href="/"
-                                            onClick={() => setIsMobileMenuOpen(false)}
-                                            className="block px-4 py-2.5 rounded-xl text-neutral-300 hover:text-white hover:bg-neutral-900 border border-transparent text-sm"
-                                        >
-                                            Home (Landing Page)
-                                        </Link>
+                                <button
+                                    type="button"
+                                    aria-label="Close mobile menu"
+                                    className="absolute right-5 top-6 rounded-full border border-white/25 bg-black/40 px-3 py-2 text-sm font-semibold text-white hover:bg-black/70 transition-colors duration-200"
+                                    onClick={() => setIsMobileMenuOpen(false)}
+                                >
+                                    Close
+                                </button>
+                                <div className="flex h-full min-h-0 flex-col">
+                                    <div className="min-h-0 flex-1 overflow-y-auto pb-6 pr-2 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+                                        <div className="space-y-3">
                                         <Link
                                             href="/about"
+                                            className={getLinkClass(
+                                                "/about",
+                                                "block text-center text-lg"
+                                            )}
                                             onClick={() => setIsMobileMenuOpen(false)}
-                                            className={getLinkClass("/about", "block text-sm")}
                                         >
                                             About
                                         </Link>
-                                        <div className="rounded-xl border border-neutral-800/80 bg-neutral-900/40 p-2 space-y-1">
-                                            <div className="flex justify-between items-center px-2 py-1">
+                                        <div className="relative">
+                                            <div
+                                                className={`${getLinkClass(
+                                                    "/projects",
+                                                    "text-lg"
+                                                )} flex items-center justify-center`}
+                                            >
                                                 <Link
                                                     href="/projects"
+                                                    className="pr-3"
                                                     onClick={() => setIsMobileMenuOpen(false)}
-                                                    className="font-medium text-sm text-neutral-200"
                                                 >
                                                     Projects
                                                 </Link>
+                                                <div className="h-5 w-px bg-white/30"></div>
                                                 <button
-                                                    onClick={() => setIsMobileProjectsDropdownOpen(!isMobileProjectsDropdownOpen)}
-                                                    className="text-neutral-400 p-1"
-                                                    aria-label="Toggle mobile projects"
+                                                    onClick={() =>
+                                                        setIsMobileProjectsDropdownOpen(
+                                                            !isMobileProjectsDropdownOpen
+                                                        )
+                                                    }
+                                                    className="pl-3"
+                                                    type="button"
+                                                    aria-label="Toggle mobile projects menu"
                                                 >
                                                     <svg
-                                                        className={`w-3.5 h-3.5 transition-transform ${isMobileProjectsDropdownOpen ? "rotate-180" : ""}`}
-                                                        fill="none"
-                                                        stroke="currentColor"
-                                                        viewBox="0 0 24 24"
+                                                        className="w-5 h-5"
+                                                        fill="currentColor"
+                                                        viewBox="0 0 20 20"
                                                     >
-                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+                                                        <path
+                                                            fillRule="evenodd"
+                                                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                                            clipRule="evenodd"
+                                                        />
                                                     </svg>
                                                 </button>
                                             </div>
-                                            {isMobileProjectsDropdownOpen && (
-                                                <div className="pl-3 pt-2 space-y-1.5 border-t border-neutral-800">
-                                                    {projectLinks.map((p) => (
+                                            <div className={mobileDropdownClasses}>
+                                                <div className="mt-2 space-y-2">
+                                                    {projectLinks.map((link) => (
                                                         <Link
-                                                            key={p.href}
-                                                            href={p.href}
-                                                            onClick={() => setIsMobileMenuOpen(false)}
-                                                            className="block text-xs text-neutral-400 hover:text-white py-1"
+                                                            key={link.href}
+                                                            href={link.href}
+                                                            className="block text-center px-4 py-3 bg-black/50 rounded-full hover:bg-violet-700/60 transition-colors duration-200"
+                                                            onClick={() => {
+                                                                setIsMobileMenuOpen(false);
+                                                                setIsMobileProjectsDropdownOpen(
+                                                                    false
+                                                                );
+                                                            }}
                                                         >
-                                                            {p.name}
+                                                            <p className="font-semibold text-base">
+                                                                {link.name}
+                                                            </p>
+                                                            <p className="text-sm text-gray-300">
+                                                                {link.description}
+                                                            </p>
                                                         </Link>
                                                     ))}
                                                 </div>
-                                            )}
+                                            </div>
                                         </div>
                                         <Link
                                             href="/practice-codes"
+                                            className={getLinkClass(
+                                                "/practice-codes",
+                                                "block text-center text-lg"
+                                            )}
                                             onClick={() => setIsMobileMenuOpen(false)}
-                                            className={getLinkClass("/practice-codes", "block text-sm")}
                                         >
                                             Practice Codes
                                         </Link>
                                         <Link
                                             href="/contact-me"
+                                            className={getLinkClass(
+                                                "/contact-me",
+                                                "block text-center text-lg"
+                                            )}
                                             onClick={() => setIsMobileMenuOpen(false)}
-                                            className={getLinkClass("/contact-me", "block text-sm")}
                                         >
                                             Contact
                                         </Link>
                                     </div>
                                 </div>
-
-                                <div className="pt-4 border-t border-neutral-800 text-xs text-neutral-500 text-center">
-                                    Daksh Singh &copy; {new Date().getFullYear()}
+                                <div className="shrink-0 border-t border-purple-700/40 bg-black/95 px-6 pb-[calc(1rem+env(safe-area-inset-bottom))] pt-5 text-center backdrop-blur-sm">
+                                    <h3 className="text-xl font-bold tracking-tight text-white">Daksh Singh</h3>
+                                    <p className="mt-3 text-sm italic text-gray-300/90">
+                                        &quot;Crafting digital experiences, one line of code at a time.&quot;
+                                    </p>
+                                    <p className="mt-4 text-xs uppercase tracking-[0.18em] text-violet-300/90">
+                                        Daksh Singh (c) 2026
+                                    </p>
+                                </div>
                                 </div>
                             </motion.div>
                         </motion.div>
                     )}
                 </AnimatePresence>
-            </nav>
-        </header>
+            </div>
+        </nav>
+    </div>
     );
 }
