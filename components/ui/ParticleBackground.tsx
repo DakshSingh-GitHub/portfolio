@@ -36,8 +36,8 @@ const ParticleBackground = () => {
                 this.y = Math.random() * (canvas?.height || window.innerHeight);
                 this.directionX = Math.random() * 2 - 1; // -1 to 1
                 this.directionY = Math.random() * 2 - 1;
-                this.size = Math.random() * 2 + 1;
-                this.color = "rgba(139, 92, 246, 0.3)"; // Purple with opacity
+                this.size = Math.random() * 1.5 + 0.5;
+                this.color = "rgba(255, 255, 255, 0.12)"; // Subtle monochrome speck
             }
 
             update() {
@@ -51,8 +51,8 @@ const ParticleBackground = () => {
                     this.directionY = -this.directionY;
                 }
 
-                this.x += this.directionX;
-                this.y += this.directionY;
+                this.x += this.directionX * 0.6;
+                this.y += this.directionY * 0.6;
 
                 this.draw();
             }
@@ -68,7 +68,7 @@ const ParticleBackground = () => {
 
         const initParticles = () => {
             particles = [];
-            let numberOfParticles = (canvas.width * canvas.height) / 9000;
+            let numberOfParticles = (canvas.width * canvas.height) / 12000;
             for (let i = 0; i < numberOfParticles; i++) {
                 particles.push(new Particle());
             }
@@ -83,14 +83,16 @@ const ParticleBackground = () => {
                             (particles[a].x - particles[b].x) +
                         (particles[a].y - particles[b].y) *
                             (particles[a].y - particles[b].y);
-                    if (distance < (canvas.width / 7) * (canvas.height / 7)) {
-                        let opacityValue = 1 - distance / 20000;
-                        ctx.strokeStyle = "rgba(139, 92, 246," + opacityValue + ")";
-                        ctx.lineWidth = 1;
-                        ctx.beginPath();
-                        ctx.moveTo(particles[a].x, particles[a].y);
-                        ctx.lineTo(particles[b].x, particles[b].y);
-                        ctx.stroke();
+                    if (distance < (canvas.width / 8) * (canvas.height / 8)) {
+                        let opacityValue = (1 - distance / 18000) * 0.05;
+                        if (opacityValue > 0) {
+                            ctx.strokeStyle = "rgba(255, 255, 255," + opacityValue + ")";
+                            ctx.lineWidth = 0.5;
+                            ctx.beginPath();
+                            ctx.moveTo(particles[a].x, particles[a].y);
+                            ctx.lineTo(particles[b].x, particles[b].y);
+                            ctx.stroke();
+                        }
                     }
                 }
             }
@@ -119,7 +121,7 @@ const ParticleBackground = () => {
     return (
         <canvas
             ref={canvasRef}
-            className="fixed top-0 left-0 w-full h-full -z-10 bg-slate-950"
+            className="fixed top-0 left-0 w-full h-full -z-10 bg-[#080808] pointer-events-none"
         />
     );
 };
