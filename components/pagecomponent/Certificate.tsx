@@ -87,8 +87,14 @@ const certificates_g1 = [
     {
         title: "National Level Hackathon",
         issuer: "Shivalik College of Engineering (SCE), Dehradun",
-        date: "Issued Sept 2026",
+        date: "Issued Oct 2026",
         pdfUrl: "https://drive.google.com/file/d/1zfzODywW_Fc3Xyp7AFv5ByEzqAuKNADS/view?usp=sharing"
+    },
+    {
+        title: "MST Blockchain x Newrro 24-Hour Buildathon",
+        issuer: "BMS COLLEGE OF ENGINEERING",
+        date: "Issued Oct 2026",
+        pdfUrl: "https://drive.google.com/file/d/1aASlJqomaVTKGHs5qIlLPJhe_gu1Ypro/view?usp=sharing"
     }
 ];
 
