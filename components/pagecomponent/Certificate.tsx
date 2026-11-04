@@ -83,6 +83,12 @@ const certificates_g1 = [
         issuer: "Hackthon Raptors CIC",
         date: "Issued Aug 2026",
         pdfUrl: "https://drive.google.com/file/d/1lz_Gf3UXOMDgyOMJSfj1THlT9M3lXYJ5/view?usp=sharing"
+    },
+    {
+        title: "National Level Hackathon",
+        issuer: "Shivalik College of Engineering (SCE), Dehradun",
+        date: "Issued Sept 2026",
+        pdfUrl: "https://drive.google.com/file/d/1zfzODywW_Fc3Xyp7AFv5ByEzqAuKNADS/view?usp=sharing"
     }
 ];
 
