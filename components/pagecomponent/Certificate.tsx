@@ -72,6 +72,12 @@ const certificates_g1 = [
         date: "Issued Jan 2026",
         pdfUrl: "https://drive.google.com/file/d/1WEWspv9kzgZhPcPRLcr2c9XxXGfkAr5t/view?usp=sharing",
     },
+    {
+        title: "Vivekananda Innovation Hackathon 2026",
+        issuer: "RAMAKRISHNA MISSION, GURUGRAM VIVEKANANDA INSTITUTE OF VALUES",
+        date: "Issued October 2026",
+        pdfUrl: "https://drive.google.com/file/d/1IxVdFuLJROAuRZlCKR3_KF3l-NApEDQn/view?usp=sharing"
+    },
 ];
 
 
