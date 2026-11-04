@@ -75,9 +75,15 @@ const certificates_g1 = [
     {
         title: "Vivekananda Innovation Hackathon 2026",
         issuer: "RAMAKRISHNA MISSION, GURUGRAM VIVEKANANDA INSTITUTE OF VALUES",
-        date: "Issued October 2026",
+        date: "Issued Oct 2026",
         pdfUrl: "https://drive.google.com/file/d/1IxVdFuLJROAuRZlCKR3_KF3l-NApEDQn/view?usp=sharing"
     },
+    {
+        title: "Zero Dependency Hackathon 2026",
+        issuer: "Hackthon Raptors CIC",
+        date: "Issued Aug 2026",
+        pdfUrl: "https://drive.google.com/file/d/1lz_Gf3UXOMDgyOMJSfj1THlT9M3lXYJ5/view?usp=sharing"
+    }
 ];
 
 
